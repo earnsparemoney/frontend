@@ -97,9 +97,9 @@ module.exports = {
         to: 'static',
         ignore: ['.*', 'sw/*', 'dll/*']
       },
-      {
-        from: resolve('static/sw')
-      }
+      // {
+      //   from: resolve('static/sw')
+      // }
     ]),
     new webpack.DllReferencePlugin({
       context: __dirname,

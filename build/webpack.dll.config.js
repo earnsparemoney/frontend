@@ -10,11 +10,11 @@ module.exports = {
   mode: 'production',
   // 你想要打包的模块的数组
   entry: {
-    vendor: ['vue/dist/vue.esm.js', 'vuex', 'vue-router', 'vuex', 'axios']
+    vendor: ['vue/dist/vue.esm.js', 'vuex', 'vue-router', 'axios']
   },
   output: {
     path: resolve('static/dll'), // 打包后文件输出的位置
-    filename: '[name].[hash].dll.js',
+    filename: '[name].[chunkhash].dll.js',
     library: '[name]_library'
     // vendor.dll.js中暴露出的全局变量名。
     // 主要是给DllPlugin中的name使用，

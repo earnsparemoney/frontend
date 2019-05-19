@@ -1,13 +1,20 @@
 <template>
   <div>
     Home
-    <a-button>test</a-button>
+    <a-button
+      @click="goToRegister">
+      注册</a-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  methods: {
+    goToRegister () {
+      this.$router.push('/register')
+    }
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@
   <div
     class="register"
     :style="registerStyle">
-    <a-button class="button-login" @click="goToLogin">登录</a-button>
+    <a-button class="button-login" @click="goToRegister">注册</a-button>
     <a-form
       class="form"
       :form="form"
@@ -12,11 +12,7 @@
         has-feedback>
         <a-input
           type="text"
-          placeholder="6-16位英文和数字组合的用户名"
-          v-decorator="[
-            'username',
-            {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{6,16}$/, message: '用户名格式错误' }]}
-          ]">
+          placeholder="请输入用户名">
           <a-icon
             slot="prefix"
             type="user"
@@ -30,11 +26,7 @@
         has-feedback>
         <a-input
           type="password"
-          placeholder="8-16位英文和数字组合的密码"
-          v-decorator="[
-            'passowrd',
-            {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{8,16}$/, message: '密码格式错误' }]}
-          ]">
+          placeholder="请输入密码">
           <a-icon
             slot="prefix"
             type="lock"
@@ -43,47 +35,16 @@
         </a-input>
       </a-form-item>
 
-      <a-form-item
-        label="邮箱"
-        has-feedback>
-        <a-input
-          type="text"
-          placeholder="请输入你的邮箱"
-          v-decorator="[
-            'email',
-            {rules: [{ required: true, pattern: /^[\w\.-]+@[\w\-]+\.\w{2,3}$/, message: '邮箱格式不正确' }]}
-          ]">
-          <a-icon
-            slot="prefix"
-            type="mail"
-            :style="iconStyle"
-          />
-        </a-input>
-      </a-form-item>
-
-      <a-form-item
-        label="手机号码"
-        has-feedback>
-        <a-input
-          type="text"
-          placeholder="请输入你的手机号码"
-          v-decorator="[
-            'phone',
-            {rules: [{ required: true, pattern: /^[0-9]{11}$/, message: '手机号码格式不正确' }]}
-          ]">
-          <a-icon
-            slot="prefix"
-            type="phone"
-            :style="iconStyle"
-          />
-        </a-input>
+      <a-form-item>
+        <span class="form-forget">忘记密码</span>
       </a-form-item>
 
       <a-form-item>
         <a-button
           type="primary"
           :loading="loading"
-          @click="handleSubmit">注册</a-button>
+          @click="handleLogin">
+          登陆</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -105,18 +66,11 @@ export default {
     }
   },
   methods: {
-    handleSubmit () {
-      this.isValidate() ? this.loading = true : console.log('error')
+    goToRegister () {
+      this.$router.push('/register')
     },
-    isValidate () {
-      let validate = true
-      this.form.validateFields((err, values) => {
-        validate = err ? false : validate
-      })
-      return validate
-    },
-    goToLogin () {
-      this.$router.push('/login')
+    handleLogin () {
+      this.loading = true
     }
   }
 }
@@ -150,6 +104,10 @@ export default {
     .form
       background-color #fff
       border-radius 6px
+
+      .form-forget
+        color #0B99B2
+        cursor pointer
 
     @media (min-width 1200px)
       .form

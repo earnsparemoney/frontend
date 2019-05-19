@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <router-view />
+    <nav-bar />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    NavBar
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-
+main
+  padding 64px 0 0 0
 </style>

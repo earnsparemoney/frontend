@@ -6,18 +6,19 @@
     justify="center"
     align="middle">
     <a-col
-      :xs="{ span:16 }"
-      :sm="{ span: 6 }">
+      :xs="{ span: 16 }"
+      :md="{ span: 12 }"
+      :xl="{ span: 6 }">
       <a-form :form="form" layout="vertical">
         <a-form-item
           label="Username"
           has-feedback>
           <a-input
             type="text"
-            placeholder="Plase input your username"
+            placeholder="6-16位英文和数字组合的用户名"
             v-decorator="[
               'username',
-              {rules: [{ required: true, pattern: /^\w{6}$/, message: 'error' }]}
+              {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{6,16}$/, message: '用户名格式错误' }]}
             ]">
             <a-icon
               slot="prefix"
@@ -32,10 +33,10 @@
           has-feedback>
           <a-input
             type="password"
-            placeholder="Plase input your passowrd"
+            placeholder="8-16位英文和数字组合的密码"
             v-decorator="[
               'passowrd',
-              {rules: [{ required: true, pattern: /^\w{6}$/, message: 'error' }]}
+              {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{8,16}$/, message: '密码格式错误' }]}
             ]">
             <a-icon
               slot="prefix"
@@ -50,10 +51,10 @@
           has-feedback>
           <a-input
             type="text"
-            placeholder="Plase input your email"
+            placeholder="请输入你的邮箱"
             v-decorator="[
               'email',
-              {rules: [{ required: true, pattern: /^\w{6}$/, message: 'error' }]}
+              {rules: [{ required: true, pattern: /^[\w\.-]+@[\w\-]+\.\w{2,3}$/, message: '邮箱格式不正确' }]}
             ]">
             <a-icon
               slot="prefix"
@@ -68,10 +69,10 @@
           has-feedback>
           <a-input
             type="text"
-            placeholder="Plase input your email"
+            placeholder="请输入你的手机号码"
             v-decorator="[
               'phone',
-              {rules: [{ required: true, pattern: /^\w{6}$/, message: 'error' }]}
+              {rules: [{ required: true, pattern: /^[0-9]{11}$/, message: '手机号码格式不正确' }]}
             ]">
             <a-icon
               slot="prefix"
@@ -98,7 +99,7 @@ export default {
   data () {
     return {
       registerStyle: {
-        height: document.documentElement.clientHeight + 'px'
+        height: document.documentElement.clientHeight - 64 + 'px'
       },
       form: this.$form.createForm(this),
       iconStyle: {
@@ -109,7 +110,6 @@ export default {
   },
   methods: {
     handleSubmit () {
-      this.$refs.register.style = 'height: ' + document.documentElement.clientHeight + 'px'
       this.isValidate() ? this.loading = true : console.log('error')
     },
     isValidate () {
@@ -132,10 +132,10 @@ export default {
     fontStyle()
     color #81838C
 
-  .register
-    background-color #f3f3f3
-
-    >>> .ant-input
+  >>> .ant-input
       height 43px
       fontStyle()
+
+  .register
+    background-color #f3f3f3
 </style>

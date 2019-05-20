@@ -2,11 +2,15 @@
   <div
     class="register"
     :style="registerStyle">
-    <a-button class="button-login" @click="goToLogin">登录</a-button>
+    <a-button class="register__button--login" @click="goToLogin">登录</a-button>
     <a-form
       class="form"
       :form="form"
       layout="vertical">
+      <a-form-item>
+        <h1 class="form__h1--title">创建一个账户</h1>
+      </a-form-item>
+
       <a-form-item
         label="用户名"
         has-feedback>
@@ -81,6 +85,7 @@
 
       <a-form-item>
         <a-button
+          class="form__button--register"
           type="primary"
           :loading="loading"
           @click="handleSubmit">注册</a-button>
@@ -127,42 +132,45 @@ export default {
     font-size 14px
     font-weight 400
 
+  formStyle(_width, _bgColor)
+    width _width
+    background-color _bgColor
+    padding 24px 20px 0px 20px
+    border-radius 6px
+    .form__h1--title
+        text-align center
+    .form__button--register
+      width 100%
+
   >>> label
     fontStyle()
     color #81838C
 
   >>> .ant-input
-      height 43px
-      fontStyle()
+    fontStyle()
+    height 43px
 
   .register
     display flex
     flex-direction column
     justify-content center
     align-items  center
-    background-color #f3f3f3
+    background-color #ecf1f1
 
-    .button-login
+    .register__button--login
       position absolute
       top 74px
       right 10px
 
-    .form
-      background-color #fff
-      border-radius 6px
-
     @media (min-width 1200px)
       .form
-        width 30%
-        padding 24px 20px 0px 20px
+        formStyle(30%, #fff)
 
     @media (min-width 768px) and (max-width 1200px)
       .form
-        width 55%
-        padding 24px 20px 0px 20px
+        formStyle(55%, #fff)
 
     @media (max-width 576px)
       .form
-        width 90%
-        padding 24px 20px 0px 20px
+        formStyle(90%, #ecf1f1)
 </style>

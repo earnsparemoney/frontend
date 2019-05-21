@@ -10,7 +10,7 @@
     "wbuild": "set NODE_ENV=production && webpack --config build/webpack.build.config.js",
     "wdev": "set NODE_ENV=development && webpack-dev-server --config build/webpack.dev.config.js --open",
     "build:docker": "docker build --tag=earnsparemoney .",
-    "docker": "docker run -p 8080:80 earnsparemoney",
+    "docker": "docker run -d -p 8080:80 earnsparemoney",
     "dll": "webpack --config build/webpack.dll.config.js",
     "lint": "eslint --ext .js,.vue src"
   },

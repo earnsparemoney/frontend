@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import router from './router'
+import { createRouter } from './router'
 import store from './store'
 import App from './App.vue'
 
@@ -25,13 +25,13 @@ Vue.use(Menu)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: {
-    App
-  },
-  template: '<App/>'
-})
+export function createApp () {
+  const router = createRouter()
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
+  })
+
+  return { app, router }
+}

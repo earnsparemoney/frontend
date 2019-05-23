@@ -2,9 +2,6 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
-const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -13,7 +10,7 @@ function resolve (dir) {
 module.exports = {
   context: path.join(__dirname, '../'),
   entry: {
-    app: './src/main.js',
+    app: './src/entry-client.js',
   },
   output: {
     filename: 'static/js/[name].[chunkhash].js',
@@ -48,27 +45,6 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.css$/,
-        use: [
-          process.env.NODE_ENV === 'production'
-            ? MiniCssExtractPlugin.loader
-            : 'vue-style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.styl(us)?$/,
-        use: [
-          process.env.NODE_ENV === 'production'
-            ? MiniCssExtractPlugin.loader
-            : 'vue-style-loader',
-          'css-loader',
-          'postcss-loader',
-          'stylus-loader'
-        ]
-      },
-      {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         loader: 'url-loader',
         options: {
@@ -88,25 +64,16 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'index.html'
-    }),
     new CopyWebpackPlugin([
       {
         from: resolve('static'),
         to: 'static',
         ignore: ['.*', 'sw/*', 'dll/*']
       },
-      // {
-      //   from: resolve('static/sw')
-      // }
-    ]),
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('./../static/dll/vendor-manifest.json')
-    }),
-    new AddAssetHtmlPlugin({
-      filepath: resolve('static/dll/*.js'),
-    })
+      {
+        from: resolve('static/dll'),
+        ignore: ['*.json']
+      }
+    ])
   ]
 };

@@ -21,3 +21,14 @@
 - git add .
 - npx git-cz
 - git push
+
+## 服务端渲染
+### 测试
+#### 开发环境
+- `npm run dev`
+- 进入`localhost:3000`，查看页面源代码可见服务端渲染结果
+- 进入`localhost:8080`，该页面则为普通spa
+#### 生产环境
+- `npm run build`
+- `npm start`
+- 进入`localhost:3000`

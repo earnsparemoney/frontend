@@ -100,7 +100,7 @@ export default {
   data () {
     return {
       registerStyle: {
-        height: document.documentElement.clientHeight - 64 + 'px'
+        height: ''
       },
       form: this.$form.createForm(this),
       iconStyle: {
@@ -123,6 +123,9 @@ export default {
     goToLogin () {
       this.$router.push('/login')
     }
+  },
+  mounted () {
+    this.registerStyle.height = document.documentElement.clientHeight - 64 + 'px'
   }
 }
 </script>

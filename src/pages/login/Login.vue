@@ -73,7 +73,7 @@ export default {
         status: ''
       },
       registerStyle: {
-        height: document.documentElement.clientHeight - 64 + 'px'
+        height: ''
       },
       iconStyle: {
         color: 'rgba(0,0,0,.25)'
@@ -96,6 +96,9 @@ export default {
       this.password.status = password.value ? 'success' : 'error'
       return this.username.status === 'success' && this.password.status === 'success'
     }
+  },
+  mounted () {
+    this.registerStyle.height = document.documentElement.clientHeight - 64 + 'px'
   }
 }
 </script>

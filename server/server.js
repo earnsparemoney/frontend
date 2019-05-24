@@ -4,10 +4,10 @@ const koaStatic = require('koa-static')
 
 const app = new Koa()
 
-const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV === 'development'
 
 let ssrRouter
-if (isProd) {
+if (!isDev) {
   ssrRouter = require('./router/ssr')
 } else {
   ssrRouter = require('./router/dev-ssr')
@@ -16,4 +16,6 @@ if (isProd) {
 app.use(koaStatic(path.join(__dirname, '../dist/')))
 app.use(ssrRouter.routes()).use(ssrRouter.allowedMethods())
 
-app.listen(3000)
+app.listen(3000, () => {
+  console.log('listen on 3000')
+})

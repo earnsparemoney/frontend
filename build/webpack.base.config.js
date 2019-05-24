@@ -1,6 +1,5 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function resolve (dir) {
@@ -68,10 +67,11 @@ module.exports = {
       {
         from: resolve('static'),
         to: 'static',
-        ignore: ['.*', 'sw/*', 'dll/*']
+        ignore: ['.*', 'dll/*']
       },
       {
         from: resolve('static/dll'),
+        to: 'static/js',
         ignore: ['*.json']
       }
     ])

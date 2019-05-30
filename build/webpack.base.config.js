@@ -1,6 +1,7 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { InjectManifest } = require('workbox-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -67,13 +68,13 @@ module.exports = {
       {
         from: resolve('static'),
         to: 'static',
-        ignore: ['.*', 'dll/*']
-      },
-      {
-        from: resolve('static/dll'),
-        to: 'static/js',
-        ignore: ['*.json']
+        ignore: ['.*']
       }
-    ])
+    ]),
+    new InjectManifest({
+      swSrc: './src/sw/serviceWorker.js',
+      swDest: 'serviceWorker.js',
+      exclude: [/index\.html/]
+    })
   ]
 };

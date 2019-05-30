@@ -17,7 +17,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   output: {
     filename: 'static/js/[name].[hash].js',
     chunkFilename: 'static/js/[id].[hash].js',
-    publicPath: 'http://127.0.0.1:8080/'
+    publicPath: 'http://localhost:8080/'
   },
 
   devtool: 'inline-source-map',
@@ -70,7 +70,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html'
     }),
     new AddAssetHtmlPlugin({
-      filepath: resolve('static/dll/*.js'),
+      filepath: resolve('static/js/*.js'),
     }),
     new VueSSRClientPlugin()
   ]

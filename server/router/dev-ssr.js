@@ -32,7 +32,7 @@ ssrRouter.get('*', async ctx => {
   }
   const context = { url: ctx.req.url }
   const clientManifestResp = await axios.get(
-    'http://127.0.0.1:8080/vue-ssr-client-manifest.json'
+    'http://localhost:8080/vue-ssr-client-manifest.json'
   )
   const clientManifest = clientManifestResp.data
   clientManifest.initial.unshift(clientManifest.async.pop())

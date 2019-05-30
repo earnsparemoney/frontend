@@ -52,7 +52,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('./../static/dll/vendor-manifest.json')
+      manifest: require('./../static/js/vendor-manifest.json')
     }),
     new VueSSRClientPlugin()
   ]

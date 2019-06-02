@@ -10,7 +10,7 @@ function resolve (dir) {
 module.exports = {
   context: path.join(__dirname, '../'),
   entry: {
-    app: './src/entry-client.js',
+    app: './src/entry-client.js'
   },
   output: {
     filename: 'static/js/[name].[chunkhash].js',
@@ -72,7 +72,7 @@ module.exports = {
       }
     ]),
     new InjectManifest({
-      swSrc: './src/sw/serviceWorker.js',
+      swSrc: path.join(__dirname, '../src/sw/serviceWorker.js'),
       swDest: 'serviceWorker.js',
       exclude: [/index\.html/]
     })

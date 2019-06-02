@@ -60,5 +60,3 @@ self.addEventListener('push', (event) => {
   }
   event.waitUntil(self.registration.showNotification(title, options))
 })
-
-console.log(1)

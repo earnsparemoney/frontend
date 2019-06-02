@@ -72,6 +72,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new AddAssetHtmlPlugin({
       filepath: resolve('static/js/*.js'),
     }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./../static/js/vendor-manifest.json')
+    }),
     new VueSSRClientPlugin()
   ]
 })

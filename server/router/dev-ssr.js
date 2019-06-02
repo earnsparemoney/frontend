@@ -44,13 +44,12 @@ ssrRouter.get('*', async ctx => {
     template,
     clientManifest
   })
-
-  await new Promise((resolve, reject) => {
-    renderer.renderToString(context, (err, html) => {
-      ctx.body = html
-      resolve()
-    })
-  })
+  try {
+    const html = await renderer.renderToString(context)
+    ctx.body = html
+  } catch {
+    ctx.body = 'no response'
+  }
 })
 
 module.exports = ssrRouter

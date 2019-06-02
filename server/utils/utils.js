@@ -5,10 +5,13 @@ function resolve (filePath) {
 }
 
 function getClearClientManifest (clientManifest) {
-  clientManifest.all.shift()
-  clientManifest.all.shift()
-  clientManifest.async.shift()
-  clientManifest.async.shift()
+  for (var i = 0; i < clientManifest.async.length;) {
+    if (clientManifest.async[i].includes('serviceWorker.js') || clientManifest.async[i].includes('precache')) {
+      clientManifest.async.splice(i, 1)
+    } else {
+      i++
+    }
+  }
   clientManifest.initial.unshift(clientManifest.async.pop())
   clientManifest.all.unshift(clientManifest.all.pop())
 }

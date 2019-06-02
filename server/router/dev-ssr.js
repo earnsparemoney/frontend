@@ -5,7 +5,10 @@ const webpack = require('webpack')
 const serverConfig = require('../../build/webpack.server.config')
 const Router = require('koa-router')
 const { createBundleRenderer } = require('vue-server-renderer')
-const { resolve } = require('../utils/utils')
+const {
+  resolve,
+  getClearClientManifest
+} = require('../utils/utils')
 
 const ssrRouter = new Router()
 
@@ -34,9 +37,8 @@ ssrRouter.get('*', async ctx => {
   const clientManifestResp = await axios.get(
     'http://localhost:8080/vue-ssr-client-manifest.json'
   )
-  const clientManifest = clientManifestResp.data
-  clientManifest.initial.unshift(clientManifest.async.pop())
-  clientManifest.all.unshift(clientManifest.all.pop())
+  let clientManifest = clientManifestResp.data
+  getClearClientManifest(clientManifest)
   const renderer = createBundleRenderer(serverBundle, {
     runInNewContext: false,
     template,

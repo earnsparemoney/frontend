@@ -9,7 +9,7 @@
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js",
     "build": "npm run build:client && npm run build:server",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js",
-    "dev:server": "cross-env NODE_ENV=devlopment nodemon server/server.js",
+    "dev:server": "cross-env NODE_ENV=development nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "build:docker": "docker-compose up --build",
     "docker": "docker-compose up",

@@ -47,7 +47,7 @@ ssrRouter.get('*', async ctx => {
   try {
     const html = await renderer.renderToString(context)
     ctx.body = html
-  } catch {
+  } catch(err) {
     ctx.body = 'no response'
   }
 })

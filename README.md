@@ -9,7 +9,6 @@
 - 安装依赖：`cnpm i`
 ### 非Docker环境
 - `npm run dev`，进入`localhost:3000`或`localhost:8080`
-- `npm start`，进入`localhost:3000`
 ### Docker环境
 - `npm run docker`，进入`localhost:3000`
 

@@ -21,6 +21,7 @@ if (!isDev) {
 } else {
   ssrRouter = require('./router/dev-ssr')
 }
+
 app.use(koaStatic(path.join(__dirname, '../dist/'), {
   index: ' '
 }))

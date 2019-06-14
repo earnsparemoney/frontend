@@ -1,29 +1,46 @@
-# frontend
+# 挣闲钱——前端
 
-## Project setup
-```
-npm install
-```
+## 代码提交
+- git add .
+- npx git-cz
+- git push
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 启动
+- 安装依赖：`cnpm i`
+### 非Docker环境
+- `npm run dev`，进入`localhost:3000`或`localhost:8080`
+- `npm start`，进入`localhost:3000`
+### Docker环境
+- `npm run docker`，进入`localhost:3000`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 待实现
+- 基本功能
+- PWA
+- autotrack埋点
 
-### Run your tests
-```
-npm run test
-```
+## 已完成
+- 规范commit信息
+- 自定义webpack4环境进行打包
+- 服务端渲染环境配置
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 服务端渲染
+### 测试
+#### 开发环境
+- `npm run dev`
+- 进入`localhost:3000`，查看页面源代码可见服务端渲染结果
+- 进入`localhost:8080`，该页面则为普通spa
+#### 生产环境
+- `npm run build`
+- `npm start`
+- 进入`localhost:3000`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Docker For Mac
+- [阿里云镜像](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors): 加速镜像下载
+- `npm run build:docker`: 重新构建
+- `npm run docker`: 启动docker
+- 进入`localhost: 3000`
+
+### 常用指令
+- docker stop $(docker ps -a -q): 停止所有container
+- docker rm $(docker ps -a -q): 删除所有container
+- docker rmi $(docker images -q): 删除所有image

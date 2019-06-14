@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 3000:80
+    links:
+      - web:koaserver
+  web:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    working_dir: /app
+    command: [ "npm", "start" ]

@@ -1,13 +1,14 @@
 module.exports = {
   presets: [
     [
-      '@vue/app', {
-        polyfills: [
-          // 'es6.promise',
-          'es6.symbol',
-          'es6.set'
-        ]
-      }
+      '@vue/app',
+      // {
+      //   polyfills: [
+      //     // 'es6.promise',
+      //     'es6.symbol',
+      //     'es6.set'
+      //   ]
+      // }
     ]
   ],
   plugins: [

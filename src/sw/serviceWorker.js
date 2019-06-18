@@ -2,6 +2,8 @@ importScripts('/workbox/workbox-sw.js')
 
 const runtimeCacheName = 'earnsparemoney'
 
+workbox.setConfig({ debug: false })
+
 workbox.setConfig({
   modulePathPrefix: '/workbox/'
 })

@@ -57,7 +57,7 @@ module.exports = {
       )
       config.plugins.push(
         new VueSSRClientPlugin({
-          // filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
+          filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
         })
       )
     } else {

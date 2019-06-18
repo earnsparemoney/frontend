@@ -1,6 +1,14 @@
 module.exports = {
   presets: [
-    '@vue/app'
+    [
+      '@vue/app', {
+        polyfills: [
+          // 'es6.promise',
+          'es6.symbol',
+          'es6.set'
+        ]
+      }
+    ]
   ],
   plugins: [
     ["@babel/plugin-syntax-dynamic-import"],

@@ -23,9 +23,9 @@ if (!isDev) {
 }
 
 app.use(koaStatic(path.join(__dirname, '../dist/'), {
-  index: ' '
+  // index: ' '
 }))
-app.use(ssrRouter.routes()).use(ssrRouter.allowedMethods())
+// app.use(ssrRouter.routes()).use(ssrRouter.allowedMethods())
 
 app.listen(3000, () => {
   console.log('listen on 3000')

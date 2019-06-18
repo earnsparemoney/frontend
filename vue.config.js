@@ -56,7 +56,9 @@ module.exports = {
         new workboxPlugin.InjectManifest(workboxOptions)
       )
       config.plugins.push(
-        new VueSSRClientPlugin()
+        new VueSSRClientPlugin({
+          // filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
+        })
       )
     } else {
       config.entry.app = resolve('src/entry-server.js')
@@ -87,6 +89,8 @@ module.exports = {
       .set('utils', resolve('src/utils'))
       .set('@ant-design/icons/lib/dist$', resolve('src/utils/antdIcon.js'))
 
+    // console.log(process.env.VUE_CLI_MODERN_BUILD)
+    config.plugins.has('copy') &&
     config
       .plugin('copy')
       .tap(args => {

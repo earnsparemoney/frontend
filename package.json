@@ -5,9 +5,10 @@
   "scripts": {
     "dev:client": "vue-cli-service serve",
     "dev:server": "cross-env BUILD_TARGET=server NODE_ENV=production DEV=dev nodemon server/server.js",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build:client": "vue-cli-service build",
     "build:server": "cross-env BUILD_TARGET=server vue-cli-service build --no-clean",
+    "build:modern": "vue-cli-service build --modern",
     "build": "npm run build:client && npm run build:server",
     "build:docker": "docker-compose up --build",
     "docker": "docker-compose up",

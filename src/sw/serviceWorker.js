@@ -23,12 +23,16 @@ workbox.core.setCacheNameDetails({
 })
 
 // 预缓存资源
-workbox.precaching.precache(['/'].concat(self.__precacheManifest.map(precache => ({ url: precache.url }))))
+workbox.precaching.precache(self.__precacheManifest.map(precache => ({ url: precache.url })))
 
 // 对主页资源使用网络优先的方案
 workbox.routing.registerRoute(
-  '/',
-  new workbox.strategies.NetworkFirst()
+  function ({ url, event }) {
+    if (event.request.destination === 'document') {
+      return true
+    }
+  },
+  new workbox.strategies.NetworkOnly()
 )
 
 // 哈希码的存在，静态资源使用缓存优先的方案
@@ -56,9 +60,20 @@ workbox.routing.registerRoute(
 workbox.routing.setDefaultHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document':
-      return caches.match('/')
+      return caches.match(`/index.html`)
   }
 })
+
+// workbox.routing.setCatchHandler(({ event }) => {
+//   switch (event.request.destination) {
+//     case 'document':
+//       return event.waitUntil(
+//         caches.open(runtimeCacheName).then(cache => {
+
+//         })
+//       )
+//   }
+// })
 
 // 测试notification
 self.addEventListener('push', (event) => {

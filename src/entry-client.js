@@ -2,6 +2,8 @@
 
 import { createApp } from './main'
 
+// window.Promise = Promise
+
 const { app, router } = createApp()
 
 router.onReady(() => {

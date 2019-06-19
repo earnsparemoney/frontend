@@ -5,7 +5,7 @@ const {
   getClearClientManifest,
   isModernBrowser
 } = require('../utils/utils')
-const template = require('fs').readFileSync(resolve('../../public/index.html'), 'utf-8')
+const template = require('fs').readFileSync(resolve('../../public/index-server.html'), 'utf-8')
 const serverBundle = require(resolve('../../dist/server-build/vue-ssr-server-bundle.json'))
 const clientManifest = require(resolve('../../dist/vue-ssr-client-manifest.json'))
 const clientManifestLegacy = require(resolve('../../dist/vue-ssr-client-manifest-legacy.json'))
@@ -31,6 +31,7 @@ ssrRouter.get('*', async (ctx, next) => {
       clientManifest: clientManifestLegacy
     })
   }
+  console.log(ctx.req.url)
   const context = { url: ctx.req.url }
   const html = await renderer.renderToString(context)
   ctx.body = html

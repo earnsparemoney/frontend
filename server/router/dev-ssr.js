@@ -12,7 +12,7 @@ const {
 
 const ssrRouter = new Router()
 
-const template = require('fs').readFileSync(resolve('../../public/index.html'), 'utf-8')
+const template = require('fs').readFileSync(resolve('../../public/index-server.html'), 'utf-8')
 
 const serverCompiler = webpack(serverConfig)
 const mfs = new MemoryFS()
@@ -29,13 +29,14 @@ serverCompiler.watch({}, () => {
 })
 
 ssrRouter.get('*', async ctx => {
+  console.log(ctx.url)
   if (!serverBundle) {
     ctx.body = 'wait a minute'
     return
   }
   const context = { url: ctx.req.url }
   const clientManifestResp = await axios.get(
-    'http://localhost:8080/vue-ssr-client-manifest.json'
+    'http://localhost:8080/vue-ssr-client-manifest-legacy.json'
   )
   let clientManifest = clientManifestResp.data
   getClearClientManifest(clientManifest)

@@ -5,8 +5,8 @@ module.exports = {
       // {
       //   polyfills: [
       //     // 'es6.promise',
-      //     'es6.symbol',
-      //     'es6.set'
+      //     // 'es6.symbol',
+      //     // 'es6.set'
       //   ]
       // }
     ]

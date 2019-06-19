@@ -15,12 +15,14 @@ const workboxOptions = {
   swSrc: resolve('src/sw/serviceWorker.js'),
   swDest: 'serviceWorker.js',
   importWorkboxFrom: 'disabled',
-  exclude: [/^workbox/, /index\.html/, /\.map$/]
+  exclude: [/^workbox/, /index-server\.html/, /\.map$/]
 }
 
 module.exports = {
+  // integrity: true,
   outputDir: serverSide ? resolve('dist/server-build') : resolve('dist'),
   publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
+  // publicPath: '/',
   css: {
     extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true
   },
@@ -88,6 +90,15 @@ module.exports = {
       .set('styles', resolve('src/assets/styles'))
       .set('utils', resolve('src/utils'))
       .set('@ant-design/icons/lib/dist$', resolve('src/utils/antdIcon.js'))
+
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+        .loader('vue-loader')
+        .tap(options => {
+          options = {}
+          return options
+        })
 
     // console.log(process.env.VUE_CLI_MODERN_BUILD)
     config.plugins.has('copy') &&

@@ -3,6 +3,7 @@ const workboxPlugin = require('workbox-webpack-plugin')
 const AutoDllPlugin = require('autodll-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const ModuleHtmlPlugin = require('./plugins/moduleHtmlPlugin')
 const nodeExternals = require('webpack-node-externals')
 
 function resolve (dir) {
@@ -19,10 +20,8 @@ const workboxOptions = {
 }
 
 module.exports = {
-  // integrity: true,
   outputDir: serverSide ? resolve('dist/server-build') : resolve('dist'),
   publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
-  // publicPath: '/',
   css: {
     extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true
   },
@@ -60,7 +59,8 @@ module.exports = {
       config.plugins.push(
         new VueSSRClientPlugin({
           filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
-        })
+        }),
+        new ModuleHtmlPlugin()
       )
     } else {
       config.entry.app = resolve('src/entry-server.js')

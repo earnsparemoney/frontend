@@ -23,7 +23,7 @@ workbox.core.setCacheNameDetails({
 })
 
 // 预缓存资源
-workbox.precaching.precache(self.__precacheManifest.map(precache => ({ url: precache.url })))
+workbox.precaching.precache(['/'].concat(self.__precacheManifest.map(precache => ({ url: precache.url }))))
 
 // 对主页资源使用网络优先的方案
 workbox.routing.registerRoute(
@@ -32,7 +32,7 @@ workbox.routing.registerRoute(
       return true
     }
   },
-  new workbox.strategies.NetworkOnly()
+  new workbox.strategies.NetworkFirst()
 )
 
 // 哈希码的存在，静态资源使用缓存优先的方案
@@ -57,23 +57,14 @@ workbox.routing.registerRoute(
 )
 
 // 单页面应用，路径不存在时返回主页缓存
-workbox.routing.setDefaultHandler(({ event }) => {
+workbox.routing.setCatchHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document':
       return caches.match(`/index.html`)
+    case 'image':
+      return caches.match(event.request)
   }
 })
-
-// workbox.routing.setCatchHandler(({ event }) => {
-//   switch (event.request.destination) {
-//     case 'document':
-//       return event.waitUntil(
-//         caches.open(runtimeCacheName).then(cache => {
-
-//         })
-//       )
-//   }
-// })
 
 // 测试notification
 self.addEventListener('push', (event) => {

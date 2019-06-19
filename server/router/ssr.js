@@ -2,7 +2,8 @@ const Router = require('koa-router')
 const { createBundleRenderer } = require('vue-server-renderer')
 const {
   resolve,
-  getClearClientManifest
+  getClearClientManifest,
+  isModernBrowser
 } = require('../utils/utils')
 const template = require('fs').readFileSync(resolve('../../public/index.html'), 'utf-8')
 const serverBundle = require(resolve('../../dist/server-build/vue-ssr-server-bundle.json'))
@@ -15,8 +16,9 @@ getClearClientManifest(clientManifestLegacy)
 const ssrRouter = new Router()
 
 ssrRouter.get('*', async (ctx, next) => {
+  const ua = ctx.headers['user-agent']
   let renderer
-  if (ctx.headers['user-agent'].includes('iPhone')) {
+  if (isModernBrowser(ua)) {
     renderer = createBundleRenderer(serverBundle, {
       runInNewContext: false,
       template,

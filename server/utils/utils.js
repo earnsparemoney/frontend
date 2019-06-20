@@ -27,7 +27,13 @@ function resolve (filePath) {
 }
 
 function getClearClientManifest (clientManifest) {
+  // const newInitial = []
   const newAsync = []
+  // clientManifest.initial.forEach(item => {
+  //   if (!item.includes('css/chunk-vendors')) {
+  //     newInitial.push(item)
+  //   }
+  // })
   clientManifest.async.forEach(item => {
     if (!(item.includes('serviceWorker') ||
           item.includes('workbox') ||
@@ -39,6 +45,7 @@ function getClearClientManifest (clientManifest) {
       }
     }
   })
+  // clientManifest.initial = newInitial
   clientManifest.async = newAsync
 }
 

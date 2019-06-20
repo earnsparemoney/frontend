@@ -1,7 +1,6 @@
 <template>
   <div
-    class="register"
-    :style="registerStyle">
+    class="register">
     <a-button class="register__button--login" @click="goToLogin">登录</a-button>
     <a-form
       class="form"
@@ -99,9 +98,6 @@ export default {
   name: 'Register',
   data () {
     return {
-      registerStyle: {
-        height: ''
-      },
       form: this.$form.createForm(this),
       iconStyle: {
         color: 'rgba(0,0,0,.25)'
@@ -123,9 +119,6 @@ export default {
     goToLogin () {
       this.$router.push('/login')
     }
-  },
-  mounted () {
-    this.registerStyle.height = document.documentElement.clientHeight - 64 + 'px'
   }
 }
 </script>
@@ -138,10 +131,10 @@ export default {
   formStyle(_width, _bgColor)
     width _width
     background-color _bgColor
-    padding 24px 20px 0px 20px
+    padding 24px 20px 20px 20px
     border-radius 6px
     .form__h1--title
-        text-align center
+      text-align center
     .form__button--register
       width 100%
 
@@ -158,6 +151,7 @@ export default {
     flex-direction column
     justify-content center
     align-items  center
+    height 100%
     background-color #ecf1f1
 
     .register__button--login
@@ -169,7 +163,7 @@ export default {
       .form
         formStyle(30%, #fff)
 
-    @media (min-width 768px) and (max-width 1200px)
+    @media (min-width 576px) and (max-width 1200px)
       .form
         formStyle(55%, #fff)
 

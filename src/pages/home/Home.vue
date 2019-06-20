@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     Home
     <a-button
       @click="goToRegister">
@@ -19,5 +19,4 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
 </style>

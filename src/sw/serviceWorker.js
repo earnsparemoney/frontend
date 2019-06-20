@@ -1,6 +1,7 @@
 importScripts('/workbox/workbox-sw.js')
 
 const runtimeCacheName = 'earnsparemoney'
+const offlineHtml = '/index.html'
 
 workbox.setConfig({ debug: false })
 
@@ -29,6 +30,13 @@ workbox.precaching.precache(['/'].concat(self.__precacheManifest.map(precache =>
 workbox.routing.registerRoute(
   function ({ url, event }) {
     if (event.request.destination === 'document') {
+      fetch(offlineHtml).then(res => {
+        if (res.status === 200) {
+          caches.open(runtimeCacheName).then(cache => {
+            cache.put(offlineHtml, res)
+          })
+        }
+      })
       return true
     }
   },
@@ -60,7 +68,7 @@ workbox.routing.registerRoute(
 workbox.routing.setCatchHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document':
-      return caches.match(`/index.html`)
+      return caches.match(offlineHtml)
     case 'image':
       return caches.match(event.request)
   }

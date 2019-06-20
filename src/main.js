@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { createRouter } from './router'
+import router from './router'
 import store from './store'
 import App from './App.vue'
 
@@ -25,13 +25,23 @@ Vue.use(Menu)
 
 Vue.config.productionTip = false
 
-export function createApp () {
-  const router = createRouter()
-  const app = new Vue({
-    router,
-    store,
-    render: h => h(App)
-  })
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  store,
+  router,
+  components: {
+    App
+  },
+  template: '<App/>'
+})
 
-  return { app, router }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/serviceWorker.js').then(registration => {
+      console.log('SW registered: ', registration)
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError)
+    })
+  })
 }

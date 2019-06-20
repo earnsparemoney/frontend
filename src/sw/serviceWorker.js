@@ -1,7 +1,6 @@
 importScripts('/workbox/workbox-sw.js')
 
 const runtimeCacheName = 'earnsparemoney'
-const offlineHtml = '/index.html'
 
 workbox.setConfig({ debug: false })
 
@@ -28,18 +27,7 @@ workbox.precaching.precache(['/'].concat(self.__precacheManifest.map(precache =>
 
 // 对主页资源使用网络优先的方案
 workbox.routing.registerRoute(
-  function ({ url, event }) {
-    if (event.request.destination === 'document') {
-      fetch(offlineHtml).then(res => {
-        if (res.status === 200) {
-          caches.open(runtimeCacheName).then(cache => {
-            cache.put(offlineHtml, res)
-          })
-        }
-      })
-      return true
-    }
-  },
+  '/',
   new workbox.strategies.NetworkFirst()
 )
 
@@ -68,7 +56,7 @@ workbox.routing.registerRoute(
 workbox.routing.setCatchHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document':
-      return caches.match(offlineHtml)
+      return caches.match('/')
     case 'image':
       return caches.match(event.request)
   }

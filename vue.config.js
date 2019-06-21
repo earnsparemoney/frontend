@@ -23,8 +23,9 @@ module.exports = {
   outputDir: serverSide ? resolve('dist/server-build') : resolve('dist'),
   publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
   css: {
-    extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true
-    // extract: false
+    extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true,
+    // extract: false,
+    sourceMap: true
   },
   devServer: {
     port: 8080,
@@ -38,30 +39,30 @@ module.exports = {
   configureWebpack: (config) => {
     if (!serverSide) {
       config.entry.app = resolve('src/entry-client.js')
-      config.plugins.push(
-        new AutoDllPlugin({
-          inject: true,
-          debug: true,
-          filename: '[name].[hash].js',
-          path: './dll',
-          entry: {
-            vendor: [
-              'vue/dist/vue.esm.js',
-              'vuex',
-              'vue-router',
-              'axios'
-            ]
-          }
-        })
-      )
+      // config.plugins.push(
+      //   new AutoDllPlugin({
+      //     inject: true,
+      //     debug: true,
+      //     filename: '[name].[hash].js',
+      //     path: './dll',
+      //     entry: {
+      //       vendor: [
+      //         'vue/dist/vue.esm.js',
+      //         'vuex',
+      //         'vue-router',
+      //         'axios'
+      //       ]
+      //     }
+      //   })
+      // )
       config.plugins.push(
         new workboxPlugin.InjectManifest(workboxOptions)
       )
       config.plugins.push(
         new VueSSRClientPlugin({
-          filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
+          // filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
         }),
-        new ModuleHtmlPlugin()
+        // new ModuleHtmlPlugin()
       )
     } else {
       config.entry.app = resolve('src/entry-server.js')

@@ -102,6 +102,7 @@ module.exports = {
           return options
         })
 
+
     // console.log(process.env.VUE_CLI_MODERN_BUILD)
     config.plugins.has('copy') &&
     config

@@ -11,9 +11,9 @@
     child_process: 'empty'
   },
   output: {
-    path: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\dist\\server-build',
+    path: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\dist',
     filename: 'static/js/[name].[hash].js',
-    publicPath: '/',
+    publicPath: 'http://localhost:8080/',
     globalObject: '(typeof self !== \'undefined\' ? self : this)',
     chunkFilename: 'static/js/[name].[hash].js'
   },
@@ -60,19 +60,12 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: 'e7e52912'
+              cacheIdentifier: '0d79408a'
             }
           },
           /* config.module.rule('vue').use('vue-loader') */
           {
-            loader: 'vue-loader',
-            options: {
-              compilerOptions: {
-                preserveWhitespace: false
-              },
-              cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: 'e7e52912'
-            }
+            loader: 'vue-loader'
           }
         ]
       },
@@ -187,7 +180,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -195,7 +188,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -205,7 +198,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -218,7 +211,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -226,7 +219,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -234,7 +227,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -247,7 +240,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -255,7 +248,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -265,7 +258,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -277,7 +270,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -285,7 +278,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -293,7 +286,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -312,7 +305,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -320,7 +313,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -330,7 +323,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -343,7 +336,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -351,7 +344,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -359,7 +352,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -372,7 +365,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -380,7 +373,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -390,7 +383,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -402,7 +395,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -410,7 +403,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -418,7 +411,7 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -437,7 +430,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -445,7 +438,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -455,14 +448,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('scss').oneOf('vue-modules').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -475,7 +468,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -483,7 +476,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -491,14 +484,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('scss').oneOf('vue').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -511,7 +504,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -519,7 +512,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -529,14 +522,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('scss').oneOf('normal-modules').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -548,7 +541,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -556,7 +549,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -564,14 +557,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('scss').oneOf('normal').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -590,7 +583,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -598,7 +591,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -608,14 +601,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('sass').oneOf('vue-modules').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   indentedSyntax: true
                 }
               }
@@ -629,7 +622,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -637,7 +630,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -645,14 +638,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('sass').oneOf('vue').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   indentedSyntax: true
                 }
               }
@@ -666,7 +659,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -674,7 +667,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -684,14 +677,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('sass').oneOf('normal-modules').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   indentedSyntax: true
                 }
               }
@@ -704,7 +697,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -712,7 +705,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -720,14 +713,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('sass').oneOf('normal').use('sass-loader') */
               {
                 loader: 'sass-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   indentedSyntax: true
                 }
               }
@@ -747,7 +740,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -755,7 +748,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -765,14 +758,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('less').oneOf('vue-modules').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -785,7 +778,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -793,7 +786,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -801,14 +794,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('less').oneOf('vue').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -821,7 +814,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -829,7 +822,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -839,14 +832,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('less').oneOf('normal-modules').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -858,7 +851,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -866,7 +859,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -874,14 +867,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('less').oneOf('normal').use('less-loader') */
               {
                 loader: 'less-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]
@@ -900,7 +893,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -908,7 +901,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -918,14 +911,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('stylus').oneOf('vue-modules').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   preferPathResolver: 'webpack'
                 }
               }
@@ -939,7 +932,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -947,7 +940,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -955,14 +948,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('stylus').oneOf('vue').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   preferPathResolver: 'webpack'
                 }
               }
@@ -976,7 +969,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -984,7 +977,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2,
                   modules: true,
                   localIdentName: '[name]_[local]_[hash:base64:5]'
@@ -994,14 +987,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('stylus').oneOf('normal-modules').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   preferPathResolver: 'webpack'
                 }
               }
@@ -1014,7 +1007,7 @@
               {
                 loader: 'vue-style-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   shadowMode: false
                 }
               },
@@ -1022,7 +1015,7 @@
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   importLoaders: 2
                 }
               },
@@ -1030,14 +1023,14 @@
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               /* config.module.rule('stylus').oneOf('normal').use('stylus-loader') */
               {
                 loader: 'stylus-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   preferPathResolver: 'webpack'
                 }
               }
@@ -1057,7 +1050,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\babel-loader',
-              cacheIdentifier: '17873d57'
+              cacheIdentifier: '41f8abb7'
             }
           },
           /* config.module.rule('js').use('babel-loader') */
@@ -1085,7 +1078,7 @@
                 '.vue'
               ],
               cache: true,
-              cacheIdentifier: '9d094ade',
+              cacheIdentifier: '7db42b7d',
               emitWarning: true,
               emitError: false,
               eslintPath: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\eslint\\lib\\api.js',
@@ -1104,7 +1097,7 @@
       {
         'process.env': {
           NODE_ENV: '"development"',
-          BASE_URL: '"/"'
+          BASE_URL: '"http://localhost:8080/"'
         }
       }
     ),
@@ -1155,7 +1148,7 @@
       [
         {
           from: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\public',
-          to: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\dist\\server-build',
+          to: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\dist',
           toType: 'dir',
           ignore: [
             '*.prod.*'
@@ -1164,27 +1157,11 @@
       ]
     ),
     {
-      _originalSettings: {
-        inject: true,
-        debug: true,
-        filename: '[name].[hash].js',
-        path: './dll',
-        entry: {
-          vendor: [
-            'vue/dist/vue.esm.js',
-            'vuex',
-            'vue-router',
-            'axios'
-          ]
-        }
-      }
-    },
-    {
       config: {
         chunks: [],
         exclude: [
           /^workbox/,
-          /index\.html/,
+          /index-server\.html/,
           /\.map$/
         ],
         excludeChunks: [],

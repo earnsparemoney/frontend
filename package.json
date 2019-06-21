@@ -9,7 +9,7 @@
     "build:client": "vue-cli-service build",
     "build:server": "cross-env BUILD_TARGET=server vue-cli-service build --no-clean",
     "build:modern": "vue-cli-service build --modern",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:modern && npm run build:server",
     "build:docker": "docker-compose up --build",
     "docker": "docker-compose up",
     "report": "vue-cli-service build --report",

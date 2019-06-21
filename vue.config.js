@@ -11,6 +11,7 @@ function resolve (dir) {
 }
 
 const serverSide = process.env.BUILD_TARGET === 'server'
+const isProd = process.env.NODE_ENV === 'production'
 
 const workboxOptions = {
   swSrc: resolve('src/sw/serviceWorker.js'),
@@ -20,11 +21,9 @@ const workboxOptions = {
 }
 
 module.exports = {
-  outputDir: serverSide ? resolve('dist/server-build') : resolve('dist'),
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
+  publicPath: isProd ? '/' : 'http://localhost:8080/',
   css: {
     extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true,
-    // extract: false,
     sourceMap: true
   },
   devServer: {
@@ -39,30 +38,30 @@ module.exports = {
   configureWebpack: (config) => {
     if (!serverSide) {
       config.entry.app = resolve('src/entry-client.js')
-      // config.plugins.push(
-      //   new AutoDllPlugin({
-      //     inject: true,
-      //     debug: true,
-      //     filename: '[name].[hash].js',
-      //     path: './dll',
-      //     entry: {
-      //       vendor: [
-      //         'vue/dist/vue.esm.js',
-      //         'vuex',
-      //         'vue-router',
-      //         'axios'
-      //       ]
-      //     }
-      //   })
-      // )
+      config.plugins.push(
+        new AutoDllPlugin({
+          inject: true,
+          debug: true,
+          filename: '[name].[hash].js',
+          path: './dll',
+          entry: {
+            vendor: [
+              'vue/dist/vue.esm.js',
+              'vuex',
+              'vue-router',
+              'axios'
+            ]
+          }
+        })
+      )
       config.plugins.push(
         new workboxPlugin.InjectManifest(workboxOptions)
       )
       config.plugins.push(
         new VueSSRClientPlugin({
-          // filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
+          filename: process.env.VUE_CLI_MODERN_BUILD ? 'vue-ssr-client-manifest.json' : 'vue-ssr-client-manifest-legacy.json'
         }),
-        // new ModuleHtmlPlugin()
+        new ModuleHtmlPlugin()
       )
     } else {
       config.entry.app = resolve('src/entry-server.js')
@@ -95,6 +94,10 @@ module.exports = {
 
     config.module
       .rule('vue')
+      .uses.delete('cache-loader')
+
+    config.module
+      .rule('vue')
       .use('vue-loader')
         .loader('vue-loader')
         .tap(options => {
@@ -102,6 +105,14 @@ module.exports = {
           return options
         })
 
+    if (serverSide) {
+      config.module
+        .rule('css')
+        .oneOf('normal').uses.delete('vue-style-loader')
+      config.module
+        .rule('stylus')
+        .oneOf('vue').uses.delete('vue-style-loader')
+    }
 
     // console.log(process.env.VUE_CLI_MODERN_BUILD)
     config.plugins.has('copy') &&
@@ -111,7 +122,7 @@ module.exports = {
         if (serverSide) {
           args[0][0].ignore = ['*workbox*']
         } else {
-          args[0][0].ignore = process.env.NODE_ENV === 'production' ? ['*.dev.*'] : ['*.prod.*']
+          args[0][0].ignore = isProd ? ['*.dev.*'] : ['*.prod.*']
         }
         return args
       })

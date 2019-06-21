@@ -55,17 +55,16 @@
       {
         test: /\.vue$/,
         use: [
-          /* config.module.rule('vue').use('cache-loader') */
-          {
-            loader: 'cache-loader',
-            options: {
-              cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '0d79408a'
-            }
-          },
           /* config.module.rule('vue').use('vue-loader') */
           {
-            loader: 'vue-loader'
+            loader: 'vue-loader',
+            options: {
+              compilerOptions: {
+                preserveWhitespace: false
+              },
+              cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\vue-loader',
+              cacheIdentifier: '7fa97562'
+            }
           }
         ]
       },
@@ -1050,7 +1049,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\.cache\\babel-loader',
-              cacheIdentifier: '41f8abb7'
+              cacheIdentifier: '57749136'
             }
           },
           /* config.module.rule('js').use('babel-loader') */
@@ -1078,7 +1077,7 @@
                 '.vue'
               ],
               cache: true,
-              cacheIdentifier: '7db42b7d',
+              cacheIdentifier: '6de690ed',
               emitWarning: true,
               emitError: false,
               eslintPath: 'C:\\Users\\GZS13113\\Desktop\\Lim\\Git\\frontend\\node_modules\\eslint\\lib\\api.js',
@@ -1157,6 +1156,22 @@
       ]
     ),
     {
+      _originalSettings: {
+        inject: true,
+        debug: true,
+        filename: '[name].[hash].js',
+        path: './dll',
+        entry: {
+          vendor: [
+            'vue/dist/vue.esm.js',
+            'vuex',
+            'vue-router',
+            'axios'
+          ]
+        }
+      }
+    },
+    {
       config: {
         chunks: [],
         exclude: [
@@ -1175,8 +1190,11 @@
     },
     {
       options: {
-        filename: 'vue-ssr-client-manifest.json'
+        filename: 'vue-ssr-client-manifest-legacy.json'
       }
+    },
+    {
+      isModule: undefined
     }
   ],
   entry: {

@@ -27,13 +27,14 @@
 </template>
 
 <script>
-import HandleCancelClick from '@/mixins/handleCancelClick'
 export default {
   name: 'Type',
-  mixins: [HandleCancelClick],
   methods: {
     handleTypeItemClick (e) {
       this.$emit('add', e.target.dataset.type)
+    },
+    handleCancelClick () {
+      this.$emit('cancel', this.$options.name)
     }
   }
 }

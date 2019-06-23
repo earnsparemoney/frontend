@@ -7,11 +7,13 @@
       icon="plus"
       size="large"
       @click="toggleShow('Type')"/>
+
     <div
       class="questions__wrapper"
       v-for="(item, index) of questions"
       :key="index">
       <div>{{ item.question.title }}</div>
+
       <a-radio-group
         v-if="item.type === 'Choose'"
         disabled="true">
@@ -23,7 +25,13 @@
           {{ radioItem }}
         </a-radio>
       </a-radio-group>
+
+      <a-input
+        class="input"
+        v-if="item.type === 'Fill'"
+        disabled="true"></a-input>
     </div>
+
     <type
       class="questionaire_comp"
       v-show="showType"
@@ -32,7 +40,8 @@
 
     <choose
       class="questionaire_comp"
-      v-if="showChoose"></choose>
+      v-if="showChoose"
+      ></choose>
 
     <fill
       class="questionaire_comp"
@@ -98,6 +107,9 @@ export default {
       .radio__item
         display block
         margin-top 10px
+      .input
+        margin-top 20px
+        height 60px
 
     .questionaire_comp
       position fixed

@@ -25,8 +25,8 @@
         </div>
 
         <a-radio-group v-model="question.chooseType">
-          <a-radio :value="1">单选题</a-radio>
-          <a-radio :value="2">多选题</a-radio>
+          <a-radio class="choose-type__item" :value="1">单选题</a-radio>
+          <a-radio class="choose-type__item" :value="2">多选题</a-radio>
         </a-radio-group>
       </div>
     </type-template>
@@ -76,5 +76,8 @@ export default {
 
     .add-option
       margin-top 15px
-      margin-bottom 15px
+
+    .choose-type__item
+      display block
+      margin-top 15px
 </style>

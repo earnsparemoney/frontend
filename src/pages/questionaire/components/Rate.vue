@@ -50,7 +50,6 @@ export default {
     changeRating (value) {
       this.question.max = value
     }
-
   }
 }
 </script>

@@ -36,7 +36,16 @@
         class="rating-item"
         :count="item.question.max"
         :defaultValue="0"
+        disabled="true"
         allowHalf />
+
+      <a-radio-group
+        class="judge_radio"
+        v-if="item.type === 'Judge'"
+        disabled="true">
+        <a-radio class="choose-type__item" :value="1">单选题</a-radio>
+        <a-radio class="choose-type__item" :value="2">多选题</a-radio>
+      </a-radio-group>
     </div>
 
     <type
@@ -57,6 +66,10 @@
     <rate
       class="questionaire_comp"
       v-if="showRate"></rate>
+
+    <judge
+      class="questionaire_comp"
+      v-if="showJudge"></judge>
   </div>
 </template>
 
@@ -66,13 +79,15 @@ import Type from './components/Type'
 import Choose from './components/Choose'
 import Fill from './components/Fill'
 import Rate from './components/Rate'
+import Judge from './components/Judge'
 export default {
   name: 'Questionaire',
   components: {
     Rate,
     Type,
     Choose,
-    Fill
+    Fill,
+    Judge
   },
   data () {
     return {
@@ -80,6 +95,7 @@ export default {
       showChoose: false,
       showFill: false,
       showRate: false,
+      showJudge: false,
       questions: []
     }
   },
@@ -132,4 +148,6 @@ export default {
       left 0
       right 0
       background-color #f5f2f2
+  .judge_radio
+    margin-top 5px
 </style>

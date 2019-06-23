@@ -7,9 +7,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 import {
+  Alert,
   Button,
   Form,
   Input,
+  InputNumber,
   Icon,
   Row,
   Col,
@@ -19,9 +21,13 @@ import {
   Avatar,
   Divider,
   message,
-  Radio
+  Radio,
+  Rate,
+  Select
 } from 'ant-design-vue'
 
+Vue.use(Select)
+Vue.use(Alert)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(Input)
@@ -34,6 +40,8 @@ Vue.use(Card)
 Vue.use(Avatar)
 Vue.use(Divider)
 Vue.use(Radio)
+Vue.use(Rate)
+Vue.use(InputNumber)
 
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard

@@ -12,5 +12,9 @@ export {
   EditOutline,
   StarOutline,
   PlusCircleOutline,
-  MinusCircleOutline
+  MinusCircleOutline,
+  StarFill,
+  UpOutline,
+  DownOutline,
+  CloseCircleFill
 } from '@ant-design/icons'

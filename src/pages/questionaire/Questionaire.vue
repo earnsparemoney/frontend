@@ -30,6 +30,13 @@
         class="input"
         v-if="item.type === 'Fill'"
         disabled="true"></a-input>
+
+      <a-rate
+        v-if="item.type === 'Rate'"
+        class="rating-item"
+        :count="item.question.max"
+        :defaultValue="0"
+        allowHalf />
     </div>
 
     <type
@@ -46,6 +53,10 @@
     <fill
       class="questionaire_comp"
       v-if="showFill"></fill>
+
+    <rate
+      class="questionaire_comp"
+      v-if="showRate"></rate>
   </div>
 </template>
 
@@ -54,9 +65,11 @@ import { EventBus } from '@/utils/eventBus'
 import Type from './components/Type'
 import Choose from './components/Choose'
 import Fill from './components/Fill'
+import Rate from './components/Rate'
 export default {
   name: 'Questionaire',
   components: {
+    Rate,
     Type,
     Choose,
     Fill
@@ -66,6 +79,7 @@ export default {
       showType: false,
       showChoose: false,
       showFill: false,
+      showRate: false,
       questions: []
     }
   },

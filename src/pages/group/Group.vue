@@ -1,13 +1,19 @@
 <template>
 <div class="group">
   <h2 class="group-header">Group</h2>
-  <group-card
-    class="group-card"
-    v-for="(item, index) of groups"
-    :key="index"
-    :name="item.name"
-    :number="item.number"
-    :image="item.image"/>
+  <div class="content">
+    <group-card
+      class="card"
+      v-for="(item, index) of groups"
+      :key="index"
+      :name="item.name"
+      :number="item.number"
+      :image="item.image"/>
+    <div class="card"/>
+    <div class="card"/>
+    <div class="card"/>
+    <div class="card"/>
+  </div>
 </div>
 </template>
 
@@ -59,8 +65,31 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.group
-  padding 15px 15px
-  .group-card
-    margin-top 20px
+@media (min-width 1200px)
+  .group
+    padding 15px 15px
+    .content
+      display flex
+      justify-content space-between
+      flex-direction row
+      flex-wrap wrap
+      .card
+        width 24%
+        margin-top 10px
+@media (min-width 576px) and (max-width 1200px)
+  .group
+    padding 15px 15px
+    .content
+      display flex
+      justify-content space-between
+      flex-direction row
+      flex-wrap wrap
+      .card
+        width 32%
+        margin-top 10px
+@media (max-width 576px)
+  .group
+    padding 15px 15px
+    .card
+      margin-top 20px
 </style>

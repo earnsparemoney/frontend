@@ -75,6 +75,7 @@ export default {
   @media (min-width 768px) and (max-width 1200px)
     .user
       background-color #ecf1f1
+  @media (min-width 576px) and (max-width 1200px)
     .info
       display flex
       align-items center

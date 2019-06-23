@@ -1,21 +1,27 @@
 <template>
   <div>
-   <a-input placeholder="点击编辑题目名称"></a-input>
-   <bottom-bar
-      @add="handleSaveClick"
-      @cancel="handleCancelClick"></bottom-bar>
+   <type-template
+    @add="handleSaveClick"
+    @cancel="handleCancelClick">
+      <div>
+        <a-input placeholder="点击编辑题目名称"></a-input>
+      </div>
+   </type-template>
   </div>
 </template>
 
 <script>
-import handleCancelClick from '@/mixins/handleCancelClick.js'
-import handleSaveClick from '@/mixins/handleSaveClick.js'
-import BottomBar from '@/components/BottomBar'
+import TypeTemplate from './TypeTemplate'
+import handleCancelClick from '@/mixins/handleCancelClick'
+import handleSaveClick from '@/mixins/handleSaveClick'
 export default {
   name: 'Fill',
-  mixins: [ handleCancelClick, handleSaveClick ],
+  mixins: [
+    handleCancelClick,
+    handleSaveClick
+  ],
   components: {
-    BottomBar
+    TypeTemplate
   }
 }
 </script>

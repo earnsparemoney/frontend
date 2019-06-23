@@ -65,6 +65,19 @@ module.exports = {
       .set('utils', resolve('src/utils'))
       .set('@ant-design/icons/lib/dist$', resolve('src/utils/antdIcon.js'))
 
+    config.module
+      .rule('vue')
+      .uses.delete('cache-loader')
+
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+        .loader('vue-loader')
+        .tap(options => {
+          options = {}
+          return options
+        })
+
     // console.log(process.env.VUE_CLI_MODERN_BUILD)
     config.plugins.has('copy') &&
     config

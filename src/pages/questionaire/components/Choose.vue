@@ -3,7 +3,7 @@
     <a-input
       class="title"
       placeholder="点击编辑题目"
-      v-model="title"></a-input>
+      v-model="question.title"></a-input>
 
     <a-input
       class="options__item"
@@ -20,7 +20,7 @@
       添加选项
     </div>
 
-    <a-radio-group v-model="chooseType">
+    <a-radio-group v-model="question.chooseType">
       <a-radio :value="1">单选题</a-radio>
       <a-radio :value="2">多选题</a-radio>
     </a-radio-group>
@@ -32,11 +32,12 @@
 </template>
 
 <script>
-import HandleCancelClick from '@/mixins/handleCancelClick'
+import handleCancelClick from '@/mixins/handleCancelClick.js'
+import handleSaveClick from '@/mixins/handleSaveClick.js'
 import BottomBar from '@/components/BottomBar'
 export default {
   name: 'Choose',
-  mixins: [HandleCancelClick],
+  mixins: [ handleCancelClick, handleSaveClick ],
   components: {
     BottomBar
   },

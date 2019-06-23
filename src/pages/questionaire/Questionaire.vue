@@ -23,6 +23,12 @@
           {{ radioItem }}
         </a-radio>
       </a-radio-group>
+      <a-rate
+        v-if="item.type === 'Rate'"
+        class="rating-item"
+        :count="item.question.max"
+        :defaultValue="0"
+        allowHalf />
     </div>
     <type
       class="questionaire_comp"
@@ -32,11 +38,19 @@
 
     <choose
       class="questionaire_comp"
-      v-if="showChoose"></choose>
+      v-if="showChoose"
+      @cancel="toggleShow"
+      @add="addQuestion"></choose>
 
     <fill
       class="questionaire_comp"
       v-if="showFill"></fill>
+
+    <rate
+      class="questionaire_comp"
+      v-if="showRate"
+      @cancel="toggleShow"
+      @add="addQuestion"></rate>
   </div>
 </template>
 
@@ -45,9 +59,11 @@ import { EventBus } from '@/utils/eventBus'
 import Type from './components/Type'
 import Choose from './components/Choose'
 import Fill from './components/Fill'
+import Rate from './components/Rate'
 export default {
   name: 'Questionaire',
   components: {
+    Rate,
     Type,
     Choose,
     Fill
@@ -57,6 +73,7 @@ export default {
       showType: false,
       showChoose: false,
       showFill: false,
+      showRate: false,
       questions: []
     }
   },

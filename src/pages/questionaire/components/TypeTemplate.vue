@@ -22,10 +22,29 @@ export default {
       EventBus.$emit('cancel', this.type)
     },
     handleSaveClick () {
-      EventBus.$emit('add', {
-        type: this.type,
-        question: this.question
-      })
+      if (this.isValid()) {
+        EventBus.$emit('add', {
+          type: this.type,
+          question: this.question
+        })
+      }
+    },
+    isValid () {
+      for (let key in this.question) {
+        let val = this.question[key]
+        if (!val) {
+          this.message.error('不能为空')
+          return false
+        } else if (Object.prototype.toString.call(val).includes('Array')) {
+          for (let item of val) {
+            if (!item) {
+              this.message.error('不能为空')
+              return false
+            }
+          }
+        }
+      }
+      return true
     }
   }
 }

@@ -9,6 +9,7 @@ const Task = () => import('@/pages/task/Task')
 const Finish = () => import('@/pages/finish/Finish')
 const Questionaire = () => import('@/pages/questionaire/Questionaire')
 const Group = () => import('@/pages/group/Group')
+const CreateTask = () => import('@/pages/createTask/CreateTask')
 
 Vue.use(Router)
 
@@ -62,6 +63,11 @@ const router = new Router({
       path: '/alltasks',
       name: 'AllTasks',
       component: AllTasks
+    },
+    {
+      path: '/task',
+      name: 'CreateTask',
+      component: CreateTask
     },
     {
       path: '*',

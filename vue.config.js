@@ -16,11 +16,20 @@ const workboxOptions = {
 
 module.exports = {
   devServer: {
+    host: '0.0.0.0',
     port: 8080,
     historyApiFallback: {
       rewrites: [
         { from: /.*/, to: '/index.html' }
       ]
+    },
+    proxy: {
+      '/api': {
+        target: 'https://localhost:4000/',
+        pathRewrite: {'^/api' : ''},
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
   configureWebpack: (config) => {

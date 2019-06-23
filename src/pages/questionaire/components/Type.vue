@@ -22,7 +22,10 @@
       <div class="type__item--empty">
       </div>
     </div>
-    <div class="cancel" @click="handleCancelClick">取消</div>
+    <div class="cancel bottom-bar__item" @click="handleCancelClick">
+      <a-icon type="close"></a-icon>
+      取消
+    </div>
   </div>
 </template>
 
@@ -79,10 +82,11 @@ export default {
       left 0
       right 0
       display flex
+      flex-direction column
+      align-items center
       justify-content center
-      height 70px
-      padding-top 15px
-      font-size 20px
+      height 50px
+      font-size 14px
       color #afabab
       background-color #fff
 </style>

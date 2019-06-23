@@ -22,6 +22,7 @@ export default {
   main
     height 100%
     padding 64px 0 0 0
+    background-color #ecf1f1
 
   #app
     height 100%

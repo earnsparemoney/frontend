@@ -1,5 +1,5 @@
 export default {
-  setUsername (state, username) {
-    state.username = username
+  setUserInfo (state, userInfo) {
+    state.userInfo = userInfo
   }
 }

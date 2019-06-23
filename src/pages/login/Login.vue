@@ -57,7 +57,6 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
 export default {
   name: 'Register',
   data () {
@@ -87,7 +86,7 @@ export default {
         this.loading = true
         this.login(
           {
-            username: this.username.value,
+            account: this.username.value,
             password: this.password.value
           }
         ).then(res => {
@@ -98,22 +97,6 @@ export default {
           this.loading = false
           console.log(err)
         })
-        // this.axios.get(
-        //   '/api/user/login',
-        //   {
-        //     params: {
-        //       'account': this.username.value,
-        //       'password': this.password.value
-        //     }
-        //   }
-        // ).then(res => {
-        //   if (res.status === 200) {
-        //     this.$router.push('/user')
-        //   }
-        // }).catch(err => {
-        //   this.loading = false
-        //   console.log(err)
-        // })
       }
     },
     isValidate () {
@@ -159,7 +142,6 @@ export default {
     justify-content center
     align-items  center
     height 100%
-    background-color #ecf1f1
 
     .register__button--login
       position absolute

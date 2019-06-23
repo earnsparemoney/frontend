@@ -1,7 +1,8 @@
 <template>
 <div class="alltasks">
   <h2 class="alltasks-header">All Task</h2>
-  <task-card
+  <div class="task__wrapper">
+    <task-card
     pay="2"
     from="快递柜2号"
     to="SYSU"
@@ -13,6 +14,7 @@
     :pay="item.pay"
     :from="item.from"
     :to="item.to"/>
+  </div>
 </div>
 </template>
 

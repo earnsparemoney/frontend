@@ -20,6 +20,10 @@
     <a-button
       @click="goToTasks">
       任务清单</a-button>
+
+    <a-button
+      @click="goToTask">
+      任务</a-button>
   </div>
 </template>
 
@@ -41,6 +45,9 @@ export default {
     },
     goToTasks () {
       this.$router.push('/alltasks')
+    },
+    goToTask () {
+      this.$router.push('/task')
     }
   }
 }

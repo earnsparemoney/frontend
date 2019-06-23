@@ -6,11 +6,11 @@
       </div>
       <div class="info__detail--wrapper">
         <span class="info__name">
-          {{ username || 'limsanity' }}
+          {{ userInfo ? userInfo.account : 'limsanity' }}
         </span>
         <span class="info__phone">
           <a-icon type="phone" />
-          {{ phone }}
+          {{ userInfo ? userInfo.phone : '15625583871' }}
           <a-icon
             :data-clipboard-text="phone"
             class="copy"
@@ -52,7 +52,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['username'])
+    ...mapState(['userInfo'])
   },
   methods: {
     handleMenuClick (e) {
@@ -73,6 +73,8 @@ export default {
   // @media (min-width 1200px)
 
   @media (min-width 768px) and (max-width 1200px)
+    .user
+      background-color #ecf1f1
     .info
       display flex
       align-items center
@@ -103,6 +105,8 @@ export default {
           font-size 16px
 
   @media (max-width 576px)
+    .user
+      background-color #ecf1f1
     .info
       display flex
       flex-direction column
@@ -139,6 +143,7 @@ export default {
 
     .menu
       display flex
+      background-color #f0f2f5
 
       .menu__item
         flex 1

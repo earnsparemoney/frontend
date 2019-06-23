@@ -29,27 +29,37 @@
       v-show="showType"
       @cancel="toggleShow"
       @add="addQuestion"></type>
+
     <choose
       class="questionaire_comp"
       v-if="showChoose"
       @cancel="toggleShow"
       @add="addCallback"></choose>
+
+    <fill
+      class="questionaire_comp"
+      v-if="showFill"
+      @cancel="toggleShow"
+      @add="addCallback"></fill>
   </div>
 </template>
 
 <script>
 import Type from './components/Type'
 import Choose from './components/Choose'
+import Fill from './components/Fill'
 export default {
   name: 'Questionaire',
   components: {
     Type,
-    Choose
+    Choose,
+    Fill
   },
   data () {
     return {
       showType: false,
       showChoose: false,
+      showFill: false,
       questions: []
     }
   },

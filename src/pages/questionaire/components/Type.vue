@@ -50,10 +50,20 @@ export default {
         flex-direction column
         justify-content center
         align-items center
+        position relative
         width 100px
         height 100px
         margin-top 15px
         background-color #fff
+
+        &::after
+          content ''
+          position absolute
+          left 0
+          right 0
+          top 0
+          bottom 0
+          display block
 
         .type__item__icon
           margin-bottom 10px

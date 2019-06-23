@@ -12,6 +12,10 @@
     <a-button
       @click="goToQuestionaire">
       问卷</a-button>
+
+    <a-button
+      @click="goToGroup">
+      兴趣组</a-button>
   </div>
 </template>
 
@@ -27,6 +31,9 @@ export default {
     },
     goToQuestionaire () {
       this.$router.push('/questionaire')
+    },
+    goToGroup () {
+      this.$router.push('/group')
     }
   }
 }

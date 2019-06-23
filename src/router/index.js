@@ -7,6 +7,7 @@ const User = () => import('@/pages/user/User')
 const Task = () => import('@/pages/task/Task')
 const Finish = () => import('@/pages/finish/Finish')
 const Questionaire = () => import('@/pages/questionaire/Questionaire')
+const Group = () => import('@/pages/group/Group')
 
 Vue.use(Router)
 
@@ -50,6 +51,11 @@ const router = new Router({
       path: '/questionaire',
       name: 'Questionaire',
       component: Questionaire
+    },
+    {
+      path: '/group',
+      name: 'Group',
+      component: Group
     },
     {
       path: '*',

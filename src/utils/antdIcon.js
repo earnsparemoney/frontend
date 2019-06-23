@@ -16,5 +16,6 @@ export {
   StarFill,
   UpOutline,
   DownOutline,
-  CloseCircleFill
+  CloseCircleFill,
+  InfoOutline
 } from '@ant-design/icons'

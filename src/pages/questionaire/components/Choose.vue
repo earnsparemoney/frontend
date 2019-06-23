@@ -1,8 +1,8 @@
 <template>
   <div class="choose">
     <type-template
-     @add="handleSaveClick"
-     @cancel="handleCancelClick">
+      :question="question"
+      type="Choose">
       <div>
         <a-input
           class="title"
@@ -34,12 +34,9 @@
 </template>
 
 <script>
-import handleCancelClick from '@/mixins/handleCancelClick.js'
-import handleSaveClick from '@/mixins/handleSaveClick.js'
 import TypeTemplate from './TypeTemplate'
 export default {
   name: 'Choose',
-  mixins: [ handleCancelClick, handleSaveClick ],
   components: {
     TypeTemplate
   },

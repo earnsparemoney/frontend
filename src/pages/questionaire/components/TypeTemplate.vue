@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot></slot>
+    <slot :question="question"></slot>
     <div class="bottom-bar">
       <div class="cancel bottom-bar__item" @click="handleCancelClick">取消</div>
       <a-divider class="divider" type="vertical"></a-divider>
@@ -10,14 +10,22 @@
 </template>
 
 <script>
+import { EventBus } from '@/utils/eventBus'
 export default {
   name: 'TypeTemplate',
+  props: {
+    question: Object,
+    type: String
+  },
   methods: {
     handleCancelClick () {
-      this.$emit('cancel')
+      EventBus.$emit('cancel', this.type)
     },
     handleSaveClick () {
-      this.$emit('add')
+      EventBus.$emit('add', {
+        type: this.type,
+        question: this.question
+      })
     }
   }
 }

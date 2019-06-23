@@ -32,19 +32,16 @@
 
     <choose
       class="questionaire_comp"
-      v-if="showChoose"
-      @cancel="toggleShow"
-      @add="addCallback"></choose>
+      v-if="showChoose"></choose>
 
     <fill
       class="questionaire_comp"
-      v-if="showFill"
-      @cancel="toggleShow"
-      @add="addCallback"></fill>
+      v-if="showFill"></fill>
   </div>
 </template>
 
 <script>
+import { EventBus } from '@/utils/eventBus'
 import Type from './components/Type'
 import Choose from './components/Choose'
 import Fill from './components/Fill'
@@ -75,6 +72,10 @@ export default {
       this.toggleShow(question.type)
       this.questions.push(question)
     }
+  },
+  mounted () {
+    EventBus.$on('cancel', this.toggleShow)
+    EventBus.$on('add', this.addCallback)
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div>
    <type-template
-    @add="handleSaveClick"
-    @cancel="handleCancelClick">
+    :question="question"
+    type="Fill">
       <div>
         <a-input placeholder="点击编辑题目名称"></a-input>
       </div>
@@ -12,16 +12,15 @@
 
 <script>
 import TypeTemplate from './TypeTemplate'
-import handleCancelClick from '@/mixins/handleCancelClick'
-import handleSaveClick from '@/mixins/handleSaveClick'
 export default {
   name: 'Fill',
-  mixins: [
-    handleCancelClick,
-    handleSaveClick
-  ],
   components: {
     TypeTemplate
+  },
+  data () {
+    return {
+      question: {}
+    }
   }
 }
 </script>

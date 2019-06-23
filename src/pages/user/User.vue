@@ -72,7 +72,7 @@ export default {
 <style lang="stylus" scoped>
   // @media (min-width 1200px)
 
-  @media (min-width 768px) and (max-width 1200px)
+  @media (min-width 576px) and (max-width 1200px)
     .info
       display flex
       align-items center

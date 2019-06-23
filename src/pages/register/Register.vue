@@ -1,7 +1,6 @@
 <template>
   <div
-    class="register"
-    :style="registerStyle">
+    class="register">
     <a-button class="register__button--login" @click="goToLogin">登录</a-button>
     <a-form
       class="form"
@@ -36,7 +35,7 @@
           type="password"
           placeholder="8-16位英文和数字组合的密码"
           v-decorator="[
-            'passowrd',
+            'password',
             {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{8,16}$/, message: '密码格式错误' }]}
           ]">
           <a-icon
@@ -99,9 +98,6 @@ export default {
   name: 'Register',
   data () {
     return {
-      registerStyle: {
-        height: ''
-      },
       form: this.$form.createForm(this),
       iconStyle: {
         color: 'rgba(0,0,0,.25)'
@@ -112,6 +108,18 @@ export default {
   methods: {
     handleSubmit () {
       this.isValidate() ? this.loading = true : alert('error')
+      const { username, password } = this.form.getFieldsValue()
+      this.axios.post(
+        '/api/user',
+        {
+          'account': username,
+          password
+        }
+      ).then(res => {
+        if (res.status === 200) {
+          this.$router.push('/user')
+        }
+      })
     },
     isValidate () {
       let validate = true
@@ -123,9 +131,6 @@ export default {
     goToLogin () {
       this.$router.push('/login')
     }
-  },
-  mounted () {
-    this.registerStyle.height = document.documentElement.clientHeight - 64 + 'px'
   }
 }
 </script>
@@ -158,6 +163,7 @@ export default {
     flex-direction column
     justify-content center
     align-items  center
+    height 100%
     background-color #ecf1f1
 
     .register__button--login

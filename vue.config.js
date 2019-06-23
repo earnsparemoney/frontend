@@ -1,6 +1,7 @@
 const path = require('path')
 const workboxPlugin = require('workbox-webpack-plugin')
 const AutoDllPlugin = require('autodll-webpack-plugin')
+const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -41,6 +42,13 @@ module.exports = {
     )
     config.plugins.push(
       new workboxPlugin.InjectManifest(workboxOptions)
+    )
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        'mapState':     ['vuex', 'mapState'],
+        'mapMutations': ['vuex', 'mapMutations'],
+        'mapActions': ['vuex', 'mapActions']
+      })
     )
   },
   chainWebpack: (config) => {

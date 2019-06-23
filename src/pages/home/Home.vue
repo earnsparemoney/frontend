@@ -4,6 +4,14 @@
     <a-button
       @click="goToRegister">
       注册</a-button>
+
+    <a-button
+      @click="goToUser">
+      用户</a-button>
+
+    <a-button
+      @click="goToQuestionaire">
+      问卷</a-button>
   </div>
 </template>
 
@@ -13,6 +21,12 @@ export default {
   methods: {
     goToRegister () {
       this.$router.push('/register')
+    },
+    goToUser () {
+      this.$router.push('/user')
+    },
+    goToQuestionaire () {
+      this.$router.push('/questionaire')
     }
   }
 }

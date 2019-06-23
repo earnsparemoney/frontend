@@ -1,7 +1,6 @@
 <template>
   <div
-    class="register"
-    :style="registerStyle">
+    class="register">
     <a-button class="register__button--login" @click="goToRegister">注册</a-button>
     <a-form
       class="form"
@@ -58,6 +57,7 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
 export default {
   name: 'Register',
   data () {
@@ -72,21 +72,48 @@ export default {
         value: '',
         status: ''
       },
-      registerStyle: {
-        height: ''
-      },
       iconStyle: {
         color: 'rgba(0,0,0,.25)'
       }
     }
   },
   methods: {
+    ...mapActions(['login']),
     goToRegister () {
       this.$router.push('/register')
     },
     handleLogin () {
       if (this.isValidate()) {
         this.loading = true
+        this.login(
+          {
+            username: this.username.value,
+            password: this.password.value
+          }
+        ).then(res => {
+          if (res.status === 200) {
+            this.$router.push('/user')
+          }
+        }).catch(err => {
+          this.loading = false
+          console.log(err)
+        })
+        // this.axios.get(
+        //   '/api/user/login',
+        //   {
+        //     params: {
+        //       'account': this.username.value,
+        //       'password': this.password.value
+        //     }
+        //   }
+        // ).then(res => {
+        //   if (res.status === 200) {
+        //     this.$router.push('/user')
+        //   }
+        // }).catch(err => {
+        //   this.loading = false
+        //   console.log(err)
+        // })
       }
     },
     isValidate () {
@@ -96,9 +123,6 @@ export default {
       this.password.status = password.value ? 'success' : 'error'
       return this.username.status === 'success' && this.password.status === 'success'
     }
-  },
-  mounted () {
-    this.registerStyle.height = document.documentElement.clientHeight - 64 + 'px'
   }
 }
 </script>
@@ -134,6 +158,7 @@ export default {
     flex-direction column
     justify-content center
     align-items  center
+    height 100%
     background-color #ecf1f1
 
     .register__button--login
@@ -145,7 +170,7 @@ export default {
       .form
         formStyle(30%, #fff)
 
-    @media (min-width 768px) and (max-width 1200px)
+    @media (min-width 576px) and (max-width 1200px)
       .form
         formStyle(55%, #fff)
 

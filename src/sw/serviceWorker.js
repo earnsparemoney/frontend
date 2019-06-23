@@ -52,6 +52,13 @@ workbox.routing.registerRoute(
   })
 )
 
+workbox.routing.registerRoute(
+  /\/api/,
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'api-cache'
+  })
+)
+
 // 单页面应用，路径不存在时返回主页缓存
 workbox.routing.setCatchHandler(({ event }) => {
   switch (event.request.destination) {

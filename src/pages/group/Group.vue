@@ -1,7 +1,7 @@
 <template>
 <div class="group">
   <h2 class="group-header">Group</h2>
-  <task-card
+  <group-card
     class="group-card"
     v-for="(item, index) of groups"
     :key="index"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TaskCard from '@/components/GroupCard'
+import GroupCard from '@/components/GroupCard'
 export default {
   name: 'Group',
   data () {
@@ -21,7 +21,7 @@ export default {
     }
   },
   components: {
-    TaskCard
+    GroupCard
   },
   created () {
     this.groups = this.fetchdata()

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AllTasks from '../pages/task/AllTasks'
 const Home = () => import('@/pages/home/Home')
 const Register = () => import('@/pages/register/Register')
 const Login = () => import('@/pages/login/Login')
@@ -56,6 +57,11 @@ const router = new Router({
       path: '/group',
       name: 'Group',
       component: Group
+    },
+    {
+      path: '/alltasks',
+      name: 'AllTasks',
+      component: AllTasks
     },
     {
       path: '*',

@@ -16,6 +16,10 @@
     <a-button
       @click="goToGroup">
       兴趣组</a-button>
+
+    <a-button
+      @click="goToTasks">
+      任务清单</a-button>
   </div>
 </template>
 
@@ -34,6 +38,9 @@ export default {
     },
     goToGroup () {
       this.$router.push('/group')
+    },
+    goToTasks () {
+      this.$router.push('/alltasks')
     }
   }
 }

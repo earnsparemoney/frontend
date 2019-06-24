@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   main
     height 100%
     padding 64px 0 0 0

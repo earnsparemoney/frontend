@@ -25,7 +25,8 @@ import {
   Radio,
   Rate,
   Select,
-  DatePicker
+  DatePicker,
+  Checkbox
 } from 'ant-design-vue'
 
 Vue.use(Select)
@@ -46,6 +47,7 @@ Vue.use(Rate)
 Vue.use(InputNumber)
 Vue.use(DatePicker)
 Vue.use(Modal)
+Vue.use(Checkbox)
 
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard

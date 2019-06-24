@@ -64,7 +64,12 @@
 export default {
   name: 'CreateTask',
   methods: {
+    handleCancelClick () {
+      this.$router.push('/')
+    },
+    handleSaveClick () {
 
+    }
   }
 }
 </script>

@@ -21,5 +21,9 @@ export {
   MoneyCollectOutline,
   EnvironmentOutline,
   CalendarOutline,
-  CloseOutline
+  CloseOutline,
+  EllipsisOutline,
+  ArrowUpOutline,
+  ArrowDownOutline,
+  DeleteOutline
 } from '@ant-design/icons'

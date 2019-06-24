@@ -11,25 +11,58 @@
     <div
       class="questions__wrapper"
       v-for="(item, index) of questions"
-      :key="index">
-      <div>{{ item.question.title }}</div>
+      :key="`${index}${item.type}`">
+
+      <a-dropdown>
+        <a class="ant-dropdown-link">
+          <a-icon type="ellipsis" />
+        </a>
+        <a-menu slot="overlay">
+          <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
+            <a>
+              <a-icon type="arrow-up"></a-icon>
+              上移
+            </a>
+          </a-menu-item>
+          <a-menu-divider></a-menu-divider>
+          <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
+            <a>
+              <a-icon type="arrow-down"></a-icon>
+              下移
+            </a>
+          </a-menu-item>
+          <a-menu-divider></a-menu-divider>
+          <a-menu-item class="ant-menu-item" @click="handleDeleteClick(index)">
+            <a>
+              <a-icon type="delete"></a-icon>
+              删除
+            </a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+
+      <div class="question--title">{{ item.question.title }}</div>
 
       <a-radio-group
-        v-if="item.type === 'Choose'"
-        disabled="true">
+        v-if="item.type === 'Choose' && item.question.chooseType === 1">
         <a-radio
           class="radio__item"
           v-for="(radioItem, radioIndex) of item.question.options"
           :key="radioIndex"
-          :value="index">
+          :value="radioIndex">
           {{ radioItem }}
         </a-radio>
       </a-radio-group>
 
-      <a-input
+      <a-checkbox-group
+        class="checkbox__wrapper"
+        v-if="item.type === 'Choose' && item.question.chooseType === 2"
+        :options="item.question.options">
+      </a-checkbox-group>
+
+      <a-textarea
         class="input"
-        v-if="item.type === 'Fill'"
-        disabled="true"></a-input>
+        v-if="item.type === 'Fill'"></a-textarea>
 
       <a-rate
         v-if="item.type === 'Rate'"
@@ -70,6 +103,7 @@
     <judge
       class="questionaire_comp"
       v-if="showJudge"></judge>
+
   </div>
 </template>
 
@@ -110,9 +144,30 @@ export default {
     addCallback (question) {
       this.toggleShow(question.type)
       this.questions.push(question)
+      localStorage.setItem('questions', JSON.stringify(this.questions))
+    },
+    handleMoveUpClick (index) {
+      if (index !== 0) {
+        const temp = this.questions[index]
+        this.questions.splice(index, 1)
+        this.questions.splice(index - 1, 0, temp)
+      }
+    },
+    handleMoveDownClick (index) {
+      if (index !== this.questions.length - 1) {
+        const temp = this.questions[index]
+        this.questions.splice(index, 1)
+        this.questions.splice(index + 1, 0, temp)
+      }
+    },
+    handleDeleteClick (index) {
+      if (this.questions.length !== 0) {
+        this.questions.splice(index, 1)
+      }
     }
   },
   mounted () {
+    this.questions = JSON.parse(localStorage.getItem('questions')) || []
     EventBus.$on('cancel', this.toggleShow)
     EventBus.$on('add', this.addCallback)
   }
@@ -121,6 +176,9 @@ export default {
 
 <style lang="stylus" scoped>
   @media (max-width 576px)
+    .flip-list-move
+      transition: transform 1s
+
     .add
       position fixed
       bottom 60px
@@ -129,17 +187,31 @@ export default {
       height 50px
 
     .questions__wrapper
+      position relative
       margin 10px
       margin-bottom 20px
       padding 20px
       border-radius 5px
       box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
+      background-color #fff
+      .ant-dropdown-link
+        position absolute
+        top 0px
+        right 12px
+        font-size 30px
+        .ant-menu-item
+          padding 0 20px
+      .question--title
+        font-size 18px
       .radio__item
         display block
         margin-top 10px
       .input
         margin-top 20px
-        height 60px
+        height 80px
+      .checkbox__wrapper
+        display flex
+        flex-direction column
 
     .questionaire_comp
       position fixed

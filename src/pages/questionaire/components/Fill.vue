@@ -9,7 +9,7 @@
           v-model="question.title"
           placeholder="点击编辑题目名称"></a-input>
 
-        <a-input class="input" disabled="true"></a-input>
+        <a-textarea class="input" disabled="true"></a-textarea>
       </div>
    </type-template>
   </div>
@@ -42,5 +42,5 @@ export default {
 
     .input
       margin-top 20px
-      height 60px
+      height 80px
 </style>

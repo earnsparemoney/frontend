@@ -17,5 +17,9 @@ export {
   UpOutline,
   DownOutline,
   CloseCircleFill,
-  InfoOutline
+  InfoOutline,
+  MoneyCollectOutline,
+  EnvironmentOutline,
+  CalendarOutline,
+  CloseOutline
 } from '@ant-design/icons'

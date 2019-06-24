@@ -23,7 +23,8 @@ import {
   message,
   Radio,
   Rate,
-  Select
+  Select,
+  DatePicker
 } from 'ant-design-vue'
 
 Vue.use(Select)
@@ -42,6 +43,7 @@ Vue.use(Divider)
 Vue.use(Radio)
 Vue.use(Rate)
 Vue.use(InputNumber)
+Vue.use(DatePicker)
 
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard

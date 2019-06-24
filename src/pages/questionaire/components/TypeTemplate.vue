@@ -1,10 +1,16 @@
 <template>
-  <div>
+  <div class="type-template">
     <slot :question="question"></slot>
     <div class="bottom-bar">
-      <div class="cancel bottom-bar__item" @click="handleCancelClick">取消</div>
+      <div class="cancel bottom-bar__item" @click="handleCancelClick">
+        <a-icon type="close"></a-icon>
+        取消
+      </div>
       <a-divider class="divider" type="vertical"></a-divider>
-      <div class="save bottom-bar__item" @click="handleSaveClick">保存</div>
+      <div class="save bottom-bar__item" @click="handleSaveClick">
+        <a-icon type="check"></a-icon>
+        发布
+      </div>
     </div>
   </div>
 </template>
@@ -58,13 +64,14 @@ export default {
     right 0
     display flex
     justify-content center
-    height 70px
-    font-size 20px
+    height 50px
+    font-size 14px
     background-color #fff
 
     .bottom-bar__item
       flex 1
       display flex
+      flex-direction column
       justify-content center
       align-items center
 

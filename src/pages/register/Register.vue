@@ -106,19 +106,26 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['register']),
     handleSubmit () {
       this.isValidate() ? this.loading = true : alert('error')
-      const { username, password } = this.form.getFieldsValue()
-      this.axios.post(
-        '/api/user',
-        {
-          'account': username,
-          password
-        }
-      ).then(res => {
+      const {
+        username,
+        password,
+        phone,
+        mail } = this.form.getFieldsValue()
+      this.register({
+        'account': username,
+        password,
+        phone,
+        email: mail
+      }).then(res => {
         if (res.status === 200) {
           this.$router.push('/user')
         }
+      }).catch(err => {
+        this.loading = false
+        console.log(err)
       })
     },
     isValidate () {
@@ -164,7 +171,6 @@ export default {
     justify-content center
     align-items  center
     height 100%
-    background-color #ecf1f1
 
     .register__button--login
       position absolute

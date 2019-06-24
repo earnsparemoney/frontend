@@ -90,7 +90,7 @@
     <choose
       class="questionaire_comp"
       v-if="showChoose"
-      ></choose>
+    ></choose>
 
     <fill
       class="questionaire_comp"
@@ -213,13 +213,13 @@ export default {
         display flex
         flex-direction column
 
-    .questionaire_comp
-      position fixed
-      top 64px
-      bottom 0
-      left 0
-      right 0
-      background-color #f5f2f2
+  .questionaire_comp
+    position fixed
+    top 64px
+    bottom 0
+    left 0
+    right 0
+    background-color #f5f2f2
   .judge_radio
     margin-top 5px
 </style>

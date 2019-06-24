@@ -1,6 +1,6 @@
 <template>
   <a-card
-    hoverablestyle="width: 300px"
+    hoverable
   >
     <img
       alt="example"
@@ -14,7 +14,7 @@
     <a-card-meta
       :title="name"
       :description="`当前人数: ${number}`">
-    </a-card-meta>
+      </a-card-meta>
   </a-card>
 </template>
 

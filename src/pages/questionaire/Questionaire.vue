@@ -57,7 +57,7 @@
     <choose
       class="questionaire_comp"
       v-if="showChoose"
-      ></choose>
+    ></choose>
 
     <fill
       class="questionaire_comp"
@@ -120,34 +120,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  @media (max-width 576px)
-    .add
-      position fixed
-      bottom 60px
-      right 30px
-      width 50px
-      height 50px
+@media (max-width 576px)
+  .add
+    position fixed
+    bottom 60px
+    right 30px
+    width 50px
+    height 50px
 
-    .questions__wrapper
-      margin 10px
-      margin-bottom 20px
-      padding 20px
-      border-radius 5px
-      box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
-      .radio__item
-        display block
-        margin-top 10px
-      .input
-        margin-top 20px
-        height 60px
+  .questions__wrapper
+    margin 10px
+    margin-bottom 20px
+    padding 20px
+    border-radius 5px
+    box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
+    .radio__item
+      display block
+      margin-top 10px
+    .input
+      margin-top 20px
+      height 60px
 
-    .questionaire_comp
-      position fixed
-      top 64px
-      bottom 0
-      left 0
-      right 0
-      background-color #f5f2f2
+  .questionaire_comp
+    position fixed
+    top 64px
+    bottom 0
+    left 0
+    right 0
+    background-color #f5f2f2
   .judge_radio
     margin-top 5px
 </style>

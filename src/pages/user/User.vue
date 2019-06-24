@@ -70,77 +70,102 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  // @media (min-width 1200px)
-
-  @media (min-width 576px) and (max-width 1200px)
-    .info
+@media (min-width 1200px)
+  .info
+    display flex
+    height 120px
+    margin 10px
+    .info__img--wrapper
+      width 120px
+      height 120px
+      margin 0 30px
+      padding 5px
+    .info__img
+      width 100%
+      height 100%
+    .info__detail--wrapper
       display flex
-      align-items center
-      height 226px
+      flex-direction column
 
-      .info__img--wrapper
-        width 120px
-        height 120px
-        margin 0 40px
+      .info__name
+        margin-bottom 10px
+        font-size 25px
+
+      .info__phone
+        margin-bottom 5px
+        font-size 16px
+
+      .info__social
+        font-size 16px
+@media (min-width 576px) and (max-width 1200px)
+  .info
+    display flex
+    align-items center
+    height 226px
+
+    .info__img--wrapper
+      width 120px
+      height 120px
+      margin 0 40px
+
+    .info__img
+      width 100%
+      height 100%
+
+    .info__detail--wrapper
+      display flex
+      flex-direction column
+
+      .info__name
+        margin-bottom 10px
+        font-size 25px
+
+      .info__phone
+        margin-bottom 5px
+        font-size 16px
+
+      .info__social
+        font-size 16px
+
+@media (max-width 576px)
+  .info
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    box-sizing border-box
+    padding 20px
+
+    .info__img--wrapper
+      width 120px
+      height 120px
 
       .info__img
         width 100%
         height 100%
 
-      .info__detail--wrapper
-        display flex
-        flex-direction column
-
-        .info__name
-          margin-bottom 10px
-          font-size 25px
-
-        .info__phone
-          margin-bottom 5px
-          font-size 16px
-
-        .info__social
-          font-size 16px
-
-  @media (max-width 576px)
-    .info
+    .info__detail--wrapper
       display flex
       flex-direction column
       justify-content center
       align-items center
-      box-sizing border-box
-      padding 20px
 
-      .info__img--wrapper
-        width 120px
-        height 120px
+      .info__name
+        margin-top 20px
+        margin-bottom 20px
+        font-size 25px
 
-        .info__img
-          width 100%
-          height 100%
+      .info__phone
+        margin-bottom 10px
+        font-size 14px
 
-      .info__detail--wrapper
-        display flex
-        flex-direction column
-        justify-content center
-        align-items center
+      .info__social
+        font-size 14px
 
-        .info__name
-          margin-top 20px
-          margin-bottom 20px
-          font-size 25px
+  .menu
+    display flex
 
-        .info__phone
-          margin-bottom 10px
-          font-size 14px
-
-        .info__social
-          font-size 14px
-
-    .menu
-      display flex
-
-      .menu__item
-        flex 1
-        text-align center
+    .menu__item
+      flex 1
+      text-align center
 </style>

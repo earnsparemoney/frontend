@@ -24,6 +24,10 @@
     <a-button
       @click="goToTask">
       任务</a-button>
+
+    <a-button
+      @click="goToPC">
+      pc问卷</a-button>
   </div>
 </template>
 
@@ -48,6 +52,9 @@ export default {
     },
     goToTask () {
       this.$router.push('/task')
+    },
+    goToPC () {
+      this.$router.push('/questionairepc')
     }
   }
 }

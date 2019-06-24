@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 
 import {
   Alert,
+  Modal,
   Button,
   Form,
   Input,
@@ -44,12 +45,14 @@ Vue.use(Radio)
 Vue.use(Rate)
 Vue.use(InputNumber)
 Vue.use(DatePicker)
+Vue.use(Modal)
 
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 /* eslint-disable no-new */
 new Vue({

@@ -6,9 +6,13 @@
         class="card"
         v-for="(item, index) of tasks"
         :key="index"
+        :title="item.title"
+        :description="item.description"
         :pay="item.pay"
-        :from="item.from"
-        :to="item.to"/>
+        :address="item.address"
+        :startDate="item.startDate"
+        :endDate="item.endDate"
+        :type="item.type" />
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -34,43 +38,71 @@ export default {
   },
   methods: {
     fetchData () {
-      return [{
-        pay: 3,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'finish',
-        to: 'to'
-      }]
+      return [
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        },
+        {
+          title: '取快递',
+          description: '谁能帮我取快递',
+          address: '丰巢快递柜',
+          startDate: '2019-06-24',
+          endDate: '2019-06-25',
+          pay: 3,
+          type: '快递'
+        }
+      ]
     }
   }
 }

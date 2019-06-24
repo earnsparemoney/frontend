@@ -4,8 +4,7 @@
     <a-button class="register__button--login" @click="goToRegister">注册</a-button>
     <a-form
       class="form"
-      :form="form"
-      layout="vertical">
+      :form="form">
       <a-form-item>
         <h1 class="form__h1--title">欢迎回来!</h1>
       </a-form-item>
@@ -118,7 +117,7 @@ export default {
   formStyle(_width, _bgColor)
     width _width
     background-color _bgColor
-    padding 24px 20px 0px 20px
+    padding 80px 20px 0px 20px
     border-radius 6px
     .form__h1--title
         text-align center
@@ -127,6 +126,7 @@ export default {
       cursor pointer
     .form__button--login
       width 100%
+      height 45px
 
   >>> label
     fontStyle()
@@ -141,7 +141,7 @@ export default {
     flex-direction column
     justify-content center
     align-items  center
-    height 100%
+    background-color #ecf1f1
 
     .register__button--login
       position absolute

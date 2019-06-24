@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AllTasks from '../pages/task/AllTasks'
+import { isPC } from '@/utils/utils'
 const QuestionairePC = () => import('../pages/questionaire/QuestionairePC')
 const Home = () => import('@/pages/home/Home')
 const Register = () => import('@/pages/register/Register')
@@ -53,7 +54,14 @@ const router = new Router({
     {
       path: '/questionaire',
       name: 'Questionaire',
-      component: Questionaire
+      component: Questionaire,
+      beforeEnter: (to, from, next) => {
+        if (!isPC()) {
+          next()
+        } else {
+          next('/questionairepc')
+        }
+      }
     },
     {
       path: '/group',
@@ -80,6 +88,28 @@ const router = new Router({
       redirect: '/'
     }
   ]
+})
+
+// 路由鉴权
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!router.app.$store || !router.app.$store.state.auth) {
+      router
+        .app
+        .$store
+        .dispatch('login')
+        .then(() => {
+          next()
+        })
+        .catch(() => {
+          next('/login')
+        })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

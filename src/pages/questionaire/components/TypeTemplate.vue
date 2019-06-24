@@ -1,6 +1,6 @@
 <template>
   <div class="type-template">
-    <slot :question="question"></slot>
+    <slot :question="question" class="question"></slot>
     <div class="bottom-bar">
       <div class="cancel bottom-bar__item" @click="handleCancelClick">
         <a-icon type="close"></a-icon>

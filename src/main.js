@@ -56,6 +56,12 @@ Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
+if (process.env.NODE_ENV === 'development') {
+  Vue.config.devtools = true
+} else {
+  Vue.config.devtools = false
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

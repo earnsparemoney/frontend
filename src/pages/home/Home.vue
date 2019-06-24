@@ -6,28 +6,12 @@
       注册</a-button>
 
     <a-button
-      @click="goToUser">
-      用户</a-button>
-
-    <a-button
       @click="goToQuestionaire">
       问卷</a-button>
 
     <a-button
       @click="goToGroup">
       兴趣组</a-button>
-
-    <a-button
-      @click="goToTasks">
-      任务清单</a-button>
-
-    <a-button
-      @click="goToTask">
-      任务</a-button>
-
-    <a-button
-      @click="goToPC">
-      pc问卷</a-button>
   </div>
 </template>
 
@@ -37,9 +21,6 @@ export default {
   methods: {
     goToRegister () {
       this.$router.push('/register')
-    },
-    goToUser () {
-      this.$router.push('/user')
     },
     goToQuestionaire () {
       this.$router.push('/questionaire')

@@ -29,6 +29,7 @@
     </div>
 
     <a-menu
+      ref="menu"
       class="menu"
       mode="horizontal"
       defaultSelectedKeys='task'
@@ -48,7 +49,9 @@ export default {
   data () {
     return {
       phone: '15625583871',
-      qq: '798607646'
+      qq: '798607646',
+      doingTasks: [],
+      finishTasks: []
     }
   },
   computed: {
@@ -99,6 +102,9 @@ export default {
 
       .info__social
         font-size 16px
+  .menu
+    background-color #ecf1f1
+
 @media (min-width 576px) and (max-width 1200px)
   .user
     background-color #ecf1f1
@@ -130,14 +136,14 @@ export default {
 
       .info__social
         font-size 16px
+  .menu
+    background-color #ecf1f1
 
 @media (max-width 576px)
   .user
     background-color #ecf1f1
   .info
     display flex
-    flex-direction column
-    justify-content center
     align-items center
     box-sizing border-box
     padding 20px
@@ -155,9 +161,9 @@ export default {
       flex-direction column
       justify-content center
       align-items center
+      margin auto
 
       .info__name
-        margin-top 20px
         margin-bottom 20px
         font-size 25px
 
@@ -170,7 +176,7 @@ export default {
 
   .menu
     display flex
-    background-color #f0f2f5
+    background-color #ecf1f1
 
     .menu__item
       flex 1

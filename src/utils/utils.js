@@ -17,3 +17,9 @@ export function isPC () {
   }
   return flag
 }
+
+let timer = null
+export function debounce (fn, delay) {
+  clearTimeout(timer)
+  timer = setTimeout(fn, delay)
+}

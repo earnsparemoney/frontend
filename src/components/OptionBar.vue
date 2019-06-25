@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { isPC } from '@/utils/utils'
+import { isPC, debounce } from '@/utils/utils'
 export default {
   name: 'OptionBar',
   props: {
@@ -49,7 +49,10 @@ export default {
       this.sortBy = value
     },
     onSearch (value) {
-      this.$router.replace({ name: this.routeName, query: { keyword: value, sortBy: this.sortBy } })
+      debounce(() => {
+        console.log(value)
+        this.$router.replace({ name: this.routeName, query: { keyword: value, sortBy: this.sortBy } })
+      }, 300)
     },
     emitEmpty () {
       this.$refs.keywordInput.focus()

@@ -93,6 +93,7 @@ export default {
         const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
         tasks.push(this.task)
         localStorage.setItem('tasks', JSON.stringify(tasks))
+        this.$router.push('/user')
       }
       console.log(this.task)
     },

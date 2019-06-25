@@ -1,4 +1,8 @@
 export {
+  RiseOutline,
+  TeamOutline,
+  FileTextOutline,
+  OrderedListOutline,
   UserOutline,
   LockOutline,
   MailOutline,

@@ -10,10 +10,7 @@
       <a-col :xxl='18' :xl='17' :lg='17' :md='14' :sm='13' :xs='0'>
         <a-menu mode='horizontal' class='menu-site' id='nav'>
           <a-menu-item key='1'>
-            任务中心
-          </a-menu-item>
-          <a-menu-item key="2">
-            待定
+            首页
           </a-menu-item>
         </a-menu>
       </a-col>
@@ -52,10 +49,10 @@ export default {
   position fixed
   z-index 1
   width 100%
-  box-shadow 0 2px 8px #f0f1f2
   transition 0.2s ease-in-out
   text-decoration none
   background-color white
+  border-bottom 1px solid #e9e9e9
 
 #logo
   padding 0 20px

@@ -1,6 +1,27 @@
 <template>
-  <div>
-    Home
+  <div class="home">
+    <div class="nav-view">
+      <a-menu
+        mode="horizontal"
+        defaultSelectedKeys='questionaire'
+        @click="handleMenuClick"
+      >
+        <a-menu-item key="questionaire">
+          <a-icon type="file-text" />问卷中心
+        </a-menu-item>
+        <a-menu-item key="task">
+          <a-icon type="ordered-list" />任务中心
+        </a-menu-item>
+        <a-menu-item key="hot">
+          <a-icon type="rise" />热门
+        </a-menu-item>
+        <a-menu-item key="group">
+          <a-icon type="team" />兴趣组
+        </a-menu-item>
+      </a-menu>
+    </div>
+    <router-view></router-view>
+    <!--Home
     <a-button
       @click="goToRegister">
       注册</a-button>
@@ -27,14 +48,21 @@
 
     <a-button
       @click="goToPC">
-      pc问卷</a-button>
+      pc问卷</a-button>-->
   </div>
 </template>
 
 <script>
 export default {
   name: 'Home',
+  data () {
+    return {
+    }
+  },
   methods: {
+    handleMenuClick (e) {
+      this.$router.push(`${e.key}`)
+    },
     goToRegister () {
       this.$router.push('/register')
     },
@@ -61,5 +89,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+.nav-view
+  0 2px 8px #f0f1f2
 </style>

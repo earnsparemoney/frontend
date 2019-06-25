@@ -1,7 +1,9 @@
 export {
   RiseOutline,
   TeamOutline,
+  MoneyCollectFill,
   FileTextOutline,
+  SearchOutline,
   OrderedListOutline,
   UserOutline,
   LockOutline,

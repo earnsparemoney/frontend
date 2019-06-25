@@ -9,9 +9,9 @@
       </a-col>
       <a-col :xxl='18' :xl='17' :lg='17' :md='14' :sm='13' :xs='0'>
         <a-menu mode='horizontal' class='menu-site' id='nav'>
-          <a-menu-item key='1'>
+<!--          <a-menu-item key='1'>
             首页
-          </a-menu-item>
+          </a-menu-item>-->
         </a-menu>
       </a-col>
       <a-col :xxl='2' :xl='2' :lg='2' :md='2' :sm='3' :xs='3'>

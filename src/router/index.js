@@ -72,30 +72,30 @@ const router = new Router({
     },
     {
       path: '/questionnaire',
-      name: 'Questionnaire',
+      name: 'questionnaire',
       component: Questionaire,
       beforeEnter: (to, from, next) => {
         if (!isPC()) {
           next()
         } else {
-          next('/questionairepc')
+          next('/questionnairePC')
         }
       }
     },
     {
-      path: '/questionnairepc',
-      name: 'QuestionnairePC',
+      path: '/questionnairePC',
+      name: 'questionnairePC',
       component: QuestionairePC,
       beforeEnter: (to, from, next) => {
         if (isPC()) {
           next()
         } else {
-          next('/questionaire')
+          next('/createQuestionnaire')
         }
       }
     },
     {
-      path: '/task',
+      path: '/createTask',
       name: 'CreateTask',
       component: CreateTask
     },

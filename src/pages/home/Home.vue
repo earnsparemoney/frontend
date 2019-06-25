@@ -1,25 +1,27 @@
 <template>
   <div class="home">
-    <div class="nav-view">
-      <a-menu
-        mode="horizontal"
-        defaultSelectedKeys='questionaire'
-        @click="handleMenuClick"
-      >
-        <a-menu-item key="questionaire">
-          <a-icon type="file-text" />问卷中心
-        </a-menu-item>
-        <a-menu-item key="tasks">
-          <a-icon type="ordered-list" />任务中心
-        </a-menu-item>
-        <a-menu-item key="hot">
-          <a-icon type="rise" />热门
-        </a-menu-item>
-        <a-menu-item key="group">
-          <a-icon type="team" />兴趣组
-        </a-menu-item>
-      </a-menu>
-    </div>
+    <keep-alive>
+      <div class="nav-view">
+        <a-menu
+          mode="horizontal"
+          defaultSelectedKeys='questionnaires'
+          @click="handleMenuClick"
+        >
+          <a-menu-item key="questionnaires">
+            <a-icon type="file-text" />问卷中心
+          </a-menu-item>
+          <a-menu-item key="tasks">
+            <a-icon type="ordered-list" />任务中心
+          </a-menu-item>
+          <a-menu-item key="hot">
+            <a-icon type="rise" />热门
+          </a-menu-item>
+          <a-menu-item key="group">
+            <a-icon type="team" />兴趣组
+          </a-menu-item>
+        </a-menu>
+      </div>
+    </keep-alive>
     <router-view></router-view>
     <!--Home
     <a-button

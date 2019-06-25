@@ -15,11 +15,12 @@
     <a-icon slot="prefix" type="search" />
     <a-icon v-if="keyword" slot="suffix" type="close-circle" @click="emitEmpty" />
   </a-input>
-  <a-button class="create-btn" type="primary" icon="plus" @click="handleClick">创建新{{type}}</a-button>
+  <a-button :shape="isPC ? '' : 'circle'" class="create-btn" type="primary" icon="plus" @click="handleClick">{{ isPC ? `创建新${type}` : '' }}</a-button>
 </div>
 </template>
 
 <script>
+import { isPC } from '@/utils/utils'
 export default {
   name: 'OptionBar',
   props: {
@@ -29,7 +30,8 @@ export default {
   data () {
     return {
       sortBy: 'startTime',
-      keyword: null
+      keyword: null,
+      isPC: false
     }
   },
   watch: {
@@ -47,21 +49,39 @@ export default {
       this.sortBy = value
     },
     onSearch (value) {
-      this.$router.push({ name: this.routeName, query: { keyword: value, sortBy: this.sortBy } })
+      this.$router.replace({ name: this.routeName, query: { keyword: value, sortBy: this.sortBy } })
     },
     emitEmpty () {
       this.$refs.keywordInput.focus()
       this.keyword = ''
     }
+  },
+  mounted () {
+    this.isPC = isPC()
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.option-label
-  margin 0 10px 0 15px
-.create-btn
-  float right
-.keyword-input
-  width 180px
+
+@media (min-width 768px) and (max-width 1200px)
+  .option-label
+    margin 0 10px 0 15px
+  .create-btn
+    float right
+  .keyword-input
+    width 180px
+
+@media (max-width 576px)
+  .option-label
+    margin 0 10px 0 15px
+  .create-btn
+    position fixed
+    bottom 60px
+    right 30px
+    width 50px
+    height 50px
+    z-index 1
+  .keyword-input
+    width 180px
 </style>

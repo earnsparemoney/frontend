@@ -24,7 +24,7 @@
             <a-menu-item key="/user">
               我的信息
             </a-menu-item>
-            <a-menu-item key="/task">
+            <a-menu-item key="/createTask">
               创建任务
             </a-menu-item>
             <a-menu-item key="/alltasks">

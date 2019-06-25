@@ -26,4 +26,9 @@ export default {
 
   #app
     height 100%
+
+  .ant-modal
+    .ant-btn-primary
+      background-color #ff4d4f
+      border #ff4d4f
 </style>

@@ -13,7 +13,7 @@
       <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
     </a-card-meta>
     <a-divider />
-    <p>问卷详情: {{ description }}$</p>
+    <p>问卷详情: {{ description }}</p>
   </a-card>
 </template>
 

@@ -4,6 +4,7 @@ export {
   MoneyCollectFill,
   FileTextOutline,
   SearchOutline,
+  CloseCircleOutline,
   OrderedListOutline,
   UserOutline,
   LockOutline,

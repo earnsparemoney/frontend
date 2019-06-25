@@ -1,29 +1,12 @@
 <template>
   <div class="allquestionnaires">
-    <div class="options">
-      <span class="sort-option">排序方式: </span>
-      <a-dropdown>
-        <a-menu slot="overlay" @click="handleSortClick">
-          <a-menu-item key="创建时间"><a-icon type="calendar" />创建时间</a-menu-item>
-          <a-menu-item key="结束时间"><a-icon type="calendar" />结束时间</a-menu-item>
-          <a-menu-item key="报酬"><a-icon type="money-collect" />报酬</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px">
-          {{sortby}} <a-icon type="down" />
-        </a-button>
-      </a-dropdown>
-      <span class="option-label">搜索: </span>
-      <a-input-search
-        placeholder="搜索你想填写的问卷"
-        style="width: 200px"
-        @search="onSearch"
-      />
-      <a-button class="create-btn" type="primary" icon="plus" @click="createNewQuestionnaire">创建新问卷</a-button>
-    </div>
+    <option-bar
+      :routeName="'questionnaires'"
+      :type="'问卷'"/>
     <div class="content">
       <questionnaire-card
         class="card"
-        v-for="(item, index) of questionnaires"
+        v-for="(item, index) of filteredList"
         :key="index"
         :title="item.title"
         :description="item.description"/>
@@ -37,48 +20,60 @@
 
 <script>
 import QuestionnaireCard from '@/components/QuestionnaireCard'
+import OptionBar from '@/components/OptionBar'
 export default {
   name: 'Questionnaires',
   components: {
-    QuestionnaireCard
+    QuestionnaireCard,
+    OptionBar
+  },
+  watch: {
+    '$route.query.sortBy': 'updateQuery',
+    '$route.query.keyword': 'updateQuery'
   },
   data () {
     return {
       questionnaires: [],
-      sortby: '创建时间'
+      sortBy: '创建时间',
+      keyword: ''
+    }
+  },
+  computed: {
+    filteredList () {
+      return this.questionnaires
+        .filter(item =>
+          ((item.title.toLowerCase().indexOf(this.keyword) !== -1) ||
+            (item.description.toLowerCase().indexOf(this.keyword)) !== -1))
     }
   },
   created () {
     this.questionnaires = this.fetchData()
   },
   methods: {
-    handleSortClick (e) {
-      this.sortby = e.key
-      console.log(e.key)
+    updateQuery () {
+      this.sortBy = this.$route.query.sortBy || 'startTime'
+      this.keyword = (this.$route.query.keyword || '').toLowerCase()
     },
     fetchData () {
       return [{
-        title: '我去',
-        description: '他去'
+        title: 'abdsad',
+        description: 'fdasfs'
       }, {
-        title: '我去',
-        description: '他去'
+        title: 'awerwer',
+        description: 'twery'
       }, {
-        title: '我去',
-        description: '他去'
+        title: 'kuk,uk',
+        description: 'tretre'
       }, {
-        title: '我去',
-        description: '他去'
+        title: 'gdfg',
+        description: 'rwerq'
       }, {
-        title: '我去',
-        description: '他去'
+        title: 'oil.',
+        description: 'ret'
       }, {
-        title: '我去',
-        description: '他去'
+        title: '675',
+        description: 'rteu'
       }]
-    },
-    createNewQuestionnaire () {
-      this.$router.push('questionnaire')
     }
   }
 }

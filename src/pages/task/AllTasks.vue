@@ -1,52 +1,51 @@
 <template>
-<div class="alltasks">
-  <div class="options">
-    <span class="sort-option">排序方式: </span>
-    <a-dropdown>
-      <a-menu slot="overlay" @click="handleSortClick">
-        <a-menu-item key="创建时间"><a-icon type="calendar" />创建时间</a-menu-item>
-        <a-menu-item key="结束时间"><a-icon type="calendar" />结束时间</a-menu-item>
-        <a-menu-item key="报酬"><a-icon type="money-collect" />报酬</a-menu-item>
-      </a-menu>
-      <a-button style="margin-left: 8px">
-        {{sortby}} <a-icon type="down" />
-      </a-button>
-    </a-dropdown>
-    <span class="option-label">搜索: </span>
-    <a-input-search
-      placeholder="搜索你想参加的任务"
-      style="width: 200px"
-      @search="onSearch"
-    />
-    <a-button class="create-btn" type="primary" icon="plus" @click="createNewTask">创建新任务</a-button>
+  <div class="alltasks">
+    <option-bar
+      :routeName="'AllTasks'"
+      :type="'任务'"/>
+    <div class="content">
+      <task-card
+        class="card"
+        v-for="(item, index) of filteredList"
+        :key="index"
+        :pay="item.pay"
+        :from="item.from"
+        :to="item.to"/>
+      <div class="card"/>
+      <div class="card"/>
+      <div class="card"/>
+      <div class="card"/>
+    </div>
   </div>
-  <div class="content">
-    <task-card
-      class="card"
-      v-for="(item, index) of tasks"
-      :key="index"
-      :pay="item.pay"
-      :from="item.from"
-      :to="item.to"/>
-    <div class="card"/>
-    <div class="card"/>
-    <div class="card"/>
-    <div class="card"/>
-  </div>
-</div>
 </template>
 
 <script>
 import TaskCard from '@/components/TaskCard'
+import OptionBar from '@/components/OptionBar'
+
 export default {
   name: 'AllTask',
   components: {
-    TaskCard
+    TaskCard,
+    OptionBar
+  },
+  watch: {
+    '$route.query.sortBy': 'updateQuery',
+    '$route.query.keyword': 'updateQuery'
   },
   data () {
     return {
       tasks: [],
-      sortby: '创建时间'
+      sortBy: '创建时间',
+      keyword: ''
+    }
+  },
+  computed: {
+    filteredList () {
+      return this.tasks
+        .filter(item =>
+          ((item.from.toLowerCase().indexOf(this.keyword) !== -1) ||
+            (item.to.toLowerCase().indexOf(this.keyword)) !== -1))
     }
   },
   created () {
@@ -84,22 +83,15 @@ export default {
         to: 'to'
       }]
     },
-    handleSortClick (e) {
-      this.sortby = e.key
-      console.log(e.key)
-    },
-    createNewTask () {
-      this.$router.push('CreateTask')
+    updateQuery () {
+      this.sortBy = this.$route.query.sortBy || 'startTime'
+      this.keyword = (this.$route.query.keyword || '').toLowerCase()
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.option-label
-  margin 0 10px 0 15px
-.create-btn
-  float right
 @media (min-width 1200px)
   .alltasks
     height 100%

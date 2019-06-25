@@ -67,6 +67,7 @@ export default {
 @media (min-width 1200px)
   .group
     padding 15px 15px
+    background-color #ecf1f1
     .content
       display flex
       justify-content space-between

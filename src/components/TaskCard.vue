@@ -4,7 +4,7 @@
   >
     <template class="ant-card-actions" slot="actions">
       <a-icon type="check" />
-      <a-icon type="phone" />
+      <a href="tel:15625583871"><a-icon type="phone" /></a>
       <a-icon type="mail" />
     </template>
     <a-card-meta

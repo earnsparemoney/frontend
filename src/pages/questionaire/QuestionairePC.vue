@@ -34,75 +34,106 @@
         <a-textarea v-model="tips" placeholder="点击编辑问卷说明" :rows="4"/>
       </div>
 
-      <div
-        class="questions__wrapper"
-        v-for="(item, index) of questions"
-        :key="index"
-        @mouseover="enterItem(index)">
-        <a-input
-          class="title"
-          placeholder="点击编辑题目"
-          v-model="item.title"></a-input>
+      <transition-group name="flip-list" tag="div">
+        <div
+          class="questions__wrapper"
+          v-for="(item, index) of questions"
+          :key="item"
+          @mouseover="enterItem(index)">
 
-        <a-divider />
-        <div v-if="item.type === 'Choose'">
-          <div class="choose">
-            <a-input
-              class="options__item"
-              v-for="(option, index) of item.options"
-              :key="index"
-              v-model="item.options[index]"
-              placeholder="点击编辑选项"
-            >
-              <a-icon slot="suffix" type="minus-circle" @click="removeOption(index)"></a-icon>
-            </a-input>
+          <a-dropdown>
+            <a class="ant-dropdown-link">
+              <a-icon type="ellipsis" />
+            </a>
+            <a-menu slot="overlay">
+              <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
+                <a>
+                  <a-icon type="arrow-up"></a-icon>
+                  上移
+                </a>
+              </a-menu-item>
+              <a-menu-divider></a-menu-divider>
+              <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
+                <a>
+                  <a-icon type="arrow-down"></a-icon>
+                  下移
+                </a>
+              </a-menu-item>
+              <a-menu-divider></a-menu-divider>
+              <a-menu-item class="ant-menu-item" @click="handleDeleteClick(index)">
+                <a>
+                  <a-icon type="delete"></a-icon>
+                  删除
+                </a>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
 
-            <div class="add-option" @click="addOption">
-              <a-icon type="plus-circle"></a-icon>
-              添加选项
+          <a-input
+            class="title"
+            placeholder="点击编辑题目"
+            v-model="item.title"></a-input>
+
+          <a-divider />
+          <div v-if="item.type === 'Choose'">
+            <div class="choose">
+              <a-input
+                class="options__item"
+                v-for="(option, index) of item.options"
+                :key="index"
+                v-model="item.options[index]"
+                placeholder="点击编辑选项"
+              >
+                <a-icon slot="suffix" type="minus-circle" @click="removeOption(index)"></a-icon>
+              </a-input>
+
+              <div class="add-option" @click="addOption">
+                <a-icon type="plus-circle"></a-icon>
+                添加选项
+              </div>
+
+              <a-radio-group class="choose-type" v-model="item.chooseType">
+                <a-radio class="choose-type__item" :value="1">单选题</a-radio>
+                <a-radio class="choose-type__item" :value="2">多选题</a-radio>
+              </a-radio-group>
             </div>
+          </div>
 
-            <a-radio-group class="choose-type" v-model="item.chooseType">
-              <a-radio class="choose-type__item" :value="1">单选题</a-radio>
-              <a-radio class="choose-type__item" :value="2">多选题</a-radio>
+          <div v-else-if="item.type === 'Fill'">
+            <a-textarea placeholder="填写你的回答" disabled="true" :rows="4"/>
+          </div>
+
+          <div v-else-if="item.type === 'Rate'">
+            <a-rate
+              class="rating-item"
+              :count="item.max"
+              :defaultValue=1
+              disabled="true"
+              allowHalf />
+            <div class="rating-item">
+              <span>评分最大范围(1-10):  </span>
+              <a-select defaultValue=5 style="width: 120px" @change="changeRating">
+                <a-select-option value=1>1</a-select-option>
+                <a-select-option value=2>2</a-select-option>
+                <a-select-option value=3>3</a-select-option>
+                <a-select-option value=4>4</a-select-option>
+                <a-select-option value=5>5</a-select-option>
+                <a-select-option value=6>6</a-select-option>
+                <a-select-option value=7>7</a-select-option>
+                <a-select-option value=8>8</a-select-option>
+                <a-select-option value=9>9</a-select-option>
+                <a-select-option value=10>10</a-select-option>
+              </a-select>
+            </div>
+          </div>
+          <div v-if="item.type === 'Judge'">
+            <a-radio-group class="answer" name="answer" disabled="true">
+              <a-radio :value=true>是</a-radio>
+              <a-radio :value=false>否</a-radio>
             </a-radio-group>
           </div>
         </div>
-
-        <div v-else-if="item.type === 'Fill'">
-          <a-textarea placeholder="填写你的回答" disabled="true" :rows="4"/>
-        </div>
-
-        <div v-else-if="item.type === 'Rate'">
-          <a-rate
-            class="rating-item"
-            :count="item.max"
-            :defaultValue=1
-            disabled="true"
-            allowHalf />
-          <div class="rating-item">
-            <span>评分最大范围(1-10):  </span>
-            <a-select defaultValue=5 style="width: 120px" @change="changeRating">
-              <a-select-option value=1>1</a-select-option>
-              <a-select-option value=2>2</a-select-option>
-              <a-select-option value=3>3</a-select-option>
-              <a-select-option value=4>4</a-select-option>
-              <a-select-option value=5>5</a-select-option>
-              <a-select-option value=6>6</a-select-option>
-              <a-select-option value=7>7</a-select-option>
-              <a-select-option value=8>8</a-select-option>
-              <a-select-option value=9>9</a-select-option>
-              <a-select-option value=10>10</a-select-option>
-            </a-select>
-          </div>
-        </div>
-        <div v-if="item.type === 'Judge'">
-          <a-radio-group class="answer" name="answer" disabled="true">
-            <a-radio :value=true>是</a-radio>
-            <a-radio :value=false>否</a-radio>
-          </a-radio-group>
-        </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -171,12 +202,34 @@ export default {
           return
       }
       this.questions.push(item)
+    },
+    handleMoveUpClick (index) {
+      if (index !== 0) {
+        const temp = this.questions[index]
+        this.questions.splice(index, 1)
+        this.questions.splice(index - 1, 0, temp)
+      }
+    },
+    handleMoveDownClick (index) {
+      if (index !== this.questions.length - 1) {
+        const temp = this.questions[index]
+        this.questions.splice(index, 1)
+        this.questions.splice(index + 1, 0, temp)
+      }
+    },
+    handleDeleteClick (index) {
+      if (this.questions.length !== 0) {
+        this.questions.splice(index, 1)
+      }
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+.flip-list-move
+  transition: transform 1s
+
 .questionaire
   display flex
   height 100%
@@ -222,12 +275,20 @@ export default {
     padding 20px 30px
     overflow scroll
     .questions__wrapper
+      position relative
       background white
       margin 10px
       margin-bottom 20px
       padding 20px
       border-radius 5px
       box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
+      .title
+        margin-top 20px
+      .ant-dropdown-link
+        position absolute
+        top -2px
+        right 20px
+        font-size 30px
       .radio__item
         display block
         margin-top 10px

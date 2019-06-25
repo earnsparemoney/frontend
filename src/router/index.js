@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AllTasks from '../pages/task/AllTasks'
-const QuestionairePC = () => import('../pages/questionaire/QuestionairePC')
+import { isPC } from '@/utils/utils'
+const Questionnaires = () => import('@/pages/questionaire/Questionnaires')
+const QuestionairePC = () => import('@/pages/questionaire/QuestionairePC')
 const Home = () => import('@/pages/home/Home')
 const Register = () => import('@/pages/register/Register')
 const Login = () => import('@/pages/login/Login')
@@ -20,7 +22,25 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      redirect: '/questionnaires',
+      component: Home,
+      children: [
+        {
+          path: 'questionnaires',
+          name: 'questionnaires',
+          component: Questionnaires
+        },
+        {
+          path: 'tasks',
+          name: 'AllTasks',
+          component: AllTasks
+        },
+        {
+          path: 'group',
+          name: 'Group',
+          component: Group
+        }
+      ]
     },
     {
       path: '/register',
@@ -51,19 +71,28 @@ const router = new Router({
       ]
     },
     {
-      path: '/questionaire',
-      name: 'Questionaire',
-      component: Questionaire
+      path: '/questionnaire',
+      name: 'Questionnaire',
+      component: Questionaire,
+      beforeEnter: (to, from, next) => {
+        if (!isPC()) {
+          next()
+        } else {
+          next('/questionairepc')
+        }
+      }
     },
     {
-      path: '/group',
-      name: 'Group',
-      component: Group
-    },
-    {
-      path: '/alltasks',
-      name: 'AllTasks',
-      component: AllTasks
+      path: '/questionnairepc',
+      name: 'QuestionnairePC',
+      component: QuestionairePC,
+      beforeEnter: (to, from, next) => {
+        if (isPC()) {
+          next()
+        } else {
+          next('/questionaire')
+        }
+      }
     },
     {
       path: '/task',
@@ -71,15 +100,32 @@ const router = new Router({
       component: CreateTask
     },
     {
-      path: '/questionairepc',
-      name: 'Questionairepc',
-      component: QuestionairePC
-    },
-    {
       path: '*',
       redirect: '/'
     }
   ]
+})
+
+// 路由鉴权
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!router.app.$store || !router.app.$store.state.auth) {
+      router
+        .app
+        .$store
+        .dispatch('login')
+        .then(() => {
+          next()
+        })
+        .catch(() => {
+          next('/login')
+        })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

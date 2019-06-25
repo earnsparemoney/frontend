@@ -9,7 +9,7 @@
         <a-menu-item key="questionaire">
           <a-icon type="file-text" />问卷中心
         </a-menu-item>
-        <a-menu-item key="task">
+        <a-menu-item key="tasks">
           <a-icon type="ordered-list" />任务中心
         </a-menu-item>
         <a-menu-item key="hot">
@@ -25,10 +25,6 @@
     <a-button
       @click="goToRegister">
       注册</a-button>
-
-    <a-button
-      @click="goToUser">
-      用户</a-button>
 
     <a-button
       @click="goToQuestionaire">
@@ -49,6 +45,7 @@
     <a-button
       @click="goToPC">
       pc问卷</a-button>-->
+
   </div>
 </template>
 
@@ -65,24 +62,6 @@ export default {
     },
     goToRegister () {
       this.$router.push('/register')
-    },
-    goToUser () {
-      this.$router.push('/user')
-    },
-    goToQuestionaire () {
-      this.$router.push('/questionaire')
-    },
-    goToGroup () {
-      this.$router.push('/group')
-    },
-    goToTasks () {
-      this.$router.push('/alltasks')
-    },
-    goToTask () {
-      this.$router.push('/task')
-    },
-    goToPC () {
-      this.$router.push('/questionairepc')
     }
   }
 }

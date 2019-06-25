@@ -64,7 +64,9 @@ export default {
 
 <style lang="stylus" scoped>
   .choose
+    height calc(100% - 114px)
     padding 20px
+    overflow scroll
 
     .title
       height 50px

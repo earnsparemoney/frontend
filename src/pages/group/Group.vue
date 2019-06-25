@@ -1,6 +1,5 @@
 <template>
 <div class="group">
-  <h2 class="group-header">Group</h2>
   <div class="content">
     <group-card
       class="card"

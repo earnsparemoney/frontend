@@ -13,24 +13,16 @@
       <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
     </a-card-meta>
     <a-divider />
-    <p>报酬: {{ pay }}$</p>
-    <p>地址: {{ address }}</p>
-    <p>时间: {{ startDate }} ~ {{ endDate }}</p>
-    <p>类型: {{ type }}</p>
+    <p>问卷详情: {{ description }}$</p>
   </a-card>
 </template>
 
 <script>
 export default {
-  name: 'TaskCard',
+  name: 'QuestionnaireCard',
   props: {
     title: String,
-    description: String,
-    pay: String,
-    address: String,
-    startDate: String,
-    endDate: String,
-    type: String
+    description: String
   }
 }
 </script>

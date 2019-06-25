@@ -20,14 +20,14 @@
             <img class="user-icon" alt='user-icon' height='50' src='@/assets/test.png' />
             <!--<span class="dropdown-caret"></span>-->
           </div>
-          <a-menu slot="overlay">
-            <a-menu-item key="0">
+          <a-menu slot="overlay" @click="handleMenuItemClick">
+            <a-menu-item key="/user">
               我的信息
             </a-menu-item>
-            <a-menu-item key="1">
-              历史记录
+            <a-menu-item key="/task">
+              创建任务
             </a-menu-item>
-            <a-menu-item key="2">
+            <a-menu-item key="/alltasks">
               任务管理
             </a-menu-item>
             <a-menu-divider />
@@ -41,6 +41,14 @@
 
 <script>
 export default {
+  name: 'NavBar',
+  methods: {
+    handleMenuItemClick ({ key }) {
+      if (!(location.href.includes('/user') && key.includes('/user'))) {
+        this.$router.push(key)
+      }
+    }
+  }
 }
 </script>
 

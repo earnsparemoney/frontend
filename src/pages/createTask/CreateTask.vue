@@ -4,17 +4,19 @@
 
     <span>任务名称</span>
     <a-input
+      v-model="task.title"
       class="input--style"
       placeholder="任务名称"></a-input>
 
     <span>任务内容描述</span>
     <a-textarea
-      row="4"
-      class="input--style"
+      v-model="task.description"
+      class="input--style textarea--style"
       placeholder="任务内容描述"></a-textarea>
 
     <span>地点</span>
     <a-input
+      v-model="task.address"
       class="input--style"
       placeholder="地点">
       <a-icon slot="prefix" type="environment" />
@@ -24,15 +26,18 @@
     <div class="date__wrapper">
       <a-date-picker
         class="date--start"
-        placeholder="开始日期">
+        placeholder="开始日期"
+        @change="setStartDate">
       </a-date-picker>
       <a-date-picker
-        placeholder="结束日期">
+        placeholder="结束日期"
+        @change="setEndDate">
       </a-date-picker>
     </div>
 
     <span>报酬</span>
     <a-input
+      v-model="task.pay"
       class="input--style"
       placeholder="报酬">
       <a-icon slot="prefix" type="money-collect" />
@@ -41,9 +46,10 @@
     <span>任务类型:</span>
     <a-select
       class="task-type"
-      defaultValue="express">
-      <a-select-option value="express">快递</a-select-option>
-      <a-select-option value="food">外卖</a-select-option>
+      defaultValue="快递"
+      @change="setTaskType">
+      <a-select-option value="快递">快递</a-select-option>
+      <a-select-option value="外卖">外卖</a-select-option>
     </a-select>
 
     <div class="bottom-bar">
@@ -63,12 +69,50 @@
 <script>
 export default {
   name: 'CreateTask',
+  data () {
+    return {
+      task: {
+        title: '',
+        description: '',
+        address: '',
+        startDate: '',
+        endDate: '',
+        pay: '',
+        type: '快递'
+      }
+    }
+  },
   methods: {
     handleCancelClick () {
       this.$router.push('/')
     },
     handleSaveClick () {
-
+      if (!this.isValid()) {
+        this.message.error('输入不能为空')
+      } else {
+        const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+        tasks.push(this.task)
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+      }
+      console.log(this.task)
+    },
+    isValid () {
+      for (let key in this.task) {
+        if (!this.task[key]) {
+          return false
+        }
+      }
+      return true
+    },
+    setStartDate (date, dateString) {
+      this.task.startDate = dateString
+    },
+    setEndDate (date, dateString) {
+      this.task.endDate = dateString
+    },
+    setTaskType (type) {
+      console.log(type)
+      this.task.type = type
     }
   }
 }
@@ -78,16 +122,23 @@ export default {
   .create-task
     padding 20px
     padding-bottom 60px
+    background-color #ecf1f1
+    overflow hidden
 
     .create-task--title
       text-align center
 
     .input--style
       height 50px
+      margin-top 10px
       margin-bottom 20px
+
+    .textarea--style
+      height 70px
 
     .date__wrapper
       display flex
+      margin-top 10px
       margin-bottom 20px
       .date--start
         margin-right 10px
@@ -112,6 +163,7 @@ export default {
         flex-direction column
         justify-content center
         align-items center
+        z-index 1
 
       .divider
         height 100%

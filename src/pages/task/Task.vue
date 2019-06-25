@@ -6,9 +6,13 @@
         class="card"
         v-for="(item, index) of tasks"
         :key="index"
+        :title="item.title"
+        :description="item.description"
         :pay="item.pay"
-        :from="item.from"
-        :to="item.to"/>
+        :address="item.address"
+        :startDate="item.startDate"
+        :endDate="item.endDate"
+        :type="item.type" />
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -29,41 +33,13 @@ export default {
       tasks: []
     }
   },
-  created () {
-    this.tasks = this.fetchData()
-  },
   methods: {
     fetchData () {
-      return [{
-        pay: 3,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }, {
-        pay: 4,
-        from: 'from',
-        to: 'to'
-      }]
+      this.tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
     }
+  },
+  mounted () {
+    this.fetchData()
   }
 }
 </script>

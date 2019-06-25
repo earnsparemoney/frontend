@@ -1,6 +1,5 @@
 <template>
 <div class="alltasks">
-  <h2 class="alltasks-header">All Task</h2>
   <div class="content">
     <task-card
       class="card"

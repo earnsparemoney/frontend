@@ -8,78 +8,83 @@
       size="large"
       @click="toggleShow('Type')"/>
 
-    <div
-      class="questions__wrapper"
-      v-for="(item, index) of questions"
-      :key="`${index}${item.type}`">
+    <transition-group name="flip-list" tag="div">
+      <div
+        class="questions__wrapper"
+        v-for="(item, index) of questions"
+        :key="item">
 
-      <a-dropdown>
-        <a class="ant-dropdown-link">
-          <a-icon type="ellipsis" />
-        </a>
-        <a-menu slot="overlay">
-          <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
-            <a>
-              <a-icon type="arrow-up"></a-icon>
-              上移
-            </a>
-          </a-menu-item>
-          <a-menu-divider></a-menu-divider>
-          <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
-            <a>
-              <a-icon type="arrow-down"></a-icon>
-              下移
-            </a>
-          </a-menu-item>
-          <a-menu-divider></a-menu-divider>
-          <a-menu-item class="ant-menu-item" @click="handleDeleteClick(index)">
-            <a>
-              <a-icon type="delete"></a-icon>
-              删除
-            </a>
-          </a-menu-item>
-        </a-menu>
-      </a-dropdown>
+        <a-dropdown>
+          <a class="ant-dropdown-link">
+            <a-icon type="ellipsis" />
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
+              <a>
+                <a-icon type="arrow-up"></a-icon>
+                上移
+              </a>
+            </a-menu-item>
+            <a-menu-divider></a-menu-divider>
+            <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
+              <a>
+                <a-icon type="arrow-down"></a-icon>
+                下移
+              </a>
+            </a-menu-item>
+            <a-menu-divider></a-menu-divider>
+            <a-menu-item class="ant-menu-item" @click="handleDeleteClick(index)">
+              <a>
+                <a-icon type="delete"></a-icon>
+                删除
+              </a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
 
-      <div class="question--title">{{ item.question.title }}</div>
+        <div class="question--title">{{ item.question.title }}</div>
 
-      <a-radio-group
-        v-if="item.type === 'Choose' && item.question.chooseType === 1">
-        <a-radio
-          class="radio__item"
-          v-for="(radioItem, radioIndex) of item.question.options"
-          :key="radioIndex"
-          :value="radioIndex">
-          {{ radioItem }}
-        </a-radio>
-      </a-radio-group>
+        <a-radio-group
+          v-if="item.type === 'Choose' && item.question.chooseType === 1"
+          disabled="true">
+          <a-radio
+            class="radio__item"
+            v-for="(radioItem, radioIndex) of item.question.options"
+            :key="radioIndex"
+            :value="radioIndex">
+            {{ radioItem }}
+          </a-radio>
+        </a-radio-group>
 
-      <a-checkbox-group
-        class="checkbox__wrapper"
-        v-if="item.type === 'Choose' && item.question.chooseType === 2"
-        :options="item.question.options">
-      </a-checkbox-group>
+        <a-checkbox-group
+          class="checkbox__wrapper"
+          v-if="item.type === 'Choose' && item.question.chooseType === 2"
+          :options="item.question.options"
+          disabled="true">
+        </a-checkbox-group>
 
-      <a-textarea
-        class="input"
-        v-if="item.type === 'Fill'"></a-textarea>
+        <a-textarea
+          class="input"
+          v-if="item.type === 'Fill'"
+          disabled="true"></a-textarea>
 
-      <a-rate
-        v-if="item.type === 'Rate'"
-        class="rating-item"
-        :count="item.question.max"
-        :defaultValue="0"
-        disabled="true"
-        allowHalf />
+        <a-rate
+          v-if="item.type === 'Rate'"
+          class="rating-item"
+          :count="item.question.max"
+          :defaultValue="0"
+          disabled="true"
+          allowHalf />
 
-      <a-radio-group
-        class="judge_radio"
-        v-if="item.type === 'Judge'"
-        disabled="true">
-        <a-radio class="choose-type__item" :value="1">单选题</a-radio>
-        <a-radio class="choose-type__item" :value="2">多选题</a-radio>
-      </a-radio-group>
-    </div>
+        <a-radio-group
+          class="judge_radio"
+          v-if="item.type === 'Judge'"
+          disabled="true">
+          <a-radio class="choose-type__item" :value="1">单选题</a-radio>
+          <a-radio class="choose-type__item" :value="2">多选题</a-radio>
+        </a-radio-group>
+      </div>
+    </transition-group>
 
     <type
       class="questionaire_comp"
@@ -179,47 +184,56 @@ export default {
     .flip-list-move
       transition: transform 1s
 
-    .add
-      position fixed
-      bottom 60px
-      right 30px
-      width 50px
-      height 50px
+    .questionaire
+      background-color #ecf1f1
+      overflow hidden
 
-    .questions__wrapper
-      position relative
-      margin 10px
-      margin-bottom 20px
-      padding 20px
-      border-radius 5px
-      box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
-      background-color #fff
-      .ant-dropdown-link
-        position absolute
-        top 0px
-        right 12px
-        font-size 30px
-        .ant-menu-item
-          padding 0 20px
-      .question--title
-        font-size 18px
-      .radio__item
-        display block
-        margin-top 10px
-      .input
-        margin-top 20px
-        height 80px
-      .checkbox__wrapper
-        display flex
-        flex-direction column
+      .add
+        position fixed
+        bottom 60px
+        right 30px
+        width 50px
+        height 50px
+        z-index 1
 
-  .questionaire_comp
-    position fixed
-    top 64px
-    bottom 0
-    left 0
-    right 0
-    background-color #f5f2f2
-  .judge_radio
-    margin-top 5px
+      .questions__wrapper
+        position relative
+        margin 10px
+        margin-bottom 20px
+        padding 20px
+        border-radius 5px
+        box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
+        background-color #fff
+
+        .ant-dropdown-link
+          position absolute
+          top -10px
+          right 12px
+          font-size 30px
+          .ant-menu-item
+            padding 0 20px
+        .question--title
+          font-size 18px
+        .radio__item
+          display block
+          margin-top 10px
+        .input
+          margin-top 20px
+          height 80px
+        .checkbox__wrapper
+          >>> .ant-checkbox-group-item
+            display block
+            margin 10px 0
+
+      .questionaire_comp
+        position fixed
+        top 64px
+        bottom 0
+        left 0
+        right 0
+        background-color #f5f2f2
+        z-index 1
+
+      .judge_radio
+        margin-top 5px
 </style>

@@ -19,25 +19,61 @@
           <a-icon class="type__item__icon" type="star" />
           打分题
         </div>
-        <a-button class="btn" type="primary" @click="submitQuestionaire">提交问卷</a-button>
+        <a-button class="btn" type="primary" @click="handleSubmitClick">提交问卷</a-button>
         <a-button class="btn" type="danger" @click="cancelClick">取消</a-button>
       </div>
     </div>
     <div class="content">
+      <div class="questionnaire-meta">
+        <div class="meta-data">
+          <span>日期</span>
+          <div class="date__wrapper">
+            <a-date-picker
+              class="date--start"
+              placeholder="开始日期"
+              @change="setStartDate">
+            </a-date-picker>
+            <a-date-picker
+              placeholder="结束日期"
+              @change="setEndDate">
+            </a-date-picker>
+          </div>
+        </div>
+        <div class="meta-data">
+          <span>最多人数</span>
+          <div>
+            <a-input
+              class="meta-data-input"
+              placeholder="最多人数"
+              v-model="questionnaire.usernum">
+            </a-input>
+          </div>
+        </div>
+        <div class="meta-data">
+          <span>赏金</span>
+          <div>
+            <a-input
+              class="meta-data-input"
+              v-model="questionnaire.adward"
+              placeholder="赏金">
+            </a-input>
+          </div>
+        </div>
+      </div>
       <div class="questions__wrapper questionaire-header">
         <a-input
           class="title"
           size="large"
           placeholder="点击编辑问卷标题"
-          v-model="title"></a-input>
+          v-model="questionnaire.title"></a-input>
         <a-divider />
-        <a-textarea v-model="tips" placeholder="点击编辑问卷说明" :rows="4"/>
+        <a-textarea v-model="questionnaire.description" placeholder="点击编辑问卷说明" :rows="4"/>
       </div>
 
       <transition-group name="flip-list" tag="div">
         <div
           class="questions__wrapper"
-          v-for="(item, index) of questions"
+          v-for="(item, index) of questionnaire.questions"
           :key="item"
           @mouseover="enterItem(index)">
 
@@ -139,34 +175,77 @@
 </template>
 
 <script>
+import taskService from '@/services/taskService'
 export default {
   name: 'QuestionairePC',
   data () {
     return {
       clicked: -1,
-      title: '',
-      tips: '',
-      questions: []
+      questionnaire: {
+        title: '',
+        description: '',
+        questions: [],
+        startdate: null,
+        enddate: null,
+        adward: 0,
+        usernum: 0
+      }
     }
   },
   methods: {
+    handleSubmitClick () {
+      if (!this.isValid()) {
+        this.message.error('输入不能为空')
+      } else {
+        taskService.addQuestionnaire({
+          title: this.questionnaire.title,
+          description: this.questionnaire.description,
+          body: JSON.stringify(this.questionnaire.questions),
+          startdate: this.questionnaire.startdate,
+          enddate: this.questionnaire.enddate,
+          adward: this.questionnaire.adward,
+          usernum: this.questionnaire.usernum
+        }).then((res) => {
+          console.log(res)
+          this.$router.push('/')
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('提交失败')
+        })
+      }
+      console.log(this.questionnaire)
+    },
+    isValid () {
+      for (let key in this.questionnaire) {
+        let val = this.questionnaire[key]
+        if (!val) {
+          return false
+        } else if (Object.prototype.toString.call(val).includes('Array')) {
+          for (let item of val) {
+            if (!item) {
+              return false
+            }
+          }
+        }
+      }
+      return true
+    },
     enterItem (index) {
       console.log(index)
       this.clicked = index
     },
     changeRating (value) {
-      this.questions[this.clicked].max = parseInt(value)
+      this.questionnaire.questions[this.clicked].max = parseInt(value)
     },
     removeOption (index) {
-      this.questions[this.clicked].options.splice(index, 1)
+      this.questionnaire.questions[this.clicked].options.splice(index, 1)
     },
     addOption (index) {
-      this.questions[this.clicked].options.push('')
+      this.questionnaire.questions[this.clicked].options.push('')
     },
     cancelClick () {
       this.$router.go(-1)
     },
-    submitQuestionaire () {},
     handleTypeItemClick (e) {
       let type = e.target.dataset.type
       let item = null
@@ -201,26 +280,32 @@ export default {
         default:
           return
       }
-      this.questions.push(item)
+      this.questionnaire.questions.push(item)
     },
     handleMoveUpClick (index) {
       if (index !== 0) {
-        const temp = this.questions[index]
-        this.questions.splice(index, 1)
-        this.questions.splice(index - 1, 0, temp)
+        const temp = this.questionnaire.questions[index]
+        this.questionnaire.questions.splice(index, 1)
+        this.questionnaire.questions.splice(index - 1, 0, temp)
       }
     },
     handleMoveDownClick (index) {
-      if (index !== this.questions.length - 1) {
-        const temp = this.questions[index]
-        this.questions.splice(index, 1)
-        this.questions.splice(index + 1, 0, temp)
+      if (index !== this.questionnaire.questions.length - 1) {
+        const temp = this.questionnaire.questions[index]
+        this.questionnaire.questions.splice(index, 1)
+        this.questionnaire.questions.splice(index + 1, 0, temp)
       }
     },
     handleDeleteClick (index) {
-      if (this.questions.length !== 0) {
-        this.questions.splice(index, 1)
+      if (this.questionnaire.questions.length !== 0) {
+        this.questionnaire.questions.splice(index, 1)
       }
+    },
+    setStartDate (date, dateString) {
+      this.questionnaire.startdate = dateString
+    },
+    setEndDate (date, dateString) {
+      this.questionnaire.enddate = dateString
     }
   }
 }
@@ -274,6 +359,14 @@ export default {
     width 100%
     padding 20px 30px
     overflow scroll
+    .questionnaire-meta
+      display flex
+      margin 10px
+      margin-bottom 15px
+      .meta-data
+        margin-right 20px
+        .meta-data-input
+          width 100px
     .questions__wrapper
       position relative
       background white

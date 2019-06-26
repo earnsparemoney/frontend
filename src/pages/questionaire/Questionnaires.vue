@@ -9,7 +9,8 @@
         v-for="(item, index) of filteredList"
         :key="index"
         :title="item.title"
-        :description="item.description"/>
+        :description="item.description"
+        @click.native="handleCardClick(index)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -46,34 +47,16 @@ export default {
             (item.description.toLowerCase().indexOf(this.keyword)) !== -1))
     }
   },
-  created () {
-    this.questionnaires = this.fetchData()
+  mounted () {
+    this.questionnaires = localStorage.getItem('questionnaires') ? JSON.parse(localStorage.getItem('questionnaires')) : []
   },
   methods: {
+    handleCardClick (index) {
+      this.$router.push('/questionnaire/' + (index + 1))
+    },
     updateQuery () {
       this.sortBy = this.$route.query.sortBy || 'startTime'
       this.keyword = (this.$route.query.keyword || '').toLowerCase()
-    },
-    fetchData () {
-      return [{
-        title: 'abdsad',
-        description: 'fdasfs'
-      }, {
-        title: 'awerwer',
-        description: 'twery'
-      }, {
-        title: 'kuk,uk',
-        description: 'tretre'
-      }, {
-        title: 'gdfg',
-        description: 'rwerq'
-      }, {
-        title: 'oil.',
-        description: 'ret'
-      }, {
-        title: '675',
-        description: 'rteu'
-      }]
     }
   }
 }
@@ -84,6 +67,8 @@ export default {
     margin 0 10px 0 15px
   .create-btn
     float right
+  .content
+    overflow scroll
   @media (min-width 1200px)
     .allquestionnaires
       height 100%

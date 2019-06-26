@@ -13,7 +13,7 @@
         </span>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view class="content-view"></router-view>
 
   </div>
 </template>
@@ -35,18 +35,6 @@ export default {
           itemName: '任务中心',
           selected: false,
           itemView: 'tasks'
-        },
-        {
-          iconType: 'rise',
-          itemName: '热门',
-          selected: false,
-          itemView: 'hot'
-        },
-        {
-          iconType: 'team',
-          itemName: '兴趣组',
-          selected: false,
-          itemView: 'group'
         }
       ]
     }
@@ -80,6 +68,9 @@ export default {
   .menu
     white-space nowrap
     background-color #fff
+    position fixed
+    width 100%
+    z-index 999
 
     .menu__item
       display inline-block
@@ -98,4 +89,7 @@ export default {
     overflow hidden
     overflow-x scroll
 
+  .content-view
+    position relative
+    top 50px
 </style>

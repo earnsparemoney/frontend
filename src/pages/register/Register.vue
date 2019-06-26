@@ -113,12 +113,12 @@ export default {
         username,
         password,
         phone,
-        mail } = this.form.getFieldsValue()
+        email } = this.form.getFieldsValue()
       this.register({
         'account': username,
         password,
         phone,
-        email: mail
+        email: email
       }).then(res => {
         if (res.status === 200) {
           this.$router.push('/user')

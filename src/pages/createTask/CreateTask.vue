@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import taskService from '@/services/taskService'
 export default {
   name: 'CreateTask',
   data () {
@@ -90,10 +91,24 @@ export default {
       if (!this.isValid()) {
         this.message.error('输入不能为空')
       } else {
-        const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
-        tasks.push(this.task)
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-        this.$router.push('/user')
+        taskService.addTask({
+          title: this.title,
+          description: this.description,
+          address: this.address,
+          startDate: this.startDate,
+          endDate: this.endDate,
+          pay: this.pay,
+          type: this.type
+        }, 'token').then((res) => {
+          console.log(res)
+          this.$router.push('/user')
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('提交错误')
+        })
+        // const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+        //  tasks.push(this.task)
+        // localStorage.setItem('tasks', JSON.stringify(tasks))
       }
       console.log(this.task)
     },

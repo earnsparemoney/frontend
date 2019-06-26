@@ -7,11 +7,64 @@
       icon="plus"
       size="large"
       @click="toggleShow('Type')"/>
+    <a-button
+      class="submit"
+      type="dashed"
+      shape="circle"
+      icon="check"
+      size="large"
+      @click="handleSubmitClick"/>
+    <div class="questionnaire-base-info">
+      <div class="header">
+        <strong>问卷标题</strong>
+        <a-input
+          class="meta-data-input"
+          v-model="questionnaire.title"
+          placeholder="问卷标题"></a-input>
+      </div>
+      <div class="description">
+        <strong>问卷描述</strong>
+        <a-textarea
+          class="meta-data-input"
+          v-model="questionnaire.description"
+          placeholder="问卷描述"></a-textarea>
+      </div>
+    </div>
+    <div class="questionnaire-meta">
+      <div class="meta-data">
+        <span>日期</span>
+        <div class="date__wrapper">
+          <a-date-picker
+            class="date--start"
+            placeholder="开始日期"
+            @change="setStartDate">
+          </a-date-picker>
+          <a-date-picker
+            placeholder="结束日期"
+            @change="setEndDate">
+          </a-date-picker>
+        </div>
+      </div>
+      <div class="meta-data">
+        <span>最多人数</span>
+        <a-input
+          class="meta-data-input"
+          placeholder="最多人数"
+          v-model="questionnaire.usernum"></a-input>
+      </div>
+      <div class="meta-data">
+        <span>赏金</span>
+        <a-input
+          class="meta-data-input"
+          v-model="questionnaire.adward"
+          placeholder="赏金"></a-input>
+      </div>
+    </div>
 
     <transition-group name="flip-list" tag="div">
       <div
         class="questions__wrapper"
-        v-for="(item, index) of questions"
+        v-for="(item, index) of questionnaire.questions"
         :key="item">
 
         <a-dropdown>
@@ -119,6 +172,7 @@ import Choose from './components/Choose'
 import Fill from './components/Fill'
 import Rate from './components/Rate'
 import Judge from './components/Judge'
+import taskService from '@/services/taskService'
 export default {
   name: 'Questionaire',
   components: {
@@ -135,10 +189,39 @@ export default {
       showFill: false,
       showRate: false,
       showJudge: false,
-      questions: []
+      questionnaire: {
+        title: '',
+        description: '',
+        questions: [],
+        startdate: null,
+        enddate: null,
+        adward: 0,
+        usernum: 0
+      }
     }
   },
   methods: {
+    handleSubmitClick () {
+      if (!this.isValid()) {
+        this.message.error('输入不能为空')
+      } else {
+        taskService.addQuestionnaire({
+          title: this.questionnaire.title,
+          description: this.questionnaire.description,
+          body: JSON.stringify(this.questionnaire.questions),
+          startdate: this.questionnaire.startdate,
+          enddate: this.questionnaire.enddate,
+          adward: this.questionnaire.adward,
+          usernum: this.questionnaire.usernum
+        }).then((res) => {
+          console.log(res)
+          this.$router.push('/')
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('提交失败')
+        })
+      }
+    },
     toggleShow (type) {
       this[`show${type}`] = !this[`show${type}`]
     },
@@ -148,31 +231,50 @@ export default {
     },
     addCallback (question) {
       this.toggleShow(question.type)
-      this.questions.push(question)
-      localStorage.setItem('questions', JSON.stringify(this.questions))
+      this.questionnaire.questions.push(question)
     },
     handleMoveUpClick (index) {
       if (index !== 0) {
-        const temp = this.questions[index]
-        this.questions.splice(index, 1)
-        this.questions.splice(index - 1, 0, temp)
+        const temp = this.questionnaire.questions[index]
+        this.questionnaire.questions.splice(index, 1)
+        this.questionnaire.questions.splice(index - 1, 0, temp)
       }
     },
     handleMoveDownClick (index) {
-      if (index !== this.questions.length - 1) {
-        const temp = this.questions[index]
-        this.questions.splice(index, 1)
-        this.questions.splice(index + 1, 0, temp)
+      if (index !== this.questionnaire.questions.length - 1) {
+        const temp = this.questionnaire.questions[index]
+        this.questionnaire.questions.splice(index, 1)
+        this.questionnaire.questions.splice(index + 1, 0, temp)
       }
     },
     handleDeleteClick (index) {
-      if (this.questions.length !== 0) {
-        this.questions.splice(index, 1)
+      if (this.questionnaire.questions.length !== 0) {
+        this.questionnaire.questions.splice(index, 1)
       }
+    },
+    setStartDate (date, dateString) {
+      this.questionnaire.startdate = dateString
+    },
+    setEndDate (date, dateString) {
+      this.questionnaire.enddate = dateString
+    },
+    isValid () {
+      for (let key in this.questionnaire) {
+        let val = this.questionnaire[key]
+        if (!val) {
+          return false
+        } else if (Object.prototype.toString.call(val).includes('Array')) {
+          for (let item of val) {
+            if (!item) {
+              return false
+            }
+          }
+        }
+      }
+      return true
     }
   },
   mounted () {
-    this.questions = JSON.parse(localStorage.getItem('questions')) || []
     EventBus.$on('cancel', this.toggleShow)
     EventBus.$on('add', this.addCallback)
   }
@@ -181,6 +283,13 @@ export default {
 
 <style lang="stylus" scoped>
   @media (max-width 576px)
+    .questionnaire-base-info
+      padding 20px 20px 0 20px
+    .questionnaire-meta
+      padding 20px
+      display flex
+      .meta-data
+        margin-right 10px
     .flip-list-move
       transition: transform 1s
 
@@ -195,6 +304,17 @@ export default {
         width 50px
         height 50px
         z-index 1
+
+      .submit
+        position fixed
+        bottom 120px
+        right 30px
+        width 50px
+        height 50px
+        border none
+        z-index 1
+        color white
+        background-color lightseagreen
 
       .questions__wrapper
         position relative

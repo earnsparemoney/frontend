@@ -2,11 +2,6 @@
   <a-card
     hoverable
   >
-    <template class="ant-card-actions" slot="actions">
-      <a-icon type="check" />
-      <a-icon type="phone" />
-      <a-icon type="mail" />
-    </template>
     <a-card-meta
       :title="title"
       :description="description">
@@ -28,5 +23,4 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
 </style>

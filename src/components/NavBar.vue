@@ -22,13 +22,10 @@
           </div>
           <a-menu slot="overlay" @click="handleMenuItemClick">
             <a-menu-item key="/user">
-              我的信息
+              个人中心
             </a-menu-item>
-            <a-menu-item key="/createTask">
-              创建任务
-            </a-menu-item>
-            <a-menu-item key="/alltasks">
-              任务管理
+            <a-menu-item key="/">
+              修改信息
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item key="3">Logout</a-menu-item>
@@ -55,7 +52,7 @@ export default {
 <style lang="stylus" scoped>
 #header
   position fixed
-  z-index 1
+  z-index 1000
   width 100%
   transition 0.2s ease-in-out
   text-decoration none

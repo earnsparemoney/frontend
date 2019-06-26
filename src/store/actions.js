@@ -1,18 +1,13 @@
-import axios from 'axios'
+import authService from '@/services/authService'
+
 export default {
   login ({ commit }, { account, password }) {
     return new Promise((resolve, reject) => {
-      console.log(account)
-      axios.get(
-        '/api/user/login',
-        {
-          params: {
-            account,
-            password
-          }
-        }
-      ).then(res => {
-        commit('setUserInfo', res.data.data[0])
+      authService.login({
+        account,
+        password
+      }).then(res => {
+        commit('setUserInfo', res.data.user)
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -21,21 +16,17 @@ export default {
   },
   register ({ dispatch, commit }, { account, password, phone, email }) {
     return new Promise((resolve, reject) => {
-      axios.post(
-        '/api/user',
-        {
-          account,
-          password,
-          phone,
-          email
-        }
-      ).then(() => {
-        dispatch('login', { account, password })
-          .then(res => {
-            resolve(res)
-          }).catch(err => {
-            reject(err)
-          })
+      authService.register({
+        account,
+        password,
+        phone,
+        email
+      }).then(res => {
+        console.log(res.data)
+        commit('setUserInfo', res.data.user)
+        resolve(res)
+      }).catch(err => {
+        reject(err)
       })
     })
   }

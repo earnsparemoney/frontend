@@ -4,5 +4,9 @@ export default {
   },
   setToken (state, token) {
     state.token = token
+  },
+  logout (state) {
+    state.userInfo = null
+    state.token = null
   }
 }

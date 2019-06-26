@@ -1,7 +1,7 @@
 <template>
   <header id='header'>
     <a-row>
-      <a-col class='header-left' :xxl='4' :xl='5' :lg='5' :md='8' :sm='8' :xs='21'>
+      <a-col class='header-left' :xxl='4' :xl='5' :lg='5' :md='8' :sm='8' :xs='19'>
         <router-link to='/' id='logo'>
           <img alt='logo' height='40' src='@/assets/logo.png' />
           <img alt='logo' height='30' src='@/assets/fontlogo.png' />
@@ -9,12 +9,9 @@
       </a-col>
       <a-col :xxl='18' :xl='17' :lg='17' :md='14' :sm='13' :xs='0'>
         <a-menu mode='horizontal' class='menu-site' id='nav'>
-<!--          <a-menu-item key='1'>
-            首页
-          </a-menu-item>-->
         </a-menu>
       </a-col>
-      <a-col :xxl='2' :xl='2' :lg='2' :md='2' :sm='3' :xs='3'>
+      <a-col v-if="this.$store.state.token" :xxl='2' :xl='2' :lg='2' :md='2' :sm='3' :xs='5'>
         <a-dropdown :trigger="['click']">
           <div class="user-menu" to="#">
             <img class="user-icon" alt='user-icon' height='50' src='@/assets/test.png' />
@@ -28,10 +25,11 @@
               修改信息
             </a-menu-item>
             <a-menu-divider />
-            <a-menu-item key="3">Logout</a-menu-item>
+            <a-menu-item key="logout">Logout</a-menu-item>
           </a-menu>
         </a-dropdown>
       </a-col>
+      <a-button v-else class="login" type="primary" @click="handleLoginClick">登陆</a-button>
     </a-row>
   </header>
 </template>
@@ -40,10 +38,19 @@
 export default {
   name: 'NavBar',
   methods: {
+    ...mapActions(['logout']),
     handleMenuItemClick ({ key }) {
+      if (key === 'logout') {
+        this.logout()
+        this.$router.push('/')
+        return
+      }
       if (!(location.href.includes('/user') && key.includes('/user'))) {
         this.$router.push(key)
       }
+    },
+    handleLoginClick () {
+      this.$router.push({ name: 'Login' })
     }
   }
 }
@@ -58,6 +65,9 @@ export default {
   text-decoration none
   background-color white
   border-bottom 1px solid #e9e9e9
+  .login
+    margin-top 16px
+    float left
 
 #logo
   padding 0 20px

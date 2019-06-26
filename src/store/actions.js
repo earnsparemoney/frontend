@@ -31,5 +31,8 @@ export default {
         reject(err)
       })
     })
+  },
+  logout ({ commit }) {
+    commit('logout')
   }
 }

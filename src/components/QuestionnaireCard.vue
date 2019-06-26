@@ -4,7 +4,7 @@
     <a-card-meta
       :title="title"
       :description="description">
-      <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <a-avatar slot="avatar" :src="`api/${publisher.img}`" />
     </a-card-meta>
     <div class="icon__wrapper">
       <div class="icon__item">
@@ -28,7 +28,8 @@ export default {
     description: {
       type: String,
       default: '1234'
-    }
+    },
+    publisher: Object
   }
 }
 </script>

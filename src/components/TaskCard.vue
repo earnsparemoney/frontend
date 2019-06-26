@@ -5,14 +5,14 @@
       hoverable
     >
       <template class="ant-card-actions" slot="actions">
-        <a-icon type="check" />
-        <a href="tel:15625583871"><a-icon type="phone" /></a>
-        <a href="sms:15625583871"><a-icon type="mail" /></a>
+        <a :href="`tel:${publisher.phone}`"><a-icon type="phone" /></a>
+        <a :href="`sms:${publisher.phone}`"><a-icon type="message" /></a>
+        <a :href="`mailto:${publisher.email}`"><a-icon type="mail" /></a>
       </template>
       <a-card-meta
         :title="title"
         :description="description">
-        <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <a-avatar slot="avatar" :src="`api/${publisher.img}`" />
       </a-card-meta>
       <a-divider />
       <p>报酬: {{ adward }}$</p>

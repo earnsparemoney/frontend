@@ -80,7 +80,7 @@ export default {
           this.loading = false
           console.log(this.question)
         }).catch((err) => {
-          console.log(err)
+          console.log(err.response)
           this.message.error('获取失败请检查网络')
         })
     },
@@ -93,6 +93,11 @@ export default {
       console.log(result)
       questionnaireService.commitAnswer(this.$route.params.id, this.$store.state.token, {
         answer: result
+      }).then((res) => {
+        this.message.info('填写问卷成功')
+        this.$router.push(-1)
+      }).catch((err) => {
+        this.message.error(err.response.data.error)
       })
     }
   }

@@ -67,17 +67,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@media (min-width 1200px)
-  .create-btn
-    float right
-  .keyword-input
-    width 180px
-
-@media (min-width 768px) and (max-width 1200px)
-  .create-btn
-    float right
-  .keyword-input
-    width 180px
+@media (min-width 576px)
+  .optionBar
+    display flex
+    width 100%
+    .create-btn
+      margin-left 20px
+    .keyword-input
+      width 180px
+      margin-right 20px
 
 @media (max-width 576px)
   .create-btn

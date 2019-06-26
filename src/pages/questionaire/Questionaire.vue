@@ -292,11 +292,9 @@ export default {
         margin-right 10px
     .flip-list-move
       transition: transform 1s
-
     .questionaire
       background-color #ecf1f1
       overflow hidden
-
       .add
         position fixed
         bottom 60px
@@ -304,7 +302,6 @@ export default {
         width 50px
         height 50px
         z-index 1
-
       .submit
         position fixed
         bottom 120px
@@ -315,7 +312,6 @@ export default {
         z-index 1
         color white
         background-color lightseagreen
-
       .questions__wrapper
         position relative
         margin 10px
@@ -324,7 +320,6 @@ export default {
         border-radius 5px
         box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
         background-color #fff
-
         .ant-dropdown-link
           position absolute
           top 2px
@@ -345,7 +340,6 @@ export default {
           >>> .ant-checkbox-group-item
             display block
             margin 10px 0
-
       .questionaire_comp
         position fixed
         top 64px
@@ -354,7 +348,6 @@ export default {
         right 0
         background-color #f5f2f2
         z-index 1
-
       .judge_radio
         margin-top 5px
 </style>

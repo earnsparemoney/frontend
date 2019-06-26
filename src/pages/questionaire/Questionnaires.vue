@@ -11,6 +11,7 @@
         :key="index"
         :title="item.title"
         :description="item.description"
+        :publisher="item.publisher"
         @click.native="handleCardClick(item.id)"/>
       <div class="card"/>
       <div class="card"/>

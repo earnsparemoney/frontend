@@ -10,7 +10,7 @@
         :key="index"
         :title="item.title"
         :description="item.description"
-        @click.native="handleCardClick(index)"/>
+        @click.native="handleCardClick(item.id)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -22,6 +22,8 @@
 <script>
 import QuestionnaireCard from '@/components/QuestionnaireCard'
 import OptionBar from '@/components/OptionBar'
+import questionnaireService from '@/services/questionnaireService'
+
 export default {
   name: 'Questionnaires',
   components: {
@@ -48,11 +50,23 @@ export default {
     }
   },
   mounted () {
-    this.questionnaires = localStorage.getItem('questionnaires') ? JSON.parse(localStorage.getItem('questionnaires')) : []
+    this.fetchData()
   },
   methods: {
+    fetchData () {
+      questionnaireService.getQuestionnaires()
+        .then((res) => {
+          this.questionnaires = res.data.questionnaires
+          for (let i = 0; i < this.questionnaires.length; i++) {
+            this.questionnaires[i].questions = JSON.parse(this.questionnaires[i].questions)
+          }
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('获取失败请检查网络')
+        })
+    },
     handleCardClick (index) {
-      this.$router.push('/questionnaire/' + (index + 1))
+      this.$router.push('/questionnaire/' + index)
     },
     updateQuery () {
       this.sortBy = this.$route.query.sortBy || 'startTime'

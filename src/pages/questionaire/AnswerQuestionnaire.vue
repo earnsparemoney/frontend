@@ -55,55 +55,40 @@
 </template>
 
 <script>
+import questionnaireService from '@/services/questionnaireService'
+
 export default {
   name: 'AnswerQuestionnaire',
   data () {
     return {
-      question: {
-        title: '问卷大标题',
-        description: '问卷描述问卷描述问卷描述问卷描述问卷描述问卷描述问卷描述问卷描述',
-        questions: [{
-          title: 'reaggar',
-          type: 'Choose',
-          options: [
-            '1234234',
-            '3425435',
-            '42354353',
-            '321432424'
-          ],
-          chooseType: 1
-        }, {
-          title: 'reaggar',
-          type: 'Choose',
-          options: [
-            '1234234',
-            '3425435',
-            '42354353',
-            '321432424'
-          ],
-          chooseType: 2
-        }, {
-          title: '给出这次活动的评分',
-          max: 5,
-          type: 'Rate'
-        }, {
-          title: '你是否享受这周的活动?',
-          type: 'Judge'
-        }, {
-          title: '填写你的建议',
-          type: 'Fill'
-        }]
-      },
+      question: {},
       answers: []
     }
   },
+  mounted () {
+    this.fetchData()
+  },
   methods: {
+    fetchData () {
+      questionnaireService.getQuestionnaire(this.$route.params.id)
+        .then((res) => {
+          this.question = res.data.questionnaire
+          this.question.questions = JSON.parse(this.question.questions)
+          console.log(this.question)
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('获取失败请检查网络')
+        })
+    },
     backToTop () {
       this.$router.go(-1)
     },
     submitResult () {
       const reducer = (accumulator, currentValue) => accumulator + ',"' + currentValue.toString() + '"'
-      console.log(this.answers.reduce(reducer, '').substr(1))
+      let result = this.answers.reduce(reducer, '').substr(1)
+      questionnaireService.commitAnswer(this.$route.params.id, this.$store.state.token, {
+        answer: result
+      })
     }
   }
 }

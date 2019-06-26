@@ -4,15 +4,15 @@ export default {
   getQuestionnaires () {
     return api().get('questionnaires')
   },
-  commitAnswer (id, token) {
-    return api().post('questionnaires/' + id + '/participant', {
+  commitAnswer (id, token, answer) {
+    return api().post('questionnaires/' + id + '/participant', answer, {
       headers: {
         'Authorization': token
       }
     })
   },
   getQuestionnaire (id) {
-    return api().get('questionnaires/' + id)
+    return api().get('questionnaire/' + id)
   },
   addQuestionnaire (data, token) {
     return api().post('questionnaires', data, {

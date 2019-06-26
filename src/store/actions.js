@@ -8,22 +8,24 @@ export default {
         password
       }).then(res => {
         commit('setUserInfo', res.data.user)
+        commit('setToken', res.data.token)
         resolve(res)
       }).catch(err => {
         reject(err)
       })
     })
   },
-  register ({ dispatch, commit }, { account, password, phone, email }) {
+  register ({ dispatch, commit }, { username, password, phone, email }) {
     return new Promise((resolve, reject) => {
       authService.register({
-        account,
+        username,
         password,
         phone,
         email
       }).then(res => {
         console.log(res.data)
         commit('setUserInfo', res.data.user)
+        commit('setToken', res.data.token)
         resolve(res)
       }).catch(err => {
         reject(err)

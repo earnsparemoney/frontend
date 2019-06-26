@@ -175,7 +175,7 @@
 </template>
 
 <script>
-import taskService from '@/services/taskService'
+import questionnaireService from '@/services/questionnaireService'
 export default {
   name: 'QuestionairePC',
   data () {
@@ -197,15 +197,15 @@ export default {
       if (!this.isValid()) {
         this.message.error('输入不能为空')
       } else {
-        taskService.addQuestionnaire({
+        questionnaireService.addQuestionnaire({
           title: this.questionnaire.title,
           description: this.questionnaire.description,
-          body: JSON.stringify(this.questionnaire.questions),
-          startdate: this.questionnaire.startdate,
-          enddate: this.questionnaire.enddate,
+          questions: JSON.stringify(this.questionnaire.questions),
+          startDate: this.questionnaire.startdate,
+          endDate: this.questionnaire.enddate,
           adward: this.questionnaire.adward,
           usernum: this.questionnaire.usernum
-        }).then((res) => {
+        }, this.$store.state.token).then((res) => {
           console.log(res)
           this.$router.push('/')
         }).catch((err) => {

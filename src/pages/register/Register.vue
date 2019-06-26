@@ -114,10 +114,11 @@ export default {
         password,
         phone,
         email } = this.form.getFieldsValue()
+      console.log(username)
       this.register({
-        'account': username,
-        password,
-        phone,
+        username: username,
+        password: password,
+        phone: phone,
         email: email
       }).then(res => {
         if (res.status === 200) {

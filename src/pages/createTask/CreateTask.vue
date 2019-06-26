@@ -4,7 +4,7 @@
 
     <span>任务名称</span>
     <a-input
-      v-model="task.title"
+      v-model="task.name"
       class="input--style"
       placeholder="任务名称"></a-input>
 
@@ -16,7 +16,7 @@
 
     <span>地点</span>
     <a-input
-      v-model="task.address"
+      v-model="task.content"
       class="input--style"
       placeholder="地点">
       <a-icon slot="prefix" type="environment" />
@@ -25,11 +25,6 @@
     <span>日期</span>
     <div class="date__wrapper">
       <a-date-picker
-        class="date--start"
-        placeholder="开始日期"
-        @change="setStartDate">
-      </a-date-picker>
-      <a-date-picker
         placeholder="结束日期"
         @change="setEndDate">
       </a-date-picker>
@@ -37,7 +32,7 @@
 
     <span>报酬</span>
     <a-input
-      v-model="task.pay"
+      v-model="task.adward"
       class="input--style"
       placeholder="报酬">
       <a-icon slot="prefix" type="money-collect" />
@@ -73,13 +68,13 @@ export default {
   data () {
     return {
       task: {
-        title: '',
+        type: '快递',
+        name: '',
         description: '',
-        address: '',
-        startDate: '',
-        endDate: '',
-        pay: '',
-        type: '快递'
+        content: '',
+        deadline: null,
+        adward: null,
+        usernum: 1
       }
     }
   },
@@ -92,25 +87,20 @@ export default {
         this.message.error('输入不能为空')
       } else {
         taskService.addTask({
-          title: this.title,
-          description: this.description,
-          address: this.address,
-          startDate: this.startDate,
-          endDate: this.endDate,
-          pay: this.pay,
-          type: this.type
-        }, 'token').then((res) => {
+          name: this.task.name,
+          description: this.task.description,
+          content: this.task.content,
+          deadline: this.task.deadline,
+          adward: this.task.adward,
+          usernum: this.task.usernum
+        }, this.$store.state.token).then((res) => {
           console.log(res)
           this.$router.push('/user')
         }).catch((err) => {
           console.log(err)
           this.message.error('提交错误')
         })
-        // const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
-        //  tasks.push(this.task)
-        // localStorage.setItem('tasks', JSON.stringify(tasks))
       }
-      console.log(this.task)
     },
     isValid () {
       for (let key in this.task) {
@@ -120,11 +110,8 @@ export default {
       }
       return true
     },
-    setStartDate (date, dateString) {
-      this.task.startDate = dateString
-    },
     setEndDate (date, dateString) {
-      this.task.endDate = dateString
+      this.task.deadline = dateString
     },
     setTaskType (type) {
       console.log(type)

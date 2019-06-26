@@ -1,18 +1,11 @@
 import api from '@/services/api'
 
 export default {
-  /**
-   * authService.register({
-   *   email: 'example@qq.com',
-   *   password: 'example'
-   * })
-   * @param {*} credentials
-   */
   getTasks () {
     return api().get('tasks')
   },
-  getParticipatePosts (id) {
-    return api().get('articles/user/' + id)
+  getParticipateTasks (id) {
+    return api().get('tasks/user/' + id)
   },
   getTask (id) {
     return api().get('tasks/' + id)

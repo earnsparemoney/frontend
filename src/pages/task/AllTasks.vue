@@ -26,6 +26,7 @@
 <script>
 import TaskCard from '@/components/TaskCard'
 import OptionBar from '@/components/OptionBar'
+import taskService from '@/services/taskService'
 
 export default {
   name: 'AllTask',
@@ -54,7 +55,9 @@ export default {
   },
   methods: {
     fetchData () {
-      this.tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+      taskService.getTasks().then((res) => {
+        this.tasks = res.data.tasks
+      })
     },
     updateQuery () {
       this.sortBy = this.$route.query.sortBy || 'startTime'

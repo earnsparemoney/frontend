@@ -5,7 +5,9 @@
     <span class="breadcrumb-separator">/</span>
     {{question.title}}
   </nav>
-  <div class="content">
+
+  <loading :loading="loading"></loading>
+  <div class="content" v-show="!loading">
     <div class="answer-title one-line-ellipsis">{{question.title}}</div>
     <div class="answer-welcome">{{question.description}}</div>
     <div class="answer-cut-line"></div>
@@ -62,7 +64,8 @@ export default {
   data () {
     return {
       question: {},
-      answers: []
+      answers: [],
+      loading: true
     }
   },
   mounted () {
@@ -74,6 +77,7 @@ export default {
         .then((res) => {
           this.question = res.data.questionnaire
           this.question.questions = JSON.parse(this.question.questions)
+          this.loading = false
           console.log(this.question)
         }).catch((err) => {
           console.log(err)

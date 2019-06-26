@@ -5,6 +5,7 @@ import App from './App.vue'
 import Clipboard from 'clipboard'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Loading from '@/components/loading'
 
 import {
   Alert,
@@ -27,7 +28,8 @@ import {
   Select,
   DatePicker,
   Breadcrumb,
-  Checkbox
+  Checkbox,
+  Spin
 } from 'ant-design-vue'
 
 Vue.use(Breadcrumb)
@@ -50,6 +52,9 @@ Vue.use(InputNumber)
 Vue.use(DatePicker)
 Vue.use(Modal)
 Vue.use(Checkbox)
+Vue.use(Spin)
+
+Vue.use(Loading)
 
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard

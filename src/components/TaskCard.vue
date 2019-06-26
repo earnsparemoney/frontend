@@ -7,7 +7,7 @@
       <template class="ant-card-actions" slot="actions">
         <a-icon type="check" />
         <a href="tel:15625583871"><a-icon type="phone" /></a>
-        <a-icon type="mail" />
+        <a href="sms:15625583871"><a-icon type="mail" /></a>
       </template>
       <a-card-meta
         :title="title"

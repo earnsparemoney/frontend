@@ -69,7 +69,7 @@
 
         <a-dropdown>
           <a class="ant-dropdown-link">
-            <a-icon type="ellipsis" />
+            <a-icon type="setting" theme="filled" />
           </a>
           <a-menu slot="overlay">
             <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
@@ -327,9 +327,10 @@ export default {
 
         .ant-dropdown-link
           position absolute
-          top -10px
+          top 2px
           right 12px
-          font-size 30px
+          font-size 20px
+          color gray
           .ant-menu-item
             padding 0 20px
         .question--title

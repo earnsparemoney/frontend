@@ -33,5 +33,6 @@ export {
   EllipsisOutline,
   ArrowUpOutline,
   ArrowDownOutline,
-  DeleteOutline
+  DeleteOutline,
+  SettingFill
 } from '@ant-design/icons'

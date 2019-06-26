@@ -1,12 +1,5 @@
 <template>
 <div class="optionBar">
-  <span class="sort-option">排序方式: </span>
-  <a-select defaultValue="startTime" style="width: 120px" @change="handleSortClick">
-    <a-select-option value="startTime">创建时间</a-select-option>
-    <a-select-option value="endTime">结束时间</a-select-option>
-    <a-select-option value="money">报酬</a-select-option>
-  </a-select>
-  <span class="option-label">搜索: </span>
   <a-input
     class="keyword-input"
     :placeholder="`搜索你想做的${type}`"
@@ -15,6 +8,14 @@
     <a-icon slot="prefix" type="search" />
     <a-icon v-if="keyword" slot="suffix" type="close-circle" @click="emitEmpty" />
   </a-input>
+  <div class="sort__wrapper">
+    <span class="sort-option">排序: </span>
+    <a-select defaultValue="startTime" style="width: 120px" @change="handleSortClick">
+      <a-select-option value="startTime">创建时间</a-select-option>
+      <a-select-option value="endTime">结束时间</a-select-option>
+      <a-select-option value="money">报酬</a-select-option>
+    </a-select>
+  </div>
   <a-button :shape="isPC ? '' : 'circle'" class="create-btn" type="primary" icon="plus" @click="handleClick">{{ isPC ? `创建新${type}` : '' }}</a-button>
 </div>
 </template>
@@ -67,24 +68,18 @@ export default {
 
 <style lang="stylus" scoped>
 @media (min-width 1200px)
-  .option-label
-    margin 0 10px 0 15px
   .create-btn
     float right
   .keyword-input
     width 180px
 
 @media (min-width 768px) and (max-width 1200px)
-  .option-label
-    margin 0 10px 0 15px
   .create-btn
     float right
   .keyword-input
     width 180px
 
 @media (max-width 576px)
-  .option-label
-    margin 0 10px 0 15px
   .create-btn
     position fixed
     bottom 60px
@@ -93,5 +88,14 @@ export default {
     height 50px
     z-index 1
   .keyword-input
-    width 180px
+    // width 90%
+    height 40px
+    font-size 20px
+    >>> .ant-input
+      padding-left 35px
+
+  .sort__wrapper
+    margin-top 15px
+    text-align right
+
 </style>

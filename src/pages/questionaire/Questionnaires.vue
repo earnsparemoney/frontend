@@ -3,6 +3,7 @@
     <option-bar
       :routeName="'questionnaires'"
       :type="'问卷'"/>
+    <loading :loading="loading"></loading>
     <div class="content">
       <questionnaire-card
         class="card"
@@ -38,7 +39,8 @@ export default {
     return {
       questionnaires: [],
       sortBy: '创建时间',
-      keyword: ''
+      keyword: '',
+      loading: true
     }
   },
   computed: {
@@ -60,9 +62,11 @@ export default {
           for (let i = 0; i < this.questionnaires.length; i++) {
             this.questionnaires[i].questions = JSON.parse(this.questionnaires[i].questions)
           }
+          this.loading = false
         }).catch((err) => {
           console.log(err)
           this.message.error('获取失败请检查网络')
+          this.loading = false
         })
     },
     handleCardClick (index) {

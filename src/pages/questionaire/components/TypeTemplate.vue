@@ -9,7 +9,7 @@
       <a-divider class="divider" type="vertical"></a-divider>
       <div class="save bottom-bar__item" @click="handleSaveClick">
         <a-icon type="check"></a-icon>
-        发布
+        确定
       </div>
     </div>
   </div>

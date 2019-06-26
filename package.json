@@ -21,7 +21,9 @@
     "cross-env": "^5.2.0",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
+    "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.0.3",
+    "vue-virtual-scroller": "^1.0.0-rc.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

@@ -14,6 +14,7 @@ const Finish = () => import('@/pages/finish/Finish')
 const Questionaire = () => import('@/pages/questionaire/Questionaire')
 const Group = () => import('@/pages/group/Group')
 const CreateTask = () => import('@/pages/createTask/CreateTask')
+const PublishedQuestionnaire = () => import('@/pages/publishedQuestionnaire/Questionnaire')
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ const router = new Router({
           path: 'finish',
           name: 'Finish',
           component: Finish
+        },
+        {
+          path: 'questionnaire',
+          name: 'PublishedQuestionnaire',
+          component: PublishedQuestionnaire
         }
       ]
     },

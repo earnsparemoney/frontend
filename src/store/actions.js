@@ -24,6 +24,7 @@ export default {
         email
       }).then(res => {
         console.log(res.data)
+        console.log(commit)
         commit('setUserInfo', res.data.user)
         commit('setToken', res.data.token)
         resolve(res)

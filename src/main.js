@@ -6,6 +6,7 @@ import Clipboard from 'clipboard'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Loading from '@/components/loading'
+import { RecycleScroller } from 'vue-virtual-scroller'
 
 import {
   Alert,
@@ -59,6 +60,7 @@ Vue.use(Loading)
 Vue.prototype.message = message
 Vue.prototype.Clipboard = Clipboard
 Vue.use(VueAxios, axios)
+Vue.component('RecycleScroller', RecycleScroller)
 
 Vue.config.productionTip = false
 Vue.config.devtools = true

@@ -6,7 +6,7 @@
       </div>
       <div class="info__detail--wrapper">
         <span class="info__name">
-          {{ userInfo ? userInfo.account : 'limsanity' }}
+          {{ userInfo ? userInfo.username : 'limsanity' }}
         </span>
         <span class="info__phone">
           <a-icon type="phone" />
@@ -37,6 +37,7 @@
     >
       <a-menu-item class="menu__item" key="task">进行中的任务</a-menu-item>
       <a-menu-item class="menu__item" key="finish">已完成的任务</a-menu-item>
+      <a-menu-item class="menu__item" key="questionnaire">已发布的问卷</a-menu-item>
     </a-menu>
 
     <router-view></router-view>

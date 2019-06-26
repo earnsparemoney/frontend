@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~styles/mixins.styl'
 .task-card__wrapper
   position relative
   .icon--delete
@@ -92,8 +93,5 @@ export default {
     color #ff4d4f
     font-size 20px
   .task-card
-    box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
-    border-radius 8px
-    >>> .ant-card-actions
-      border-radius 0px 0px 8px 8px
+    boxShadow()
 </style>

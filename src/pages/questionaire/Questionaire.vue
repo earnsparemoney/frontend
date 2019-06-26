@@ -74,15 +74,8 @@
           <a-menu slot="overlay">
             <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
               <a>
-                <a-icon type="arrow-up"></a-icon>
-                上移
-              </a>
-            </a-menu-item>
-            <a-menu-divider></a-menu-divider>
-            <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
-              <a>
-                <a-icon type="arrow-down"></a-icon>
-                下移
+                <a-icon type="edit"></a-icon>
+                编辑
               </a>
             </a-menu-item>
             <a-menu-divider></a-menu-divider>
@@ -282,6 +275,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~styles/mixins.styl'
   @media (max-width 576px)
     .questionnaire-base-info
       padding 20px 20px 0 20px
@@ -321,11 +315,7 @@ export default {
         box-shadow 0px 4px 5px 2px rgba(216, 211, 211, .5)
         background-color #fff
         .ant-dropdown-link
-          position absolute
-          top 2px
-          right 12px
-          font-size 20px
-          color gray
+          settingPos()
           .ant-menu-item
             padding 0 20px
         .question--title

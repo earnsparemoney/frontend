@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AllTasks from '../pages/task/AllTasks'
 import { isPC } from '@/utils/utils'
+const AnswerQuestionnaire = () => import('@/pages/questionaire/AnswerQuestionnaire')
 const Questionnaires = () => import('@/pages/questionaire/Questionnaires')
 const QuestionairePC = () => import('@/pages/questionaire/QuestionairePC')
 const Home = () => import('@/pages/home/Home')
@@ -98,6 +99,11 @@ const router = new Router({
       path: '/createTask',
       name: 'CreateTask',
       component: CreateTask
+    },
+    {
+      path: '/questionnaire/:id',
+      name: 'AnswerQuestionnaire',
+      component: AnswerQuestionnaire
     },
     {
       path: '*',

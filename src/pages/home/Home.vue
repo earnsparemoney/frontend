@@ -87,6 +87,7 @@ export default {
       line-height 48px
       padding 0 18px
       background-color #fff
+      cursor pointer
 
     .menu__item--selected
       color #1890ff

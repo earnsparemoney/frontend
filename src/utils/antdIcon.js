@@ -5,6 +5,7 @@ export {
   FileTextOutline,
   SearchOutline,
   CloseCircleOutline,
+  HomeOutline,
   OrderedListOutline,
   UserOutline,
   LockOutline,

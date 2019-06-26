@@ -26,9 +26,11 @@ import {
   Rate,
   Select,
   DatePicker,
+  Breadcrumb,
   Checkbox
 } from 'ant-design-vue'
 
+Vue.use(Breadcrumb)
 Vue.use(Select)
 Vue.use(Alert)
 Vue.use(Button)

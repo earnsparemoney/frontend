@@ -59,13 +59,20 @@ export default {
       this.keyword = ''
     }
   },
-  mounted () {
+  created () {
     this.isPC = isPC()
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+@media (min-width 1200px)
+  .option-label
+    margin 0 10px 0 15px
+  .create-btn
+    float right
+  .keyword-input
+    width 180px
 
 @media (min-width 768px) and (max-width 1200px)
   .option-label

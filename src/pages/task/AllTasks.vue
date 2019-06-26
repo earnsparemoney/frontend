@@ -52,9 +52,6 @@ export default {
             (item.to.toLowerCase().indexOf(this.keyword)) !== -1))
     }
   },
-  created () {
-    this.tasks = this.fetchData()
-  },
   methods: {
     fetchData () {
       this.tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []

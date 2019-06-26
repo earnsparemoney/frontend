@@ -15,12 +15,12 @@
         <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       </a-card-meta>
       <a-divider />
-      <p>报酬: {{ pay }}$</p>
-      <p>地址: {{ address }}</p>
-      <p>时间: {{ startDate }} ~ {{ endDate }}</p>
-      <p>类型: {{ type }}</p>
+      <p>报酬: {{ adward }}$</p>
+      <p>内容: {{ content }}</p>
+      <p>结束时间: {{ formatedTime }}</p>
     </a-card>
     <a-icon
+      v-if="this.$store.state.userInfo && this.$store.state.userInfo.id === publisher.id"
       class="icon--delete"
       type="delete"
       @click="showModal" />
@@ -42,16 +42,16 @@
 </template>
 
 <script>
+import { formatTime } from '@/utils/utils'
 export default {
   name: 'TaskCard',
   props: {
-    title: String,
+    name: String,
     description: String,
-    pay: String,
-    address: String,
-    startDate: String,
-    endDate: String,
-    type: String
+    adward: Number,
+    content: String,
+    deadline: String,
+    publisher: Object
   },
   data () {
     return {
@@ -60,6 +60,11 @@ export default {
       modalStyle: {
         top: '30%'
       }
+    }
+  },
+  computed: {
+    formatedTime () {
+      return formatTime(this.deadline, 'yyyy-MM-dd')
     }
   },
   methods: {

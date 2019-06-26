@@ -8,13 +8,13 @@
         class="card"
         v-for="(item, index) of tasks"
         :key="index"
-        :title="item.title"
+        :name="item.name"
         :description="item.description"
-        :pay="item.pay"
-        :address="item.address"
-        :startDate="item.startDate"
-        :endDate="item.endDate"
-        :type="item.type" />
+        :adward="item.adward"
+        :content="item.content"
+        :deadline="item.deadline"
+        :publisher="item.publisher"
+        @delete="deleteTask(item.id, index)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -57,6 +57,19 @@ export default {
     fetchData () {
       taskService.getTasks().then((res) => {
         this.tasks = res.data.tasks
+      }).catch((err) => {
+        console.log(err)
+        this.message.error('获取数据失败，请检查网络')
+      })
+    },
+    deleteTask (id, index) {
+      taskService.deleteTask(id).then((res) => {
+        console.log(res)
+        this.tasks.splice(index, 1)
+        this.message.info('删除成功')
+      }).catch((err) => {
+        console.log(err)
+        this.message.error('删除失败')
       })
     },
     updateQuery () {

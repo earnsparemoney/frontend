@@ -18,7 +18,7 @@ export default {
     var config = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + token
+        'Authorization': token
       }
     }
     return api().put('user/icon/' + imgname, data, config)

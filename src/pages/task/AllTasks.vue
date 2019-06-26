@@ -22,12 +22,31 @@
         :content="item.content"
         :deadline="item.deadline"
         :publisher="item.publisher"
-        @delete="deleteTask(item.id, index)"/>
+        @delete="deleteTask(item.id, index)"
+        @click.native="clickTask(item)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
     </recycle-scroller>
+
+    <a-modal
+      class="modal"
+      v-model="visible"
+      :title="selectedItem ? selectedItem.name : ''"
+      onOk="handleOk"
+    >
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel">Return</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
+          参加任务
+        </a-button>
+      </template>
+      <p>简介: {{selectedItem ? selectedItem.description : ''}}</p>
+      <p>报酬: {{selectedItem ? selectedItem.adward : ''}}$</p>
+      <p>内容: {{selectedItem ? selectedItem.content: ''}}</p>
+      <p>结束时间: {{ selectedItem ? formatedTime : '' }}</p>
+    </a-modal>
   </div>
 </template>
 
@@ -36,6 +55,7 @@ import TaskCard from '@/components/TaskCard'
 import OptionBar from '@/components/OptionBar'
 import taskService from '@/services/taskService'
 import infiniteScroll from 'vue-infinite-scroll'
+import { formatTime } from '@/utils/utils'
 
 export default {
   name: 'AllTask',
@@ -50,14 +70,19 @@ export default {
   },
   data () {
     return {
+      loading: false,
+      selectedItem: null,
+      visible: false,
       tasks: [],
       sortBy: '创建时间',
       keyword: '',
-      loading: false,
       id: 1
     }
   },
   computed: {
+    formatedTime () {
+      return formatTime(this.selectedItem.deadline, 'yyyy-MM-dd')
+    },
     filteredList () {
       return this.tasks
         .filter(item =>
@@ -143,8 +168,12 @@ export default {
       this.loading = false
       console.log(1)
     },
+    clickTask (item) {
+      this.selectedItem = item
+      this.visible = true
+    },
     deleteTask (id, index) {
-      taskService.deleteTask(id).then((res) => {
+      taskService.deleteTask(id, this.$store.state.token).then((res) => {
         console.log(res)
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
@@ -161,6 +190,23 @@ export default {
       if (!this.loading) {
         this.fetchData(1)
       }
+    },
+    handleOk (e) {
+      this.loading = true
+      taskService.participateTask(this.selectedItem.id, this.$store.state.token)
+        .then((res) => {
+          this.visible = false
+          this.loading = false
+          this.message.info('成功参加')
+          this.fetchData()
+        }).catch((err) => {
+          this.message.error(err.response.data.error)
+          this.loading = false
+        })
+    },
+    handleCancel (e) {
+      this.selectedItem = null
+      this.visible = false
     }
   },
   mounted () {
@@ -170,6 +216,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~styles/mixins.styl'
 @media (min-width 1200px)
   .alltasks
     height 100%

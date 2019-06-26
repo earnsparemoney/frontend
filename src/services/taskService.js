@@ -18,35 +18,28 @@ export default {
     })
   },
   deleteTask (id, token) {
-    return api().post('tasks/' + id, {
+    return api().delete('tasks/' + id, {
       headers: {
         'Authorization': token
       }
     })
   },
   completeTask (id, token) {
-    return api().post('tasks/' + id, {
+    return api().post('task/' + id + '/finish', null, {
       headers: {
         'Authorization': token
       }
     })
   },
   participateTask (id, token) {
-    return api().post('tasks/' + id + '/participant/', {
+    return api().post('task/' + id + '/participate', null, {
       headers: {
         'Authorization': token
       }
     })
   },
   deleteParticipant (id, token) {
-    return api().post('tasks/' + id + '/participant/', {
-      headers: {
-        'Authorization': token
-      }
-    })
-  },
-  finishTask (id, token) {
-    return api().post('tasks/' + id + '/participant/', {
+    return api().delete('tasks/' + id + '/participate', {
       headers: {
         'Authorization': token
       }

@@ -14,8 +14,7 @@
       <a-col v-if="this.$store.state.token" :xxl='2' :xl='2' :lg='2' :md='2' :sm='3' :xs='5'>
         <a-dropdown :trigger="['click']">
           <div class="user-menu" to="#">
-            <img class="user-icon" alt='user-icon' height='50' src='@/assets/test.png' />
-            <!--<span class="dropdown-caret"></span>-->
+            <img class="user-icon" alt='user-icon' height='50' :src="`api/${this.$store.state.userInfo.img}`" />
           </div>
           <a-menu slot="overlay" @click="handleMenuItemClick">
             <a-menu-item key="/user">

@@ -86,6 +86,7 @@ export default {
     submitResult () {
       const reducer = (accumulator, currentValue) => accumulator + ',"' + currentValue.toString() + '"'
       let result = this.answers.reduce(reducer, '').substr(1)
+      console.log(result)
       questionnaireService.commitAnswer(this.$route.params.id, this.$store.state.token, {
         answer: result
       })

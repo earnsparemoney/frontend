@@ -5,7 +5,7 @@ export default {
     return api().get('questionnaires')
   },
   commitAnswer (id, token, answer) {
-    return api().post('questionnaires/' + id + '/participant', answer, {
+    return api().post('questionnaires/' + id, answer, {
       headers: {
         'Authorization': token
       }

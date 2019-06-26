@@ -208,9 +208,9 @@ export default {
         taskService.addQuestionnaire({
           title: this.questionnaire.title,
           description: this.questionnaire.description,
-          body: JSON.stringify(this.questionnaire.questions),
-          startdate: this.questionnaire.startdate,
-          enddate: this.questionnaire.enddate,
+          questions: JSON.stringify(this.questionnaire.questions),
+          startDate: this.questionnaire.startdate,
+          endDate: this.questionnaire.enddate,
           adward: this.questionnaire.adward,
           usernum: this.questionnaire.usernum
         }).then((res) => {

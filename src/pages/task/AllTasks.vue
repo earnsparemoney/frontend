@@ -14,12 +14,29 @@
         :content="item.content"
         :deadline="item.deadline"
         :publisher="item.publisher"
-        @delete="deleteTask(item.id, index)"/>
+        @delete="deleteTask(item.id, index)"
+        @click.native="clickTask(item)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
     </div>
+    <a-modal
+      v-model="visible"
+      :title="selectedItem ? selectedItem.name : ''"
+      onOk="handleOk"
+    >
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel">Return</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
+          参加任务
+        </a-button>
+      </template>
+      <p>简介: {{selectedItem ? selectedItem.description : ''}}</p>
+      <p>报酬: {{selectedItem ? selectedItem.adward : ''}}$</p>
+      <p>内容: {{selectedItem ? selectedItem.content: ''}}</p>
+      <p>结束时间: {{ selectedItem ? formatedTime : '' }}</p>
+    </a-modal>
   </div>
 </template>
 
@@ -27,6 +44,7 @@
 import TaskCard from '@/components/TaskCard'
 import OptionBar from '@/components/OptionBar'
 import taskService from '@/services/taskService'
+import { formatTime } from '@/utils/utils'
 
 export default {
   name: 'AllTask',
@@ -40,12 +58,18 @@ export default {
   },
   data () {
     return {
+      loading: false,
+      selectedItem: null,
+      visible: false,
       tasks: [],
       sortBy: '创建时间',
       keyword: ''
     }
   },
   computed: {
+    formatedTime () {
+      return formatTime(this.selectedItem.deadline, 'yyyy-MM-dd')
+    },
     filteredList () {
       return this.tasks
         .filter(item =>
@@ -54,6 +78,10 @@ export default {
     }
   },
   methods: {
+    clickTask (item) {
+      this.selectedItem = item
+      this.visible = true
+    },
     fetchData () {
       taskService.getTasks().then((res) => {
         this.tasks = res.data.tasks
@@ -63,7 +91,7 @@ export default {
       })
     },
     deleteTask (id, index) {
-      taskService.deleteTask(id).then((res) => {
+      taskService.deleteTask(id, this.$store.state.token).then((res) => {
         console.log(res)
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
@@ -75,6 +103,23 @@ export default {
     updateQuery () {
       this.sortBy = this.$route.query.sortBy || 'startTime'
       this.keyword = (this.$route.query.keyword || '').toLowerCase()
+    },
+    handleOk (e) {
+      this.loading = true
+      taskService.participateTask(this.selectedItem.id, this.$store.state.token)
+        .then((res) => {
+          this.visible = false
+          this.loading = false
+          this.message.info('成功参加')
+          this.fetchData()
+        }).catch((err) => {
+          this.message.error(err.response.data.error)
+          this.loading = false
+        })
+    },
+    handleCancel (e) {
+      this.selectedItem = null
+      this.visible = false
     }
   },
   mounted () {

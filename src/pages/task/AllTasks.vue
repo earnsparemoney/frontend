@@ -67,6 +67,7 @@
       </template>
       <strong>委托人: {{selectedItem ? selectedItem.publisher.username : '' }}</strong>
       <strong>电话: {{selectedItem ? selectedItem.publisher.phone : '' }}</strong>
+      <a-divider/>
       <p>简介: {{selectedItem ? selectedItem.description : ''}}</p>
       <p>报酬: {{selectedItem ? selectedItem.adward : ''}}$</p>
       <p>内容: {{selectedItem ? selectedItem.content: ''}}</p>

@@ -62,8 +62,8 @@ export default {
           ((item.title.toLowerCase().indexOf(this.keyword) !== -1) ||
             (item.description.toLowerCase().indexOf(this.keyword)) !== -1))
       return list.sort((obj1, obj2) => {
-        let sortBy = this.$route.query.sortBy || 'startDate'
-        if (sortBy === 'startDate') {
+        let sortBy = this.$route.query.sortBy || 'createdAt'
+        if (sortBy === 'createdAt') {
           let objDate1 = Date.parse(obj1.startDate)
           let objDate2 = Date.parse(obj2.startDate)
           if (objDate1 > objDate2) return -1
@@ -114,7 +114,7 @@ export default {
       this.$router.push('/questionnaire/' + index)
     },
     updateQuery () {
-      this.sortBy = this.$route.query.sortBy || 'startDate'
+      this.sortBy = this.$route.query.sortBy || 'createdAt'
       this.keyword = (this.$route.query.keyword || '').toLowerCase()
     },
     touchBottom () {

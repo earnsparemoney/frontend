@@ -45,6 +45,7 @@
       @change="setTaskType">
       <a-select-option value="快递">快递</a-select-option>
       <a-select-option value="外卖">外卖</a-select-option>
+      <a-select-option value="其他">其他</a-select-option>
     </a-select>
 
     <div class="bottom-bar">
@@ -98,7 +99,7 @@ export default {
           this.$router.push('/tasks')
         }).catch((err) => {
           console.log(err)
-          this.message.error('提交错误')
+          this.message.error('命名重复')
         })
       }
     },

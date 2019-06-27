@@ -35,11 +35,6 @@
         <span>日期</span>
         <div class="date__wrapper">
           <a-date-picker
-            class="date--start"
-            placeholder="开始日期"
-            @change="setStartDate">
-          </a-date-picker>
-          <a-date-picker
             placeholder="结束日期"
             @change="setEndDate">
           </a-date-picker>
@@ -186,7 +181,6 @@ export default {
         title: '',
         description: '',
         questions: [],
-        startdate: null,
         enddate: null,
         adward: 0,
         usernum: 0
@@ -202,7 +196,6 @@ export default {
           title: this.questionnaire.title,
           description: this.questionnaire.description,
           questions: JSON.stringify(this.questionnaire.questions),
-          startDate: this.questionnaire.startdate,
           endDate: this.questionnaire.enddate,
           adward: this.questionnaire.adward,
           usernum: this.questionnaire.usernum
@@ -244,9 +237,6 @@ export default {
       if (this.questionnaire.questions.length !== 0) {
         this.questionnaire.questions.splice(index, 1)
       }
-    },
-    setStartDate (date, dateString) {
-      this.questionnaire.startdate = dateString
     },
     setEndDate (date, dateString) {
       this.questionnaire.enddate = dateString

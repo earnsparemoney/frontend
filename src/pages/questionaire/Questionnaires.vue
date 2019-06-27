@@ -44,7 +44,7 @@ export default {
       loading: true,
       id: 1,
       flag: false,
-      pageSize: isPC() ? 8 : 3
+      pageSize: isPC() ? 15 : 4
     }
   },
   mounted () {

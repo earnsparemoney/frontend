@@ -247,6 +247,9 @@ export default {
       for (let key in this.questionnaire) {
         let val = this.questionnaire[key]
         if (!val) {
+          if (val === 0) {
+            return true
+          }
           return false
         } else if (Object.prototype.toString.call(val).includes('Array')) {
           for (let item of val) {

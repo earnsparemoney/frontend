@@ -6,7 +6,7 @@ const {
   isModernBrowser
 } = require('../utils/utils')
 const template = require('fs').readFileSync(resolve('../../public/index-server.html'), 'utf-8')
-const serverBundle = require(resolve('../../dist/server-build/vue-ssr-server-bundle.json'))
+const serverBundle = require(resolve('../../dist/vue-ssr-server-bundle.json'))
 const clientManifest = require(resolve('../../dist/vue-ssr-client-manifest.json'))
 const clientManifestLegacy = require(resolve('../../dist/vue-ssr-client-manifest-legacy.json'))
 

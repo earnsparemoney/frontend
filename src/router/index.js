@@ -21,155 +21,207 @@ const PublishedTask = () => import('@/pages/publishedTask/PublishedTask')
 
 Vue.use(Router)
 
-const router = new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      redirect: '/questionnaires',
-      component: Home,
-      children: [
-        {
-          path: 'questionnaires',
-          name: 'questionnaires',
-          component: Questionnaires
-        },
-        {
-          path: 'tasks',
-          name: 'AllTasks',
-          component: AllTasks,
-          beforeEnter: (to, from, next) => {
-            if (!isPC()) {
-              next()
-            } else {
-              next('/tasksPC')
+export function createRouter () {
+  const router = new Router({
+    mode: 'history',
+    routes: [
+      {
+        path: '/',
+        name: 'Home',
+        redirect: '/questionnaires',
+        component: Home,
+        children: [
+          {
+            path: 'questionnaires',
+            name: 'questionnaires',
+            component: Questionnaires
+          },
+          {
+            path: 'tasks',
+            name: 'AllTasks',
+            component: AllTasks,
+            beforeEnter: (to, from, next) => {
+              if (!isPC()) {
+                next()
+              } else {
+                next('/tasksPC')
+              }
             }
-          }
-        },
-        {
-          path: 'tasksPC',
-          name: 'AllTasksPC',
-          component: AllTasksPC,
-          beforeEnter: (to, from, next) => {
-            if (isPC()) {
-              next()
-            } else {
-              next('/tasks')
+          },
+          {
+            path: 'tasksPC',
+            name: 'AllTasksPC',
+            component: AllTasksPC,
+            beforeEnter: (to, from, next) => {
+              if (isPC()) {
+                next()
+              } else {
+                next('/tasks')
+              }
             }
+          },
+          {
+            path: 'group',
+            name: 'Group',
+            component: Group
           }
-        },
-        {
-          path: 'group',
-          name: 'Group',
-          component: Group
+        ]
+      },
+      {
+        path: '/register',
+        name: 'Register',
+        component: Register
+      },
+      {
+        path: '/login',
+        name: 'Login',
+        component: Login
+      },
+      {
+        path: '/user',
+        redirect: '/user/task',
+        name: 'User',
+        component: User,
+        children: [
+          {
+            path: 'task',
+            name: 'Task',
+            component: Task
+          },
+          {
+            path: 'finish',
+            name: 'Finish',
+            component: Finish
+          },
+          {
+            path: 'questionnaire',
+            name: 'PublishedQuestionnaire',
+            component: PublishedQuestionnaire
+          }
+        ]
+      },
+      {
+        path: '/questionnaire',
+        name: 'questionnaire',
+        component: Questionaire,
+        beforeEnter: (to, from, next) => {
+          if (!isPC()) {
+            next()
+          } else {
+            next('/questionnairePC')
+          }
         }
-      ]
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/user',
-      redirect: '/user/task',
-      name: 'User',
-      component: User,
-      children: [
-        {
-          path: 'task',
-          name: 'Task',
-          component: Task
-        },
-        {
-          path: 'finish',
-          name: 'Finish',
-          component: Finish
-        },
-        {
-          path: 'questionnaire',
-          name: 'PublishedQuestionnaire',
-          component: PublishedQuestionnaire
-        },
-        {
-          path: 'publichedtask',
-          name: 'PublichedTask',
-          component: PublishedTask
+      },
+      {
+        path: 'group',
+        name: 'Group',
+        component: Group
+      },
+      {
+        path: '/register',
+        name: 'Register',
+        component: Register
+      },
+      {
+        path: '/login',
+        name: 'Login',
+        component: Login
+      },
+      {
+        path: '/user',
+        redirect: '/user/task',
+        name: 'User',
+        component: User,
+        children: [
+          {
+            path: 'task',
+            name: 'Task',
+            component: Task
+          },
+          {
+            path: 'finish',
+            name: 'Finish',
+            component: Finish
+          },
+          {
+            path: 'questionnaire',
+            name: 'PublishedQuestionnaire',
+            component: PublishedQuestionnaire
+          },
+          {
+            path: 'publichedtask',
+            name: 'PublichedTask',
+            component: PublishedTask
+          }
+        ]
+      },
+      {
+        path: '/questionnaire',
+        name: 'questionnaire',
+        component: Questionaire,
+        beforeEnter: (to, from, next) => {
+          if (!isPC()) {
+            next()
+          } else {
+            next('/questionnairePC')
+          }
         }
-      ]
-    },
-    {
-      path: '/questionnaire',
-      name: 'questionnaire',
-      component: Questionaire,
-      beforeEnter: (to, from, next) => {
-        if (!isPC()) {
-          next()
-        } else {
-          next('/questionnairePC')
+      },
+      {
+        path: '/questionnairePC',
+        name: 'questionnairePC',
+        component: QuestionairePC,
+        beforeEnter: (to, from, next) => {
+          if (isPC()) {
+            next()
+          } else {
+            next('/createQuestionnaire')
+          }
         }
+      },
+      {
+        path: '/createTask',
+        name: 'CreateTask',
+        component: CreateTask
+      },
+      {
+        path: '/questionnaire/:id',
+        name: 'AnswerQuestionnaire',
+        component: AnswerQuestionnaire
+      },
+      {
+        path: '/user/settings',
+        name: 'Settings',
+        component: Settings
+      },
+      {
+        path: '*',
+        redirect: '/'
       }
-    },
-    {
-      path: '/questionnairePC',
-      name: 'questionnairePC',
-      component: QuestionairePC,
-      beforeEnter: (to, from, next) => {
-        if (isPC()) {
-          next()
-        } else {
-          next('/createQuestionnaire')
-        }
-      }
-    },
-    {
-      path: '/createTask',
-      name: 'CreateTask',
-      component: CreateTask
-    },
-    {
-      path: '/questionnaire/:id',
-      name: 'AnswerQuestionnaire',
-      component: AnswerQuestionnaire
-    },
-    {
-      path: '/user/settings',
-      name: 'Settings',
-      component: Settings
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ]
-})
+    ]
+  })
 
-// 路由鉴权
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!router.app.$store || !router.app.$store.state.auth) {
-      router
-        .app
-        .$store
-        .dispatch('login')
-        .then(() => {
-          next()
-        })
-        .catch(() => {
-          next('/login')
-        })
+  // 路由鉴权
+  router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!router.app.$store || !router.app.$store.state.auth) {
+        router
+          .app
+          .$store
+          .dispatch('login')
+          .then(() => {
+            next()
+          })
+          .catch(() => {
+            next('/login')
+          })
+      } else {
+        next()
+      }
     } else {
       next()
     }
-  } else {
-    next()
-  }
-})
+  })
 
-export default router
+  return router
+}

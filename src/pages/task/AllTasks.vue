@@ -4,14 +4,12 @@
       :routeName="'AllTasks'"
       :type="'任务'"/>
 
-    <recycle-scroller
+    <!-- <recycle-scroller
       class="content"
       :items="tasks"
       :item-size="32"
       key-field="id"
       v-slot="{ item }"
-      v-infinite-scroll="handleInfiniteOnLoad"
-      :infinite-scroll-distance="10"
     >
       <task-card
         class="card"
@@ -28,7 +26,32 @@
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
-    </recycle-scroller>
+    </recycle-scroller> -->
+
+    <div class="content">
+      <task-card
+        class="card"
+        v-for="(item, index) of tasks"
+        :key="index"
+        :name="item.name"
+        :description="item.description"
+        :adward="item.adward"
+        :content="item.content"
+        :deadline="item.deadline"
+        :publisher="item.publisher"
+        @delete="deleteTask(item.id, index)"
+        @click.native="clickTask(item)"/>
+      <div class="card"/>
+      <div class="card"/>
+      <div class="card"/>
+      <div class="card"/>
+    </div>
+
+    <a-spin
+      class="loading-spin"
+      v-show="loading"
+      size="large"
+      tip="Loading..." />
 
     <a-modal
       class="modal"
@@ -54,12 +77,10 @@
 import TaskCard from '@/components/TaskCard'
 import OptionBar from '@/components/OptionBar'
 import taskService from '@/services/taskService'
-import infiniteScroll from 'vue-infinite-scroll'
 import { formatTime } from '@/utils/utils'
 
 export default {
   name: 'AllTask',
-  directives: { infiniteScroll },
   components: {
     TaskCard,
     OptionBar
@@ -185,8 +206,11 @@ export default {
         }
       ]
       this.id += 3
-      this.tasks = arg ? this.tasks.concat(data) : data
-      this.loading = false
+
+      setTimeout(() => {
+        this.tasks = arg ? this.tasks.concat(data) : data
+        this.loading = false
+      }, 2000)
     },
     clickTask (item) {
       this.selectedItem = item
@@ -227,10 +251,24 @@ export default {
     handleCancel (e) {
       this.selectedItem = null
       this.visible = false
+    },
+    touchBottom () {
+      let scrollHeight = document.body.scrollHeight
+      let scrollTop = document.documentElement.scrollTop
+      let clientHeight = document.documentElement.clientHeight
+      if (scrollTop + clientHeight === scrollHeight) {
+        this.fetchData(1)
+        console.log(1)
+      }
     }
   },
   mounted () {
     this.fetchData()
+    window.addEventListener('scroll', this.touchBottom)
+  },
+  beforeDestroy () {
+    console.log('before destroy')
+    window.removeEventListener('scroll', this.touchBottom)
   }
 }
 </script>
@@ -268,8 +306,13 @@ export default {
     height 100%
     background-color #ecf1f1
     padding 15px 15px
+    overflow hidden
     .content
       height 100%
     .card
       margin-top 20px
+    .loading-spin
+      position relative
+      left 50%
+      transform translateX(-50%)
 </style>

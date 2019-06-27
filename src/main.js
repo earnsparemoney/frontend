@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import router from './router'
-import store from './store'
 import App from './App.vue'
 import Clipboard from 'clipboard'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Loading from '@/components/loading'
 import { RecycleScroller } from 'vue-virtual-scroller'
+import { createRouter } from './router'
+import { createStore } from './store'
 
 import {
   Alert,
@@ -71,22 +71,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  store,
-  router,
-  components: {
-    App
-  },
-  template: '<App/>'
-})
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/serviceWorker.js').then(registration => {
-      console.log('SW registered: ', registration)
-    }).catch(registrationError => {
-      console.log('SW registration failed: ', registrationError)
-    })
+export function createApp () {
+  const router = createRouter()
+  const store = createStore()
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
   })
+
+  return { app, router, store }
 }

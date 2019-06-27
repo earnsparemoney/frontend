@@ -1,19 +1,38 @@
 import api from '@/services/api'
 
 export default {
-  getTasks () {
-    return api().get('tasks')
+  getTasks (page, pageSize) {
+    return api().get('tasks', {
+      params: {
+        page,
+        pageSize
+      }
+    })
   },
-  getParticipateDoneTasks (id) {
-    return api().get('tasks/user/' + id + '/finish')
+  getParticipateDoneTasks (id, page, pageSize) {
+    return api().get('tasks/user/' + id + '/finish', {
+      params: {
+        page,
+        pageSize
+      }
+    })
   },
-  getParticipateRunningTasks (id) {
-    return api().get('tasks/user/' + id + '/running')
+  getParticipateRunningTasks (id, page, pageSize) {
+    return api().get('tasks/user/' + id + '/running', {
+      params: {
+        page,
+        pageSize
+      }
+    })
   },
-  getPublishedTask (token) {
+  getPublishedTask (token, page, pageSize) {
     return api().get('tasks/user', {
       headers: {
         'Authorization': token
+      },
+      params: {
+        page,
+        pageSize
       }
     })
   },

@@ -1,8 +1,13 @@
 import api from '@/services/api'
 
 export default {
-  getQuestionnaires () {
-    return api().get('questionnaires')
+  getQuestionnaires (page, pageSize) {
+    return api().get('questionnaires', {
+      params: {
+        page,
+        pageSize
+      }
+    })
   },
   commitAnswer (id, token, answer) {
     return api().post('questionnaires/' + id, answer, {
@@ -21,10 +26,14 @@ export default {
       }
     })
   },
-  getPublishedQuestionnaires (token) {
+  getPublishedQuestionnaires (token, page, pageSize) {
     return api().get('questionnaires/user', {
       headers: {
         'Authorization': token
+      },
+      params: {
+        page,
+        pageSize
       }
     })
   },

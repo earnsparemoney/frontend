@@ -1,7 +1,6 @@
 <template>
   <div
     class="register">
-    <a-button class="register__button--login" @click="goToLogin">登录</a-button>
     <a-form
       class="form"
       :form="form"

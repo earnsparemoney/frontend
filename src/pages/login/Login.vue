@@ -1,7 +1,6 @@
 <template>
   <div
     class="register">
-    <a-button class="register__button--login" @click="goToRegister">注册</a-button>
     <a-form
       class="form"
       :form="form">
@@ -39,8 +38,8 @@
         </a-input>
       </a-form-item>
 
-      <a-form-item>
-        <span class="form__span--forget">忘记密码</span>
+      <a-form-item @click.native="goToRegister">
+        <span class="form__span--forget">注册账号</span>
       </a-form-item>
 
       <a-form-item>

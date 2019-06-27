@@ -121,9 +121,9 @@ export default {
             userInfo: res.data.user,
             token: res.data.token
           })
-          this.push('/')
+          this.$router.push('/')
         }).catch((err) => {
-          console.log(err)
+          console.log(err.response)
           this.message.error('更新失败')
         })
     },
@@ -141,7 +141,6 @@ export default {
       this.$refs.imageUploader.click()
     },
     updateImage () {
-      // this.$refs.imageUploader.files[0]
       this.userImg = window.webkitURL.createObjectURL(this.$refs.imageUploader.files[0])
     }
   }

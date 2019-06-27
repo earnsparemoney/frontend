@@ -1,25 +1,52 @@
-export function isPC () {
-  // var flag = true
-  // var Agents = [
-  //   'Android',
-  //   'iPhone',
-  //   'SymbianOS',
-  //   'Windows Phone',
-  //   'iPad',
-  //   'iPod'
-  // ]
+export function isPC (ua) {
+  if (typeof navigator !== 'undefined') {
+    return isClientPC()
+  } else {
+    return isServerPC(ua)
+  }
+}
 
-  // if (typeof navigator !== 'undefined') {
-  //   var userAgentInfo = navigator.userAgent
-  //   for (var v = 0; v < Agents.length; v++) {
-  //     if (userAgentInfo.includes(Agents[v])) {
-  //       flag = false
-  //       break
-  //     }
-  //   }
-  // }
+export function isClientPC () {
+  var flag = true
+  var Agents = [
+    'Android',
+    'iPhone',
+    'SymbianOS',
+    'Windows Phone',
+    'iPad',
+    'iPod'
+  ]
 
-  return false
+  if (typeof navigator !== 'undefined') {
+    var userAgentInfo = navigator.userAgent
+    for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.includes(Agents[v])) {
+        flag = false
+        break
+      }
+    }
+  }
+
+  return flag
+}
+
+export function isServerPC (ua) {
+  var flag = true
+  var Agents = [
+    'Android',
+    'iPhone',
+    'SymbianOS',
+    'Windows Phone',
+    'iPad',
+    'iPod'
+  ]
+  for (var v = 0; v < Agents.length; v++) {
+    if (ua.includes(Agents[v])) {
+      flag = false
+      break
+    }
+  }
+  return flag
 }
 
 let timer = null

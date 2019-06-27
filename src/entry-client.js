@@ -2,8 +2,11 @@
 /* eslint-disable no-console */
 
 import { createApp } from './main'
+import { isPC } from './utils/utils'
 
 const { app, router } = createApp()
+
+router.isPC = isPC()
 
 router.onReady(() => {
   app.$mount('#app')

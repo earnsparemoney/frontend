@@ -34,7 +34,8 @@ ssrRouter.get('*', async ctx => {
     ctx.body = 'wait a minute'
     return
   }
-  const context = { url: ctx.req.url }
+  const ua = ctx.headers['user-agent']
+  const context = { url: ctx.req.url, ua }
   const clientManifestResp = await axios.get(
     'http://localhost:8080/vue-ssr-client-manifest-legacy.json'
   )

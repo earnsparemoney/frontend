@@ -1,6 +1,7 @@
 const path = require('path')
 const Koa = require('koa')
 const koaStatic = require('koa-static')
+const { historyApiFallback } = require('koa2-connect-history-api-fallback')
 
 const app = new Koa()
 
@@ -22,6 +23,9 @@ if (!isDev) {
   ssrRouter = require('./router/dev-ssr')
 }
 
+app.use(historyApiFallback({
+  index: '/index.html'
+}))
 app.use(koaStatic(path.join(__dirname, '../dist/'), {
   index: ' '
 }))

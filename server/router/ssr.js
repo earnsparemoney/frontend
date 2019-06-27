@@ -15,7 +15,7 @@ getClearClientManifest(clientManifestLegacy)
 
 const ssrRouter = new Router()
 
-ssrRouter.get('*', async (ctx, next) => {
+ssrRouter.get('/', async (ctx, next) => {
   const ua = ctx.headers['user-agent']
   let renderer
   if (isModernBrowser(ua)) {
@@ -32,7 +32,7 @@ ssrRouter.get('*', async (ctx, next) => {
     })
   }
   console.log(ctx.req.url)
-  const context = { url: ctx.req.url }
+  const context = { url: ctx.req.url, ua }
   const html = await renderer.renderToString(context)
   ctx.body = html
   await next()

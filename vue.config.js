@@ -28,7 +28,7 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-    // publicPath: isProd ? '/' : '',
+    publicPath: isProd ? '/' : 'http://localhost:8080/',
     port: 8080,
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: {
@@ -38,7 +38,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://172.26.6.31:4000/',
+        target: 'http://localhost:4000/',
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
         secure: false

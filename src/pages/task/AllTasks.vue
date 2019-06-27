@@ -149,7 +149,6 @@ export default {
         this.loading = false
         this.id += 1
       }).catch((err) => {
-        console.log(err)
         this.message.error('获取数据失败，请检查网络')
         this.loading = false
       })
@@ -164,7 +163,6 @@ export default {
         this.message.info('删除成功')
         this.fetchData()
       }).catch((err) => {
-        console.log(err)
         this.message.error('删除失败')
       })
     },

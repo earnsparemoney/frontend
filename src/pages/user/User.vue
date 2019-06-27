@@ -92,8 +92,6 @@ export default {
       authService.getUserInfo(this.$store.state.userInfo.id)
         .then((res) => {
           this.userInfo = res.data.user
-        }).catch((err) => {
-          console.log(err)
         })
     },
     handleMenuItemClick (index) {

@@ -107,7 +107,6 @@ export default {
         this.tasks = res.data.tasks
         console.log(res)
       }).catch((err) => {
-        console.log(err)
         this.message.error('获取数据失败，请检查网络')
       })
     },
@@ -117,7 +116,6 @@ export default {
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
       }).catch((err) => {
-        console.log(err)
         this.message.error('删除失败')
       })
     },

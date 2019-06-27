@@ -1,7 +1,7 @@
 <template>
   <div class="task">
     <div class="content">
-      <p v-if="tasks.length == 0">暂时没有已完成任务哦，快去领取任务把</p>
+      <p v-if="tasks.length == 0">暂时没有进行中的任务哦，快去领取任务把</p>
       <task-card
         class="card"
         v-for="(item, index) of tasks"

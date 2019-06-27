@@ -26,6 +26,7 @@
     <div class="date__wrapper">
       <a-date-picker
         placeholder="结束日期"
+        :disabledDate="disabledDate"
         @change="setEndDate">
       </a-date-picker>
     </div>
@@ -63,6 +64,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import taskService from '@/services/taskService'
 export default {
   name: 'CreateTask',
@@ -117,6 +119,9 @@ export default {
     setTaskType (type) {
       console.log(type)
       this.task.type = type
+    },
+    disabledDate (current) {
+      return current < moment().startOf('day')
     }
   }
 }

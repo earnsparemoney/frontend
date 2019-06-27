@@ -12,7 +12,6 @@ const User = () => import('@/pages/user/User')
 const Task = () => import('@/pages/task/Task')
 const Finish = () => import('@/pages/finish/Finish')
 const Questionaire = () => import('@/pages/questionaire/Questionaire')
-const Group = () => import('@/pages/group/Group')
 const CreateTask = () => import('@/pages/createTask/CreateTask')
 const PublishedQuestionnaire = () => import('@/pages/publishedQuestionnaire/Questionnaire')
 const Settings = () => import('@/pages/Settings/Settings')
@@ -51,11 +50,6 @@ export function createRouter () {
                 next('/tasks')
               }
             }
-          },
-          {
-            path: 'group',
-            name: 'Group',
-            component: Group
           }
         ]
       },
@@ -74,6 +68,7 @@ export function createRouter () {
         redirect: '/user/task',
         name: 'User',
         component: User,
+        meta: { requiresAuth: true },
         children: [
           {
             path: 'task',
@@ -101,6 +96,7 @@ export function createRouter () {
         path: '/questionnaire',
         name: 'questionnaire',
         component: Questionaire,
+        meta: { requiresAuth: true },
         beforeEnter: (to, from, next) => {
           if (!router.isPC) {
             next()
@@ -113,6 +109,7 @@ export function createRouter () {
         path: '/questionnairePC',
         name: 'questionnairePC',
         component: QuestionairePC,
+        meta: { requiresAuth: true },
         beforeEnter: (to, from, next) => {
           if (router.isPC) {
             next()
@@ -124,16 +121,19 @@ export function createRouter () {
       {
         path: '/createTask',
         name: 'CreateTask',
+        meta: { requiresAuth: true },
         component: CreateTask
       },
       {
         path: '/questionnaire/:id',
         name: 'AnswerQuestionnaire',
+        meta: { requiresAuth: true },
         component: AnswerQuestionnaire
       },
       {
         path: '/user/settings',
         name: 'Settings',
+        meta: { requiresAuth: true },
         component: Settings
       },
       {
@@ -146,17 +146,19 @@ export function createRouter () {
   // 路由鉴权
   router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-      if (!router.app.$store || !router.app.$store.state.auth) {
-        router
-          .app
-          .$store
-          .dispatch('login')
-          .then(() => {
-            next()
-          })
-          .catch(() => {
-            next('/login')
-          })
+      console.log(sessionStorage.getItem('token'))
+      if (!sessionStorage || !sessionStorage.getItem('token')) {
+        next('/login')
+        // router
+        //   .app
+        //   .$store
+        //   .dispatch('login')
+        //   .then(() => {
+        //     next()
+        //   })
+        //   .catch(() => {
+        //     next('/login')
+        //   })
       } else {
         next()
       }

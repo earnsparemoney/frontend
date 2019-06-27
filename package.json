@@ -23,6 +23,7 @@
     "clipboard": "^2.0.4",
     "core-js": "^2.6.5",
     "cross-env": "^5.2.0",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-infinite-scroll": "^2.0.2",

@@ -30,6 +30,7 @@
           <div class="date__wrapper">
             <a-date-picker
               placeholder="结束日期"
+              :disabledDate="disabledDate"
               @change="setEndDate">
             </a-date-picker>
           </div>
@@ -170,6 +171,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import questionnaireService from '@/services/questionnaireService'
 export default {
   name: 'QuestionairePC',
@@ -203,7 +205,7 @@ export default {
           this.$router.push('/')
         }).catch((err) => {
           console.log(err)
-          this.message.error('提交失败')
+          this.message.error(err.response.data.error)
         })
       }
       console.log(this.questionnaire)
@@ -299,6 +301,9 @@ export default {
     },
     setEndDate (date, dateString) {
       this.questionnaire.enddate = dateString
+    },
+    disabledDate (current) {
+      return current < moment().startOf('day')
     }
   }
 }

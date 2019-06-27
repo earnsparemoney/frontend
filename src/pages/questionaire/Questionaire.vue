@@ -31,11 +31,12 @@
       </div>
     </div>
     <div class="questionnaire-meta">
-      <div class="meta-data">
+      <div class="meta-data date__wrapper">
         <span>日期</span>
-        <div class="date__wrapper">
+        <div>
           <a-date-picker
             placeholder="结束日期"
+            :disabledDate="disabledDate"
             @change="setEndDate">
           </a-date-picker>
         </div>
@@ -154,13 +155,14 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { EventBus } from '@/utils/eventBus'
 import Type from './components/Type'
 import Choose from './components/Choose'
 import Fill from './components/Fill'
 import Rate from './components/Rate'
 import Judge from './components/Judge'
-import taskService from '@/services/taskService'
+import questionnaireService from '@/services/questionnaireService'
 export default {
   name: 'Questionaire',
   components: {
@@ -192,19 +194,19 @@ export default {
       if (!this.isValid()) {
         this.message.error('输入不能为空')
       } else {
-        taskService.addQuestionnaire({
+        questionnaireService.addQuestionnaire({
           title: this.questionnaire.title,
           description: this.questionnaire.description,
           questions: JSON.stringify(this.questionnaire.questions),
           endDate: this.questionnaire.enddate,
           adward: this.questionnaire.adward,
           usernum: this.questionnaire.usernum
-        }).then((res) => {
+        }, this.$store.state.token).then((res) => {
           console.log(res)
           this.$router.push('/')
         }).catch((err) => {
           console.log(err)
-          this.message.error('提交失败')
+          this.$router.push('/login')
         })
       }
     },
@@ -255,6 +257,9 @@ export default {
         }
       }
       return true
+    },
+    disabledDate (current) {
+      return current < moment().startOf('day')
     }
   },
   mounted () {
@@ -269,11 +274,17 @@ export default {
   @media (max-width 576px)
     .questionnaire-base-info
       padding 20px 20px 0 20px
+      .header
+        margin-bottom 10px
     .questionnaire-meta
       padding 20px
       display flex
+      justify-content space-around
       .meta-data
+        flex 1
         margin-right 10px
+      .date__wrapper
+        flex 1.5
     .flip-list-move
       transition: transform 1s
     .questionaire

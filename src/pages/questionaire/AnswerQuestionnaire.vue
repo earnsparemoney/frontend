@@ -99,7 +99,8 @@ export default {
         this.getMoney({ value: this.question.adward })
         this.$router.push('/')
       }).catch((err) => {
-        this.message.error(err.response.data.error)
+        console.log(err.response)
+        this.message.error(err.response.error)
       })
     }
   }

@@ -61,7 +61,7 @@ export default {
       this.keyword = ''
     }
   },
-  mounted () {
+  created () {
     this.isPC = isPC()
   }
 }

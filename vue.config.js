@@ -22,7 +22,6 @@ const workboxOptions = {
 }
 
 module.exports = {
-  publicPath: isProd ? '/' : 'http://localhost:8080/',
   css: {
     extract: serverSide || process.env.NODE_ENV !== 'production' ? false : true,
     sourceMap: true

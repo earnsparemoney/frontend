@@ -7,6 +7,7 @@
         v-for="(item, index) of questionnaires"
         :key="index"
         :item="item"
+        @goques="handleCardClick(item.id)"
         @delete="deleteQuestionnaire(item.id)"/>
       <div class="card"/>
       <div class="card"/>
@@ -47,6 +48,9 @@ export default {
           console.log(err)
           this.message.error('删除失败')
         })
+    },
+    handleCardClick (index) {
+      this.$router.push('/questionnaire/' + index)
     }
   },
   mounted () {

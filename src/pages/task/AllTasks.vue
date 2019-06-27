@@ -31,7 +31,7 @@
     <div class="content">
       <task-card
         class="card"
-        v-for="(item, index) of tasks"
+        v-for="(item, index) of filteredList"
         :key="index"
         :name="item.name"
         :description="item.description"
@@ -77,7 +77,7 @@
 import TaskCard from '@/components/TaskCard'
 import OptionBar from '@/components/OptionBar'
 import taskService from '@/services/taskService'
-import { formatTime } from '@/utils/utils'
+import { isPC, formatTime, debounce } from '@/utils/utils'
 
 export default {
   name: 'AllTask',
@@ -97,7 +97,9 @@ export default {
       tasks: [],
       sortBy: '创建时间',
       keyword: '',
-      id: 1
+      id: 1,
+      flag: false,
+      pageSize: isPC() ? 8 : 3
     }
   },
   computed: {
@@ -133,84 +135,21 @@ export default {
     }
   },
   methods: {
-    fetchData (arg) {
+    fetchData () {
       this.loading = true
-      // taskService.getTasks().then((res) => {
-      //   this.tasks = arg ? this.tasks.concat(res.data.tasks) : res.data.tasks
-      //   this.loading = false
-      // }).catch((err) => {
-      //   console.log(err)
-      //   this.message.error('获取数据失败，请检查网络')
-      //   this.loading = false
-      // })
-      const data = [
-        {
-          UserId: null,
-          adward: 2,
-          content: '2',
-          createdAt: '2019-06-26T16:31:33.000Z',
-          deadline: '2019-06-27T00:00:00.000Z',
-          description: '2',
-          id: this.id,
-          name: '2',
-          publisher: {
-            email: '798607646@qq.com',
-            id: 2,
-            img: 'public/images/userImage/default.jpg',
-            phone: '15625583871',
-            username: 'limsanity666'
-          },
-          publisherId: 2,
-          status: 0,
-          updatedAt: '2019-06-26T16:31:02.000Z'
-        },
-        {
-          UserId: null,
-          adward: 2,
-          content: '2',
-          createdAt: '2019-06-26T16:31:33.000Z',
-          deadline: '2019-06-27T00:00:00.000Z',
-          description: '2',
-          id: this.id + 1,
-          name: '2',
-          publisher: {
-            email: '798607646@qq.com',
-            id: 2,
-            img: 'public/images/userImage/default.jpg',
-            phone: '15625583871',
-            username: 'limsanity666'
-          },
-          publisherId: 2,
-          status: 0,
-          updatedAt: '2019-06-26T16:31:02.000Z'
-        },
-        {
-          UserId: null,
-          adward: 2,
-          content: '2',
-          createdAt: '2019-06-26T16:31:33.000Z',
-          deadline: '2019-06-27T00:00:00.000Z',
-          description: '2',
-          id: this.id + 2,
-          name: '2',
-          publisher: {
-            email: '798607646@qq.com',
-            id: 2,
-            img: 'public/images/userImage/default.jpg',
-            phone: '15625583871',
-            username: 'limsanity666'
-          },
-          publisherId: 2,
-          status: 0,
-          updatedAt: '2019-06-26T16:31:02.000Z'
+      taskService.getTasks(this.id, this.pageSize).then((res) => {
+        if (res.data.tasks.length === 0) {
+          this.flag = true
+          this.message.info('已经到底啦!!')
         }
-      ]
-      this.id += 3
-
-      setTimeout(() => {
-        this.tasks = arg ? this.tasks.concat(data) : data
+        this.tasks = (this.tasks.length !== 0) ? this.tasks.concat(res.data.tasks) : res.data.tasks
         this.loading = false
-      }, 2000)
+        this.id += 1
+      }).catch((err) => {
+        console.log(err)
+        this.message.error('获取数据失败，请检查网络')
+        this.loading = false
+      })
     },
     clickTask (item) {
       this.selectedItem = item
@@ -218,9 +157,9 @@ export default {
     },
     deleteTask (id, index) {
       taskService.deleteTask(id, this.$store.state.token).then((res) => {
-        console.log(res)
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
+        this.fetchData()
       }).catch((err) => {
         console.log(err)
         this.message.error('删除失败')
@@ -256,10 +195,11 @@ export default {
       let scrollHeight = document.body.scrollHeight
       let scrollTop = document.documentElement.scrollTop
       let clientHeight = document.documentElement.clientHeight
-      if (scrollTop + clientHeight === scrollHeight) {
-        this.fetchData(1)
-        console.log(1)
-      }
+      debounce(() => {
+        if (!this.flag && scrollTop + clientHeight >= scrollHeight - 100) {
+          this.fetchData()
+        }
+      }, 100)
     }
   },
   mounted () {

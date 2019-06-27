@@ -23,11 +23,12 @@
         label="用户名"
         has-feedback>
         <a-input
+          v-model="username"
           type="text"
           placeholder="6-16位英文和数字组合的用户名"
           v-decorator="[
             'username',
-            {rules: [{ required: true, pattern: /^[a-zA-Z0-9]{6,16}$/, message: '用户名格式错误' }]}
+            {rules: [{ pattern: /^[a-zA-Z0-9]{6,16}$/, message: '用户名格式错误' }]}
           ]">
           <a-icon
             slot="prefix"
@@ -43,9 +44,10 @@
         <a-input
           type="text"
           placeholder="请输入你的邮箱"
+          v-model="email"
           v-decorator="[
             'email',
-            {rules: [{ required: true, pattern: /^[\w\.-]+@[\w\-]+\.\w{2,3}$/, message: '邮箱格式不正确' }]}
+            {rules: [{ pattern: /^[\w\.-]+@[\w\-]+\.\w{2,3}$/, message: '邮箱格式不正确' }]}
           ]">
           <a-icon
             slot="prefix"
@@ -61,9 +63,10 @@
         <a-input
           type="text"
           placeholder="请输入你的手机号码"
+          v-model="phone"
           v-decorator="[
             'phone',
-            {rules: [{ required: true, pattern: /^[0-9]{11}$/, message: '手机号码格式不正确' }]}
+            {rules: [{ pattern: /^[0-9]{11}$/, message: '手机号码格式不正确' }]}
           ]">
           <a-icon
             slot="prefix"
@@ -90,7 +93,9 @@ export default {
   data () {
     return {
       userImg: '',
-      form: this.$form.createForm(this),
+      username: '',
+      email: '',
+      phone: '',
       iconStyle: {
         color: 'rgba(0,0,0,.25)'
       },
@@ -99,23 +104,23 @@ export default {
   },
   created () {
     this.userImg = '/api/' + this.$store.state.userInfo.img
+    this.username = this.$store.state.userInfo.username
+    this.email = this.$store.state.userInfo.email
+    this.phone = this.$store.state.userInfo.phone
   },
   methods: {
     ...mapActions(['updateState']),
     handleSubmit () {
-      this.isValidate() ? this.loading = true : alert('error')
-      const {
-        username,
-        phone,
-        email } = this.form.getFieldsValue()
-      let data = new FormData()
-      data.append('username', username)
-      data.append('email', email)
-      data.append('phone', phone)
-      data.append('image', this.$refs.imageUploader.files[0])
+      let data
+      data = new FormData()
+      data.append('username', this.username)
+      data.append('email', this.email)
+      data.append('phone', this.phone)
+      if (this.$refs.imageUploader.files[0]) {
+        data.append('image', this.$refs.imageUploader.files[0])
+      }
       authService.updateUser(data, this.$store.state.token)
         .then((res) => {
-          console.log(res)
           this.message.info('更新成功')
           this.updateState({
             userInfo: res.data.user,

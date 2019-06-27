@@ -11,7 +11,8 @@
         :adward="item.adward"
         :content="item.content"
         :deadline="item.deadline"
-        :publisher="item.publisher" />
+        :publisher="item.publisher"
+        @delete="deleteTask(item.id, index)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -45,6 +46,16 @@ export default {
         }).catch((err) => {
           console.log(err.response)
         })
+    },
+    deleteTask (id, index) {
+      taskService.deleteTask(id, this.$store.state.token).then((res) => {
+        this.tasks.splice(index, 1)
+        this.message.info('删除成功')
+        this.fetchData()
+      }).catch((err) => {
+        console.log(err)
+        this.message.error('删除失败')
+      })
     }
   }
 }

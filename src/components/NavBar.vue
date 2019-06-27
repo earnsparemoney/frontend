@@ -17,10 +17,10 @@
             <img class="user-icon" alt='user-icon' height='50' :src="`/api/${this.$store.state.userInfo.img}`" />
           </div>
           <a-menu slot="overlay" @click="handleMenuItemClick">
-            <a-menu-item key="/user">
+            <a-menu-item key="User">
               个人中心
             </a-menu-item>
-            <a-menu-item key="/user/settings">
+            <a-menu-item key="Settings">
               修改信息
             </a-menu-item>
             <a-menu-divider />
@@ -42,10 +42,8 @@ export default {
       if (key === 'logout') {
         this.logout()
         this.$router.push('/')
-        return
-      }
-      if (!(location.href.includes('/user') && key.includes('/user'))) {
-        this.$router.push(key)
+      } else {
+        this.$router.push({ name: key })
       }
     },
     handleLoginClick () {

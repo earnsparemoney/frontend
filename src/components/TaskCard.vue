@@ -9,15 +9,17 @@
         <a :href="`sms:${publisher.phone}`"><a-icon type="message" /></a>
         <a :href="`mailto:${publisher.email}`"><a-icon type="mail" /></a>
       </template>
-      <a-card-meta
-        :title="name"
-        :description="description">
-        <a-avatar slot="avatar" :src="`/api/${publisher.img}`" />
-      </a-card-meta>
-      <a-divider />
-      <p>报酬: {{ adward }}$</p>
-      <p>内容: {{ content }}</p>
-      <p>结束时间: {{ formatedTime }}</p>
+      <div class="content" @click="handleParticipate">
+        <a-card-meta
+          :title="name"
+          :description="description">
+          <a-avatar slot="avatar" :src="`/api/${publisher.img}`" />
+        </a-card-meta>
+        <a-divider />
+        <p>报酬: {{ adward }}$</p>
+        <p>内容: {{ content }}</p>
+        <p>结束时间: {{ formatedTime }}</p>
+      </div>
     </a-card>
     <a-icon
       v-if="this.$store.state.userInfo && this.$store.state.userInfo.id === publisher.id"
@@ -75,6 +77,10 @@ export default {
       this.$emit('delete')
       this.visible = false
     },
+    handleParticipate (e) {
+      this.$emit('participate')
+      this.visible = false
+    },
     handleCancel () {
       this.visible = false
     }
@@ -92,6 +98,7 @@ export default {
     right 20px
     color #ff4d4f
     font-size 20px
+    z-index 999
   .task-card
     boxShadow()
 </style>

@@ -22,20 +22,22 @@
         </a-menu-item>
       </a-menu>
     </a-dropdown>
-    <a-card-meta
-      :title="item.title"
-      :description="item.description">
-      <a-avatar slot="avatar" :src="`/api/${item.publisher.img}`" />
-    </a-card-meta>
-    <div class="icon__wrapper">
-      <div class="icon__item">
-        <a-icon type="money-collect"></a-icon>
-        <span>{{ item.adward }}</span>
-      </div>
-      <a-divider type="vertical"></a-divider>
-      <div class="icon__item">
-        <a-icon type="user"></a-icon>
-        <span>{{ item.numOfFilled }} / {{ item.usernum }}</span>
+    <div class="content" @click="goToQuestionnaire">
+      <a-card-meta
+        :title="item.title"
+        :description="item.description">
+        <a-avatar slot="avatar" :src="`/api/${item.publisher.img}`" />
+      </a-card-meta>
+      <div class="icon__wrapper">
+        <div class="icon__item">
+          <a-icon type="money-collect"></a-icon>
+          <span>{{ item.adward }}</span>
+        </div>
+        <a-divider type="vertical"></a-divider>
+        <div class="icon__item">
+          <a-icon type="user"></a-icon>
+          <span>{{ item.numOfFilled }} / {{ item.usernum }}</span>
+        </div>
       </div>
     </div>
     <a-modal
@@ -74,11 +76,13 @@ export default {
   },
   methods: {
     handleDownloadClick () {
-      console.log(JSON.parse(this.item.questions))
-      let headerLabel = JSON.parse(this.item.questions).map(item => {
+      let questionsData = this.item.questions
+      if (Object.prototype.toString.call(questionsData) !== '[object Array]') {
+        questionsData = JSON.parse(questionsData)
+      }
+      let headerLabel = questionsData.map(item => {
         return item.title
       })
-      console.log(headerLabel)
       questionnaireService.getQuestionnaireResult(this.item.id, this.$store.state.token)
         .then((res) => {
           console.log(res)
@@ -102,6 +106,9 @@ export default {
       this.$emit('delete')
       this.visible = false
     },
+    goToQuestionnaire () {
+      this.$emit('goques')
+    },
     handleCancel () {
       this.visible = false
       this.confirmLoading = false
@@ -122,6 +129,7 @@ export default {
   padding-bottom 10px
   .icon__wrapper
     margin-left 3px
+    z-index 999
     .icon__item
       display inline-block
       margin-top 15px

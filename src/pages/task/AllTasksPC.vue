@@ -15,7 +15,7 @@
         :deadline="item.deadline"
         :publisher="item.publisher"
         @delete="deleteTask(item.id, index)"
-        @click.native="clickTask(item)"/>
+        @participate="clickTask(item)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -105,6 +105,7 @@ export default {
     fetchData () {
       taskService.getTasks().then((res) => {
         this.tasks = res.data.tasks
+        console.log(res)
       }).catch((err) => {
         console.log(err)
         this.message.error('获取数据失败，请检查网络')
@@ -138,8 +139,8 @@ export default {
         })
     },
     handleCancel (e) {
-      this.selectedItem = null
       this.visible = false
+      this.selectedItem = null
     }
   },
   mounted () {

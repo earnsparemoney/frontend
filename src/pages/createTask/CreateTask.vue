@@ -95,7 +95,7 @@ export default {
           usernum: this.task.usernum
         }, this.$store.state.token).then((res) => {
           console.log(res)
-          this.$router.push('/user')
+          this.$router.push('/tasks')
         }).catch((err) => {
           console.log(err)
           this.message.error('提交错误')

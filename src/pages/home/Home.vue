@@ -85,7 +85,7 @@ export default {
       border-bottom 2px solid #1890ff
 
   .nav-view
-    0 2px 8px #f0f1f2
+    // 0 2px 8px #f0f1f2
     overflow hidden
     overflow-x scroll
 

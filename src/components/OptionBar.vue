@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { isPC, debounce } from '@/utils/utils'
+import { debounce } from '@/utils/utils'
 export default {
   name: 'OptionBar',
   props: {
@@ -61,8 +61,8 @@ export default {
       this.keyword = ''
     }
   },
-  created () {
-    this.isPC = isPC()
+  beforeMount () {
+    this.isPC = this.$router.isPC
   }
 }
 </script>

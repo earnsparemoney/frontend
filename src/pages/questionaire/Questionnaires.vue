@@ -24,7 +24,7 @@
 import QuestionnaireCard from '@/components/QuestionnaireCard'
 import OptionBar from '@/components/OptionBar'
 import questionnaireService from '@/services/questionnaireService'
-import { isPC, debounce } from '@/utils/utils'
+import { debounce } from '@/utils/utils'
 
 export default {
   name: 'Questionnaires',
@@ -44,10 +44,11 @@ export default {
       loading: true,
       id: 1,
       flag: false,
-      pageSize: isPC() ? 15 : 4
+      pageSize: Number
     }
   },
   mounted () {
+    this.pageSize = this.$router.isPC ? 15 : 4
     this.fetchData()
     window.addEventListener('scroll', this.touchBottom)
   },

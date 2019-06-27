@@ -33,18 +33,16 @@
       </div>
     </div>
 
-    <a-menu
-      ref="menu"
-      class="menu"
-      mode="horizontal"
-      defaultSelectedKeys='task'
-      @click="handleMenuClick"
-    >
-      <a-menu-item class="menu__item" key="task">进行中的任务</a-menu-item>
-      <a-menu-item class="menu__item" key="finish">已完成的任务</a-menu-item>
-      <a-menu-item class="menu__item" key="publichedtask">已发布的任务</a-menu-item>
-      <a-menu-item class="menu__item" key="questionnaire">已发布的问卷</a-menu-item>
-    </a-menu>
+    <div class="menu">
+      <span
+        :class="['menu__item', item.selected ? 'menu__item--selected' : '']"
+        v-for="(item, index) of menuItems"
+        :key="item.itemName"
+        @click="handleMenuItemClick(index)"
+      >
+        {{ item.itemName }}
+      </span>
+    </div>
 
     <router-view></router-view>
   </div>
@@ -61,11 +59,30 @@ export default {
         email: '',
         username: '',
         balance: 0
-      }
+      },
+      menuItems: [
+        {
+          itemName: '进行中的任务',
+          selected: true,
+          itemView: 'task'
+        },
+        {
+          itemName: '已完成的任务',
+          selected: false,
+          itemView: 'finish'
+        },
+        {
+          itemName: '已发布的任务',
+          selected: false,
+          itemView: 'publichedtask'
+        },
+        {
+          itemName: '已发布的问卷',
+          selected: false,
+          itemView: 'questionnaire'
+        }
+      ]
     }
-  },
-  created () {
-    this.fetchData()
   },
   methods: {
     handleMenuClick (e) {
@@ -78,7 +95,20 @@ export default {
         }).catch((err) => {
           console.log(err)
         })
+    },
+    handleMenuItemClick (index) {
+      const path = this.menuItems[index].itemView
+      this.$router.push(path)
+      this.setMenuSelected(path)
+    },
+    setMenuSelected (path) {
+      this.menuItems.forEach(item => {
+        item.selected = item.itemView === path
+      })
     }
+  },
+  created () {
+    this.fetchData()
   },
   mounted () {
     /* eslint-disable no-new */
@@ -86,6 +116,8 @@ export default {
     clipboard.on('success', () => {
       this.message.success('复制成功')
     })
+    const currentPath = this.$route.path.substr(6)
+    this.setMenuSelected(currentPath)
   }
 }
 </script>
@@ -193,10 +225,22 @@ export default {
         font-size 14px
 
   .menu
-    display flex
-    background-color #ecf1f1
+    overflow hidden
+    overflow-x scroll
+    white-space nowrap
+    background-color #fff
+    z-index 999
 
     .menu__item
-      flex 1
-      text-align center
+      display inline-block
+      height 48px
+      line-height 48px
+      padding 0 18px
+      background-color #fff
+      cursor pointer
+
+    .menu__item--selected
+      color #1890ff
+      border-bottom 2px solid #1890ff
+
 </style>

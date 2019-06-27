@@ -202,11 +202,9 @@ export default {
           adward: this.questionnaire.adward,
           usernum: this.questionnaire.usernum
         }, this.$store.state.token).then((res) => {
-          console.log(res)
           this.$router.push('/')
         }).catch((err) => {
-          console.log(err)
-          this.$router.push('/login')
+          this.message.error(err.response.data.error)
         })
       }
     },

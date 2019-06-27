@@ -10,8 +10,8 @@ export default {
   logout (state) {
     state.userInfo = null
     state.token = null
-    sessionStorage.token = null
-    sessionStorage.userInfo = null
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('userInfo')
   },
   getMoney (state, value) {
     state.userInfo.balance += parseInt(value)

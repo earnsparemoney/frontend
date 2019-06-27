@@ -38,14 +38,7 @@ export function createRouter () {
           {
             path: 'tasks',
             name: 'AllTasks',
-            component: AllTasks,
-            beforeEnter: (to, from, next) => {
-              if (!router.isPC) {
-                next()
-              } else {
-                next('/tasksPC')
-              }
-            }
+            component: AllTasks
           },
           {
             path: 'tasksPC',

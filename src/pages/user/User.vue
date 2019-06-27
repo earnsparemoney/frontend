@@ -51,23 +51,33 @@
 </template>
 
 <script>
+import authService from '@/services/authService'
 export default {
   name: 'User',
   data () {
     return {
-      phone: '15625583871',
-      email: '798607646@qq.com',
-      balance: '0',
-      doingTasks: [],
-      finishTasks: []
+      userInfo: {
+        phone: '',
+        email: '',
+        username: '',
+        balance: 0
+      }
     }
   },
-  computed: {
-    ...mapState(['userInfo'])
+  created () {
+    this.fetchData()
   },
   methods: {
     handleMenuClick (e) {
       this.$router.push(`${e.key}`)
+    },
+    fetchData () {
+      authService.getUserInfo(this.$store.state.userInfo.id)
+        .then((res) => {
+          this.userInfo = res.data.user
+        }).catch((err) => {
+          console.log(err)
+        })
     }
   },
   mounted () {

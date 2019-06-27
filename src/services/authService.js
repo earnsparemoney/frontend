@@ -14,6 +14,9 @@ export default {
   login (credentials) {
     return api().post('user/login', credentials)
   },
+  getUserInfo (id) {
+    return api().get('user/' + id)
+  },
   updateUser (data, token) {
     var config = {
       headers: {

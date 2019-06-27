@@ -154,9 +154,9 @@ export default {
 
 <style lang="stylus" scoped>
   .logo
-    margin-bottom 20px
-    height 150px
-    width 150px
+    position relative
+    left 50%
+    transform translateX(-50%)
   fontStyle()
     font-size 14px
     font-weight 400
@@ -195,6 +195,7 @@ export default {
 
     @media (min-width 1200px)
       .form
+        width 50%
         formStyle(30%, #fff)
 
     @media (min-width 768px) and (max-width 1200px)

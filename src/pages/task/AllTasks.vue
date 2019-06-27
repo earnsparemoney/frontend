@@ -65,6 +65,8 @@
           参加任务
         </a-button>
       </template>
+      <strong>委托人: {{selectedItem ? selectedItem.publisher.username : '' }}</strong>
+      <strong>电话: {{selectedItem ? selectedItem.publisher.phone : '' }}</strong>
       <p>简介: {{selectedItem ? selectedItem.description : ''}}</p>
       <p>报酬: {{selectedItem ? selectedItem.adward : ''}}$</p>
       <p>内容: {{selectedItem ? selectedItem.content: ''}}</p>
@@ -220,6 +222,10 @@ export default {
     height 100%
     background-color #ecf1f1
     padding 15px 15px
+    .loading-spin
+      position relative
+      left 50%
+      transform translateX(-50%)
     .content
       display flex
       justify-content space-between
@@ -233,6 +239,10 @@ export default {
     height 100%
     background-color #ecf1f1
     padding 15px 15px
+    .loading-spin
+      position relative
+      left 50%
+      transform translateX(-50%)
     .content
       display flex
       justify-content space-between

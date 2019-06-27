@@ -1,12 +1,12 @@
 <template>
   <div class="alltasks">
     <option-bar
-      :routeName="'AllTasks'"
+      :routeName="'AllTasksPC'"
       :type="'任务'"/>
     <div class="content">
       <task-card
         class="card"
-        v-for="(item, index) of tasks"
+        v-for="(item, index) of filteredList"
         :key="index"
         :name="item.name"
         :description="item.description"
@@ -70,10 +70,31 @@ export default {
       return formatTime(this.selectedItem.deadline, 'yyyy-MM-dd')
     },
     filteredList () {
-      return this.tasks
+      let list = this.tasks
         .filter(item =>
-          ((item.from.toLowerCase().indexOf(this.keyword) !== -1) ||
-            (item.to.toLowerCase().indexOf(this.keyword)) !== -1))
+          ((item.name.toLowerCase().indexOf(this.keyword) !== -1) ||
+            ((item.description.toLowerCase().indexOf(this.keyword)) !== -1) ||
+            (item.content.toLowerCase().indexOf(this.keyword)) !== -1))
+      return list.sort((obj1, obj2) => {
+        let sortBy = this.$route.query.sortBy || 'createdAt'
+        if (sortBy === 'createdAt') {
+          let objDate1 = Date.parse(obj1.createdAt)
+          let objDate2 = Date.parse(obj2.createdAt)
+          if (objDate1 > objDate2) return -1
+          else if (objDate1 < objDate2) return 1
+          else if (objDate1 === objDate2) return 0
+        } else if (sortBy === 'endDate') {
+          let objDate1 = Date.parse(obj1.deadline)
+          let objDate2 = Date.parse(obj2.deadline)
+          if (objDate1 < objDate2) return -1
+          else if (objDate1 > objDate2) return 1
+          else if (objDate1 === objDate2) return 0
+        } else {
+          if (obj1.adward > obj2.adward) return -1
+          else if (obj1.adward < obj2.adward) return 1
+          else if (obj1.adward === obj2.adward) return 0
+        }
+      })
     }
   },
   methods: {
@@ -100,7 +121,7 @@ export default {
       })
     },
     updateQuery () {
-      this.sortBy = this.$route.query.sortBy || 'startTime'
+      this.sortBy = this.$route.query.sortBy || 'createdAt'
       this.keyword = (this.$route.query.keyword || '').toLowerCase()
     },
     handleOk (e) {

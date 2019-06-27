@@ -8,5 +8,8 @@ export default {
   logout (state) {
     state.userInfo = null
     state.token = null
+  },
+  getMoney (state, value) {
+    state.userInfo.balance += parseInt(value)
   }
 }

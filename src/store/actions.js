@@ -39,5 +39,8 @@ export default {
   updateState ({ commit }, { userInfo, token }) {
     commit('setUserInfo', userInfo)
     commit('setToken', token)
+  },
+  getMoney ({ commit }, { balance }) {
+    commit('getMoney', balance)
   }
 }

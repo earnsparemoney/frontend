@@ -72,6 +72,7 @@ export default {
     this.fetchData()
   },
   methods: {
+    ...mapActions(['getMoney']),
     fetchData () {
       questionnaireService.getQuestionnaire(this.$route.params.id)
         .then((res) => {
@@ -95,6 +96,7 @@ export default {
         answer: result
       }).then((res) => {
         this.message.info('填写问卷成功')
+        this.getMoney({ value: this.question.adward })
         this.$router.push('/')
       }).catch((err) => {
         this.message.error(err.response.data.error)

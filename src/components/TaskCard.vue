@@ -10,7 +10,7 @@
         <a :href="`mailto:${publisher.email}`"><a-icon type="mail" /></a>
       </template>
       <a-card-meta
-        :title="title"
+        :title="name"
         :description="description">
         <a-avatar slot="avatar" :src="`/api/${publisher.img}`" />
       </a-card-meta>

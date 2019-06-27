@@ -12,7 +12,7 @@
           <a-icon type="phone" />
           {{ userInfo ? userInfo.phone : '15625583871' }}
           <a-icon
-            :data-clipboard-text="phone"
+            :data-clipboard-text="userInfo.phone"
             class="copy"
             type="copy" />
         </span>
@@ -21,9 +21,14 @@
           <a-icon type="mail" />
           {{ userInfo ? userInfo.email : '15625583871@qq.com' }}
           <a-icon
-            :data-clipboard-text="email"
+            :data-clipboard-text="userInfo.email"
             class="copy"
             type="copy" />
+        </span>
+        <span
+          class="info__social">
+          <a-icon type="money-collect" />
+          {{ userInfo ? userInfo.balance : '0' }}
         </span>
       </div>
     </div>
@@ -37,6 +42,7 @@
     >
       <a-menu-item class="menu__item" key="task">进行中的任务</a-menu-item>
       <a-menu-item class="menu__item" key="finish">已完成的任务</a-menu-item>
+      <a-menu-item class="menu__item" key="publichedtask">已发布的任务</a-menu-item>
       <a-menu-item class="menu__item" key="questionnaire">已发布的问卷</a-menu-item>
     </a-menu>
 
@@ -51,6 +57,7 @@ export default {
     return {
       phone: '15625583871',
       email: '798607646@qq.com',
+      balance: '0',
       doingTasks: [],
       finishTasks: []
     }

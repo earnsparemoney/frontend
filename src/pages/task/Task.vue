@@ -74,6 +74,8 @@ export default {
           this.fetchData()
           this.visible = false
           this.loading = false
+          this.info.error('完成任务成功')
+          this.getMoney({ value: this.selectedItem.adward })
         }).catch((err) => {
           console.log(err.response)
           this.message.error('完成任务失败，请检查网络')

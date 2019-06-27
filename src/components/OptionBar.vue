@@ -10,10 +10,10 @@
   </a-input>
   <div class="sort__wrapper">
     <span class="sort-option">排序: </span>
-    <a-select defaultValue="startTime" style="width: 120px" @change="handleSortClick">
-      <a-select-option value="startTime">创建时间</a-select-option>
-      <a-select-option value="endTime">结束时间</a-select-option>
-      <a-select-option value="money">报酬</a-select-option>
+    <a-select defaultValue="startDate" style="width: 120px" @change="handleSortClick">
+      <a-select-option value="startDate">创建时间</a-select-option>
+      <a-select-option value="endDate">结束时间</a-select-option>
+      <a-select-option value="adward">报酬</a-select-option>
     </a-select>
   </div>
   <a-button :shape="isPC ? '' : 'circle'" class="create-btn" type="primary" icon="plus" @click="handleClick">{{ isPC ? `创建新${type}` : '' }}</a-button>
@@ -30,7 +30,7 @@ export default {
   },
   data () {
     return {
-      sortBy: 'startTime',
+      sortBy: 'startDate',
       keyword: null,
       isPC: false
     }
@@ -48,10 +48,11 @@ export default {
     },
     handleSortClick (value) {
       this.sortBy = value
+      this.$router.replace({ name: this.routeName, query: { keyword: this.keyword, sortBy: value } })
     },
     onSearch (value) {
       debounce(() => {
-        console.log(value)
+        this.keyword = value
         this.$router.replace({ name: this.routeName, query: { keyword: value, sortBy: this.sortBy } })
       }, 300)
     },

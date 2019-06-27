@@ -10,8 +10,12 @@ export default {
   getParticipateRunningTasks (id) {
     return api().get('tasks/user/' + id + '/running')
   },
-  getTask (id) {
-    return api().get('tasks/' + id)
+  getPublishedTask (token) {
+    return api().get('tasks/user', {
+      headers: {
+        'Authorization': token
+      }
+    })
   },
   addTask (data, token) {
     return api().post('tasks', data, {

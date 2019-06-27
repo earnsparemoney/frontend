@@ -95,7 +95,7 @@ export default {
         answer: result
       }).then((res) => {
         this.message.info('填写问卷成功')
-        this.$router.push(-1)
+        this.$router.push('/')
       }).catch((err) => {
         this.message.error(err.response.data.error)
       })

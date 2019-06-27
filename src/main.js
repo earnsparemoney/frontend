@@ -54,7 +54,6 @@ Vue.use(DatePicker)
 Vue.use(Modal)
 Vue.use(Checkbox)
 Vue.use(Spin)
-
 Vue.use(Loading)
 
 Vue.prototype.message = message

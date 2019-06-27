@@ -2,7 +2,7 @@
   <div class="user">
     <div class="info">
       <div class="info__img--wrapper">
-        <img src="@/assets/test.png" class="info__img">
+        <img :src="`/api/${this.$store.state.userInfo.img}`" class="info__img">
       </div>
       <div class="info__detail--wrapper">
         <span class="info__name">

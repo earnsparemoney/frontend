@@ -12,7 +12,7 @@
       <a-card-meta
         :title="title"
         :description="description">
-        <a-avatar slot="avatar" :src="`api/${publisher.img}`" />
+        <a-avatar slot="avatar" :src="`/api/${publisher.img}`" />
       </a-card-meta>
       <a-divider />
       <p>报酬: {{ adward }}$</p>

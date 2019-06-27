@@ -6,13 +6,12 @@
         class="card"
         v-for="(item, index) of tasks"
         :key="index"
-        :title="item.title"
+        :name="item.name"
         :description="item.description"
-        :pay="item.pay"
-        :address="item.address"
-        :startDate="item.startDate"
-        :endDate="item.endDate"
-        :type="item.type" />
+        :adward="item.adward"
+        :content="item.content"
+        :deadline="item.deadline"
+        :publisher="item.publisher" />
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -23,6 +22,8 @@
 
 <script>
 import TaskCard from '@/components/TaskCard.vue'
+import taskService from '@/services/taskService'
+
 export default {
   name: 'Finish',
   components: {
@@ -34,75 +35,16 @@ export default {
     }
   },
   created () {
-    this.tasks = this.fetchData()
+    this.fetchData()
   },
   methods: {
     fetchData () {
-      return [
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        },
-        {
-          title: '取快递',
-          description: '谁能帮我取快递',
-          address: '丰巢快递柜',
-          startDate: '2019-06-24',
-          endDate: '2019-06-25',
-          pay: 3,
-          type: '快递'
-        }
-      ]
+      taskService.getParticipateDoneTasks(this.$store.state.userInfo.id)
+        .then((res) => {
+          this.tasks = res.data.tasks
+        }).catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

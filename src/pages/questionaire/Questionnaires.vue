@@ -9,10 +9,9 @@
         class="card"
         v-for="(item, index) of filteredList"
         :key="index"
-        :title="item.title"
-        :description="item.description"
-        :publisher="item.publisher"
-        @click.native="handleCardClick(item.id)"/>
+        :item="item"
+        @click.native="handleCardClick(item.id)"
+        @delete="deleteQuestionnaire(item.id)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -68,6 +67,16 @@ export default {
           console.log(err)
           this.message.error('获取失败请检查网络')
           this.loading = false
+        })
+    },
+    deleteQuestionnaire (id) {
+      questionnaireService.deleteQuestionnaire(id, this.$store.state.token)
+        .then((res) => {
+          this.message.info('删除成功')
+          this.fetchData()
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('删除失败')
         })
     },
     handleCardClick (index) {

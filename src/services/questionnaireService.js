@@ -20,5 +20,19 @@ export default {
         'Authorization': token
       }
     })
+  },
+  getPublishedQuestionnaires (token) {
+    return api().get('questionnaires/user', {
+      headers: {
+        'Authorization': token
+      }
+    })
+  },
+  deleteQuestionnaire (id, token) {
+    return api().delete('questionnaires/' + id, {
+      headers: {
+        'Authorization': token
+      }
+    })
   }
 }

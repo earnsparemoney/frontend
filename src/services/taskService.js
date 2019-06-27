@@ -4,8 +4,11 @@ export default {
   getTasks () {
     return api().get('tasks')
   },
-  getParticipateTasks (id) {
-    return api().get('tasks/user/' + id)
+  getParticipateDoneTasks (id) {
+    return api().get('tasks/user/' + id + '/finish')
+  },
+  getParticipateRunningTasks (id) {
+    return api().get('tasks/user/' + id + '/running')
   },
   getTask (id) {
     return api().get('tasks/' + id)

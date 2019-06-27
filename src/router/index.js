@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AllTasks from '../pages/task/AllTasks'
 import { isPC } from '@/utils/utils'
+const AllTasks = () => import('@/pages/task/AllTasks')
+const AllTasksPC = () => import('@/pages/task/AllTasksPC')
 const AnswerQuestionnaire = () => import('@/pages/questionaire/AnswerQuestionnaire')
 const Questionnaires = () => import('@/pages/questionaire/Questionnaires')
 const QuestionairePC = () => import('@/pages/questionaire/QuestionairePC')
@@ -35,7 +36,26 @@ const router = new Router({
         {
           path: 'tasks',
           name: 'AllTasks',
-          component: AllTasks
+          component: AllTasks,
+          beforeEnter: (to, from, next) => {
+            if (!isPC()) {
+              next()
+            } else {
+              next('/tasksPC')
+            }
+          }
+        },
+        {
+          path: 'tasksPC',
+          name: 'AllTasksPC',
+          component: AllTasksPC,
+          beforeEnter: (to, from, next) => {
+            if (isPC()) {
+              next()
+            } else {
+              next('/tasks')
+            }
+          }
         },
         {
           path: 'group',

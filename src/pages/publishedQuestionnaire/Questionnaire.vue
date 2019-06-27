@@ -6,9 +6,8 @@
         class="card"
         v-for="(item, index) of questionnaires"
         :key="index"
-        :title="item.title"
-        :description="item.description"
-        :publisher="item.publisher"/>
+        :item="item"
+        @delete="deleteQuestionnaire(item.id)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -19,6 +18,7 @@
 
 <script>
 import QuestionnaireCard from '@/components/QuestionnaireCard.vue'
+import questionnaireService from '../../services/questionnaireService'
 export default {
   name: 'PublishedQuestionnaire',
   components: {
@@ -31,23 +31,22 @@ export default {
   },
   methods: {
     fetchData () {
-      this.questionnaires = [
-        {
-          title: '1',
-          descrition: '2',
-          publisher: '3'
-        },
-        {
-          title: '1',
-          descrition: '2',
-          publisher: '3'
-        },
-        {
-          title: '1',
-          descrition: '2',
-          publisher: '3'
-        }
-      ]
+      questionnaireService.getPublishedQuestionnaires(this.$store.state.token)
+        .then((res) => {
+          this.questionnaires = res.data.questionnaires
+        }).catch((err) => {
+          console.log(err.response)
+        })
+    },
+    deleteQuestionnaire (id) {
+      questionnaireService.deleteQuestionnaire(id, this.$store.state.token)
+        .then((res) => {
+          this.message.info('删除成功')
+          this.fetchData()
+        }).catch((err) => {
+          console.log(err)
+          this.message.error('删除失败')
+        })
     }
   },
   mounted () {

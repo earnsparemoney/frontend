@@ -6,23 +6,41 @@
         class="card"
         v-for="(item, index) of tasks"
         :key="index"
-        :title="item.title"
+        :name="item.name"
         :description="item.description"
-        :pay="item.pay"
-        :address="item.address"
-        :startDate="item.startDate"
-        :endDate="item.endDate"
-        :type="item.type" />
+        :adward="item.adward"
+        :content="item.content"
+        :deadline="item.deadline"
+        :publisher="item.publisher"
+        @click.native="clickTask(index)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
     </div>
+    <a-modal
+      v-model="visible"
+      :title="selectedItem ? selectedItem.name : ''"
+      onOk="handleOk"
+    >
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel">返回</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
+          确认完成
+        </a-button>
+      </template>
+      <p>简介: {{selectedItem ? selectedItem.description : ''}}</p>
+      <p>报酬: {{selectedItem ? selectedItem.adward : ''}}$</p>
+      <p>内容: {{selectedItem ? selectedItem.content: ''}}</p>
+      <p>结束时间: {{ selectedItem ? formatedTime : '' }}</p>
+      <strong>任务已完成?</strong>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import TaskCard from '@/components/TaskCard.vue'
+import taskService from '../../services/taskService'
 export default {
   name: 'Task',
   components: {
@@ -30,12 +48,40 @@ export default {
   },
   data () {
     return {
+      selectedItem: null,
+      visible: false,
+      loading: false,
       tasks: []
     }
   },
   methods: {
+    clickTask (index) {
+      this.selectedItem = this.tasks[index]
+      this.visible = true
+    },
     fetchData () {
-      this.tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+      this.tasks = taskService.getParticipateRunningTasks(this.$store.state.userInfo.id)
+        .then((res) => {
+          this.tasks = res.data.tasks
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    handleOk (e) {
+      this.loading = true
+      taskService.completeTask(this.selectedItem.id, this.$store.state.token)
+        .then((res) => {
+          this.fetchData()
+          this.visible = false
+          this.loading = false
+        }).catch((err) => {
+          console.log(err.response)
+          this.message.error('完成任务失败，请检查网络')
+        })
+    },
+    handleCancel (e) {
+      this.selectedItem = null
+      this.visible = false
     }
   },
   mounted () {

@@ -90,7 +90,7 @@ export default {
           }
         ).then(res => {
           if (res.status === 200) {
-            this.$router.push('/')
+            this.$router.go(-1)
           }
         }).catch(err => {
           this.loading = false

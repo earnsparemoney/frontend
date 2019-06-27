@@ -146,7 +146,6 @@ export function createRouter () {
   // 路由鉴权
   router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-      console.log(sessionStorage.getItem('token'))
       if (!sessionStorage || !sessionStorage.getItem('token')) {
         next('/login')
         // router

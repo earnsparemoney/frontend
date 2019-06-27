@@ -7,20 +7,12 @@
 
 ## 启动
 - 安装依赖：`cnpm i`
-### 非Docker环境
 - `npm run dev`，进入`localhost:3000`或`localhost:8080`
-### Docker环境
-- `npm run docker`，进入`localhost:3000`
 
-## 待实现
-- 基本功能
-- PWA
-- autotrack埋点
-
-## 已完成
-- 规范commit信息
-- 自定义webpack4环境进行打包
-- 服务端渲染环境配置
+## 打包
+- npm run build
+- npm run build:docker
+- 访问localhost:3000即可
 
 ## 服务端渲染
 ### 测试

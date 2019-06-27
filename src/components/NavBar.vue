@@ -20,7 +20,7 @@
             <a-menu-item key="/user">
               个人中心
             </a-menu-item>
-            <a-menu-item key="/">
+            <a-menu-item key="/user/settings">
               修改信息
             </a-menu-item>
             <a-menu-divider />

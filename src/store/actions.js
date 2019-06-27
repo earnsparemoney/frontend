@@ -35,5 +35,9 @@ export default {
   },
   logout ({ commit }) {
     commit('logout')
+  },
+  updateState ({ commit }, { userInfo, token }) {
+    commit('setUserInfo', userInfo)
+    commit('setToken', token)
   }
 }

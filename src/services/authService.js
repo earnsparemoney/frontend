@@ -14,6 +14,15 @@ export default {
   login (credentials) {
     return api().post('user/login', credentials)
   },
+  updateUser (data, token) {
+    var config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': token
+      }
+    }
+    return api().put('user', data, config)
+  },
   updateImage (imgname, data, token) {
     var config = {
       headers: {

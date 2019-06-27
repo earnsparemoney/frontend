@@ -16,6 +16,7 @@ const Questionaire = () => import('@/pages/questionaire/Questionaire')
 const Group = () => import('@/pages/group/Group')
 const CreateTask = () => import('@/pages/createTask/CreateTask')
 const PublishedQuestionnaire = () => import('@/pages/publishedQuestionnaire/Questionnaire')
+const Settings = () => import('@/pages/Settings/Settings')
 
 Vue.use(Router)
 
@@ -130,6 +131,11 @@ const router = new Router({
       path: '/questionnaire/:id',
       name: 'AnswerQuestionnaire',
       component: AnswerQuestionnaire
+    },
+    {
+      path: '/user/settings',
+      name: 'Settings',
+      component: Settings
     },
     {
       path: '*',

@@ -34,5 +34,12 @@ export default {
         'Authorization': token
       }
     })
+  },
+  getQuestionnaireResult (id, token) {
+    return api().get('results/' + id, {
+      headers: {
+        'Authorization': token
+      }
+    })
   }
 }

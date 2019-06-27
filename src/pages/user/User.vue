@@ -18,10 +18,10 @@
         </span>
         <span
           class="info__social">
-          <a-icon type="qq" />
-          {{ qq }}
+          <a-icon type="mail" />
+          {{ userInfo ? userInfo.email : '15625583871@qq.com' }}
           <a-icon
-            :data-clipboard-text="qq"
+            :data-clipboard-text="email"
             class="copy"
             type="copy" />
         </span>
@@ -50,7 +50,7 @@ export default {
   data () {
     return {
       phone: '15625583871',
-      qq: '798607646',
+      email: '798607646@qq.com',
       doingTasks: [],
       finishTasks: []
     }

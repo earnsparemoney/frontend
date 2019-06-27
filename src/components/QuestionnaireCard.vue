@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import questionnaireService from '@/services/questionnaireService'
 export default {
   name: 'QuestionnaireCard',
   props: {
@@ -73,7 +74,26 @@ export default {
   },
   methods: {
     handleDownloadClick () {
-
+      console.log(JSON.parse(this.item.questions))
+      let headerLabel = JSON.parse(this.item.questions).map(item => {
+        return item.title
+      })
+      console.log(headerLabel)
+      questionnaireService.getQuestionnaireResult(this.item.id, this.$store.state.token)
+        .then((res) => {
+          console.log(res)
+          let csvContent = 'data:text/csv;charset=utf-8,\ufeff'
+          csvContent += headerLabel + '\n'
+          csvContent += res.data.result
+          csvContent += '\n'
+          const link = document.createElement('a')
+          link.setAttribute('href', encodeURI(csvContent))
+          link.setAttribute('download', this.item.title + '_result.csv')
+          link.click()
+        }).catch((err) => {
+          console.log(err.response)
+          this.message.error('获取失败!')
+        })
     },
     handleDeleteClick () {
       this.visible = true

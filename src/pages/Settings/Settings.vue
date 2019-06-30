@@ -156,6 +156,8 @@ export default {
   .logo
     position relative
     left 50%
+    width 178px
+    height 178px
     transform translateX(-50%)
   fontStyle()
     font-size 14px

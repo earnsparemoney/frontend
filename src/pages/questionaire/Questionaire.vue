@@ -70,6 +70,20 @@
           <a-menu slot="overlay">
             <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
               <a>
+                <a-icon type="up"></a-icon>
+                上移
+              </a>
+            </a-menu-item>
+            <a-menu-divider></a-menu-divider>
+            <a-menu-item class="ant-menu-item" @click="handleMoveDownClick(index)">
+              <a>
+                <a-icon type="down"></a-icon>
+                下移
+              </a>
+            </a-menu-item>
+            <a-menu-divider></a-menu-divider>
+            <a-menu-item class="ant-menu-item" @click="handleMoveUpClick(index)">
+              <a>
                 <a-icon type="edit"></a-icon>
                 编辑
               </a>

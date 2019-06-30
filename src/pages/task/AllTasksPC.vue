@@ -106,16 +106,15 @@ export default {
       taskService.getTasks().then((res) => {
         this.tasks = res.data.tasks
         console.log(res)
-      }).catch((err) => {
+      }).catch(() => {
         this.message.error('获取数据失败，请检查网络')
       })
     },
     deleteTask (id, index) {
       taskService.deleteTask(id, this.$store.state.token).then((res) => {
-        console.log(res)
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
-      }).catch((err) => {
+      }).catch(() => {
         this.message.error('删除失败')
       })
     },

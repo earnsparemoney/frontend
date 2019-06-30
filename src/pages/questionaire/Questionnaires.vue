@@ -11,7 +11,7 @@
         :key="index"
         :item="item"
         @goques="handleCardClick(item.id)"
-        @delete="deleteQuestionnaire(item.id)"/>
+        @delete="deleteQuestionnaire(item.id, index)"/>
       <div class="card"/>
       <div class="card"/>
       <div class="card"/>
@@ -53,7 +53,6 @@ export default {
     window.addEventListener('scroll', this.touchBottom)
   },
   beforeDestroy () {
-    console.log('before destroy')
     window.removeEventListener('scroll', this.touchBottom)
   },
   computed: {
@@ -101,10 +100,11 @@ export default {
         this.loading = false
       })
     },
-    deleteQuestionnaire (id) {
+    deleteQuestionnaire (id, index) {
       questionnaireService.deleteQuestionnaire(id, this.$store.state.token)
         .then((res) => {
           this.message.info('删除成功')
+          this.questionnaires.splice(index, 1)
           this.fetchData()
         }).catch((err) => {
           console.log(err)

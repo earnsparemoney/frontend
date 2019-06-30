@@ -148,7 +148,7 @@ export default {
         this.tasks = (this.tasks.length !== 0) ? this.tasks.concat(res.data.tasks) : res.data.tasks
         this.loading = false
         this.id += 1
-      }).catch((err) => {
+      }).catch(() => {
         this.message.error('获取数据失败，请检查网络')
         this.loading = false
       })
@@ -162,7 +162,7 @@ export default {
         this.tasks.splice(index, 1)
         this.message.info('删除成功')
         this.fetchData()
-      }).catch((err) => {
+      }).catch(() => {
         this.message.error('删除失败')
       })
     },

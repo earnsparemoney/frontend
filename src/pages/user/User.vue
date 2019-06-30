@@ -151,7 +151,23 @@ export default {
       .info__social
         font-size 16px
   .menu
-    background-color #ecf1f1
+    overflow hidden
+    overflow-x scroll
+    white-space nowrap
+    background-color #fff
+    z-index 999
+
+    .menu__item
+      display inline-block
+      height 48px
+      line-height 48px
+      padding 0 18px
+      background-color #fff
+      cursor pointer
+
+    .menu__item--selected
+      color #1890ff
+      border-bottom 2px solid #1890ff
 
 @media (min-width 576px) and (max-width 1200px)
   .user
@@ -185,7 +201,23 @@ export default {
       .info__social
         font-size 16px
   .menu
-    background-color #ecf1f1
+    overflow hidden
+    overflow-x scroll
+    white-space nowrap
+    background-color #fff
+    z-index 999
+
+    .menu__item
+      display inline-block
+      height 48px
+      line-height 48px
+      padding 0 18px
+      background-color #fff
+      cursor pointer
+
+    .menu__item--selected
+      color #1890ff
+      border-bottom 2px solid #1890ff
 
 @media (max-width 576px)
   .user
